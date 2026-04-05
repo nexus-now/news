@@ -1,0 +1,15 @@
+{
+  "agent_id": "herald_publisher",
+  "category": "publishing",
+  "generation": 0,
+  "total_runs": 2,
+  "total_articles": 0,
+  "avg_quality": 0.0,
+  "best_score": 0.0,
+  "evolved_prompt": "",
+  "learned_rules": [],
+  "avoid_rules": [],
+  "top_articles": [],
+  "run_log": [],
+  "last_updated": "2026-04-05T20:17:52.819139"
+}

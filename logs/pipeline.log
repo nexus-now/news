@@ -1,0 +1,32 @@
+[2026-04-05 20:17:23 UTC] ============================================================
+[2026-04-05 20:17:23 UTC] NEXUS NOW PIPELINE STARTING
+[2026-04-05 20:17:23 UTC] Posts per run: 2
+[2026-04-05 20:17:23 UTC] AI Key present: Yes
+[2026-04-05 20:17:23 UTC] Groq Key:  Yes
+[2026-04-05 20:17:23 UTC] Twitter:   Yes
+[2026-04-05 20:17:23 UTC] Instagram: No
+[2026-04-05 20:17:23 UTC] YouTube:   No
+[2026-04-05 20:17:23 UTC] ============================================================
+[2026-04-05 20:17:23 UTC] 
+[STEP 1] SCOUT — Trend Detection
+[2026-04-05 20:17:25 UTC] Scout found 2 topics
+[2026-04-05 20:17:25 UTC] 
+[STORY 1/2] TECHNOLOGY: artificial intelligence breakthroughs 2026
+[2026-04-05 20:17:25 UTC]   Agent: volt_technology | Gen:0 | AvgQ:0.0/10
+[2026-04-05 20:17:28 UTC]   Written: 'Breaking: artificial intelligence breakthroughs 2026' Q=4.0/10
+[2026-04-05 20:17:29 UTC]   AEGIS: ✅ VERIFIED | ID: NN-2026-0405-201729-GEN-6675F4
+[2026-04-05 20:17:37 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-05 20:17:37 UTC]   Pausing 10s...
+[2026-04-05 20:17:47 UTC] 
+[STORY 2/2] ENVIRONMENT: climate change extreme weather events
+[2026-04-05 20:17:47 UTC]   Agent: terra_environment | Gen:0 | AvgQ:0.0/10
+[2026-04-05 20:17:52 UTC]   Written: 'Breaking: climate change extreme weather events' Q=4.0/10
+[2026-04-05 20:17:52 UTC]   AEGIS: ✅ VERIFIED | ID: NN-2026-0405-201752-GEN-72FE58
+[2026-04-05 20:19:07 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-05 20:19:07 UTC] 
+============================================================
+[2026-04-05 20:19:07 UTC] PIPELINE COMPLETE
+[2026-04-05 20:19:07 UTC] Stories published: 2/2
+[2026-04-05 20:19:07 UTC] Duration: 103s
+[2026-04-05 20:19:07 UTC] Avg quality: 4.0/10
+[2026-04-05 20:19:07 UTC] ============================================================
