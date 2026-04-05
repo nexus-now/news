@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEXUS NOW — Every Story. Every Second. Everywhere.</title>
+<meta name="description" content="NEXUS NOW — AI-powered global news channel. Real-time stories, analysis, and breaking news delivered instantly."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red: #E81A1A;
+  --red-dim: #b01010;
+  --black: #080808;
+  --white: #F5F2ED;
+  --gray: #1a1a1a;
+  --gray2: #2a2a2a;
+  --muted: #888;
+  --ticker-h: 40px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ── TICKER ── */
+.ticker-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: var(--ticker-h);
+  background: var(--red);
+  display: flex; align-items: center;
+  overflow: hidden;
+  border-bottom: 2px solid #ff3a3a;
+}
+.ticker-label {
+  flex-shrink: 0;
+  background: var(--black);
+  color: var(--red);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 3px;
+  padding: 0 18px;
+  height: 100%;
+  display: flex; align-items: center;
+  border-right: 2px solid var(--red);
+}
+.ticker-track {
+  display: flex;
+  animation: ticker 40s linear infinite;
+  white-space: nowrap;
+}
+.ticker-track span {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--white);
+  padding: 0 40px;
+  letter-spacing: 0.5px;
+}
+.ticker-track span::after {
+  content: '◆';
+  color: rgba(255,255,255,0.4);
+  margin-left: 40px;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed; top: var(--ticker-h); left: 0; right: 0; z-index: 100;
+  height: 64px;
+  background: rgba(8,8,8,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray2);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: var(--white);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-dot {
+  width: 10px; height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,26,26,0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(232,26,26,0); }
+}
+nav { display: flex; align-items: center; gap: 28px; }
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--white); }
+.live-badge {
+  background: var(--red);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%, 90%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── HERO ── */
+.hero {
+  margin-top: calc(var(--ticker-h) + 64px);
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-main {
+  padding: 60px 48px 60px 48px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative;
+  border-right: 1px solid var(--gray2);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0e0e0e 0%, #1a0000 50%, #080808 100%);
+  z-index: 0;
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(232,26,26,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,26,26,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 2; }
+.breaking-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 6px 16px;
+  margin-bottom: 24px;
+}
+.breaking-label::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.92;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--red);
+}
+.hero-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 560px;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-primary:hover { background: var(--red-dim); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--gray2);
+  padding: 14px 32px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+/* HERO SIDEBAR */
+.hero-sidebar {
+  padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 0;
+  overflow-y: auto;
+  max-height: calc(92vh);
+}
+.sidebar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--red);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--gray2);
+}
+.news-card {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gray2);
+  cursor: pointer;
+  transition: padding-left 0.2s;
+}
+.news-card:hover { padding-left: 8px; }
+.news-card .tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.news-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.news-card .meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--gray);
+  border-top: 1px solid var(--gray2);
+  border-bottom: 1px solid var(--gray2);
+  padding: 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: var(--red);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── SECTION ── */
+section { padding: 80px 48px; }
+.section-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray2);
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+.section-title span { color: var(--red); }
+.section-link {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+.section-link:hover { color: var(--red); }
+
+/* ── NEWS GRID ── */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gray2);
+  border: 1px solid var(--gray2);
+}
+.grid-card {
+  background: var(--black);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.grid-card:hover { background: #0f0f0f; }
+.grid-card .img-placeholder {
+  width: 100%; height: 180px;
+  background: var(--gray);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.grid-card .img-placeholder .img-icon {
+  font-size: 40px;
+  opacity: 0.3;
+}
+.grid-card .img-placeholder::after {
+  content: 'AI GENERATED';
+  position: absolute; bottom: 8px; right: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  background: rgba(0,0,0,0.8);
+  padding: 3px 8px;
+}
+.grid-card .cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.grid-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.grid-card p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.grid-card .card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.grid-card .timestamp {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.grid-card .ai-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 2px 8px;
+  letter-spacing: 1px;
+}
+.grid-card-featured {
+  grid-column: span 2;
+}
+.grid-card-featured .img-placeholder {
+  height: 280px;
+}
+
+/* ── AI AGENTS SECTION ── */
+.agents-section {
+  background: var(--gray);
+  border-top: 1px solid var(--gray2);
+  border-bottom: 1px solid var(--gray2);
+}
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--gray2);
+  border: 1px solid var(--gray2);
+}
+.agent-card {
+  background: var(--black);
+  padding: 32px 24px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.agent-card:hover { background: #0a0a0a; }
+.agent-icon {
+  width: 60px; height: 60px;
+  border: 1px solid var(--gray2);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  position: relative;
+}
+.agent-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--red);
+  opacity: 0;
+  animation: radar 3s infinite;
+}
+.agent-card:nth-child(1) .agent-icon::after { animation-delay: 0s; }
+.agent-card:nth-child(2) .agent-icon::after { animation-delay: 0.6s; }
+.agent-card:nth-child(3) .agent-icon::after { animation-delay: 1.2s; }
+.agent-card:nth-child(4) .agent-icon::after { animation-delay: 1.8s; }
+.agent-card:nth-child(5) .agent-icon::after { animation-delay: 2.4s; }
+@keyframes radar {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.8); }
+}
+.agent-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.agent-role {
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.agent-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.agent-status {
+  margin-top: 16px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #4caf50;
+}
+.agent-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+/* ── PLATFORMS SECTION ── */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.platform-card {
+  border: 1px solid var(--gray2);
+  padding: 28px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.platform-card:hover { border-color: var(--red); transform: translateY(-4px); }
+.platform-icon { font-size: 36px; margin-bottom: 14px; }
+.platform-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.platform-handle {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.platform-desc { font-size: 12px; color: var(--muted); }
+
+/* ── PIPELINE SECTION ── */
+.pipeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+.pipeline-step {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+  position: relative;
+  padding: 0 16px;
+}
+.pipeline-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -12px; top: 28px;
+  color: var(--red);
+  font-size: 24px;
+  font-weight: 300;
+}
+.step-num {
+  width: 56px; height: 56px;
+  border: 1px solid var(--red);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--red);
+}
+.step-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.step-desc {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.step-tool {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--red);
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--gray);
+  border-top: 1px solid var(--gray2);
+  padding: 60px 48px 32px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--gray2);
+}
+.footer-brand .logo { font-size: 36px; margin-bottom: 16px; }
+.footer-brand p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 260px;
+}
+.footer-col h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-bottom: 20px;
+}
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-bottom p {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.ai-badge {
+  background: transparent;
+  border: 1px solid var(--gray2);
+  padding: 6px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ai-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #4caf50;
+  border-radius: 50%;
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-sidebar { display: none; }
+  .news-grid { grid-template-columns: 1fr 1fr; }
+  .grid-card-featured { grid-column: span 2; }
+  .agents-grid { grid-template-columns: repeat(3, 1fr); }
+  .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  header { padding: 0 16px; }
+  section { padding: 48px 20px; }
+  .stats-bar { padding: 24px 20px; }
+  nav { display: none; }
+  .news-grid { grid-template-columns: 1fr; }
+  .grid-card-featured { grid-column: span 1; }
+  .agents-grid { grid-template-columns: 1fr 1fr; }
+  .platforms-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-main { padding: 40px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-label">BREAKING</div>
+  <div class="ticker-track" id="tickerTrack">
+    <span>AI-powered journalism launches globally — NEXUS NOW goes live 24/7</span>
+    <span>Google Trends monitored in real-time across 90+ countries</span>
+    <span>All content generated, edited and published by autonomous AI agents</span>
+    <span>NEXUS NOW available on YouTube, Instagram, X, TikTok and web</span>
+    <span>Zero human intervention — fully autonomous news production pipeline</span>
+    <span>AI-powered journalism launches globally — NEXUS NOW goes live 24/7</span>
+    <span>Google Trends monitored in real-time across 90+ countries</span>
+    <span>All content generated, edited and published by autonomous AI agents</span>
+    <span>NEXUS NOW available on YouTube, Instagram, X, TikTok and web</span>
+    <span>Zero human intervention — fully autonomous news production pipeline</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <div class="logo-dot"></div>
+    NEXUS NOW
+  </a>
+  <nav>
+    <a href="#latest">Latest</a>
+    <a href="#world">World</a>
+    <a href="#tech">Tech</a>
+    <a href="#business">Business</a>
+    <a href="#agents">Our AI Team</a>
+    <span class="live-badge">● LIVE</span>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-main">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-content">
+      <div class="breaking-label">Breaking Now</div>
+      <h1>Every Story.<br/>Every Second.<br/><em>Everywhere.</em></h1>
+      <p class="hero-desc">
+        NEXUS NOW is the world's first fully autonomous AI news channel. Our AI agents monitor global trends in real-time, research every story, write scripts, produce videos, and publish across every major platform — without a single human in the loop.
+      </p>
+      <div class="hero-actions">
+        <a href="https://youtube.com/@nexusnow" class="btn-primary">▶ Watch Now</a>
+        <a href="#latest" class="btn-outline">Latest Stories →</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-sidebar">
+    <div class="sidebar-title">Top Stories Right Now</div>
+    <div id="sidebarNews">
+      <!-- Dynamically loaded from news.json -->
+      <div class="news-card">
+        <div class="tag">Technology</div>
+        <h3>AI Systems Now Outperform Human Analysts in Real-Time Market Predictions</h3>
+        <div class="meta">2 min ago · AI Generated · 3.2K views</div>
+      </div>
+      <div class="news-card">
+        <div class="tag">World</div>
+        <h3>Global Climate Summit Reaches Historic Agreement on Carbon Neutrality</h3>
+        <div class="meta">18 min ago · AI Generated · 8.1K views</div>
+      </div>
+      <div class="news-card">
+        <div class="tag">Business</div>
+        <h3>Tech Giants Report Record Q1 Earnings Amid AI Investment Surge</h3>
+        <div class="meta">34 min ago · AI Generated · 5.7K views</div>
+      </div>
+      <div class="news-card">
+        <div class="tag">Science</div>
+        <h3>Researchers Discover New Gene Sequence That May Slow Aging</h3>
+        <div class="meta">1 hr ago · AI Generated · 12.4K views</div>
+      </div>
+      <div class="news-card">
+        <div class="tag">Sports</div>
+        <h3>Champions League Quarter-Final Produces Stunning Comeback in Extra Time</h3>
+        <div class="meta">2 hr ago · AI Generated · 19.8K views</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num" data-target="24">0</div>
+    <div class="stat-label">Hours Active Daily</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="2">0</div>
+    <div class="stat-label">Stories Published Today</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="5">0</div>
+    <div class="stat-label">AI Agents Working</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="6">0</div>
+    <div class="stat-label">Platforms Covered</div>
+  </div>
+</div>
+
+<!-- LATEST NEWS -->
+<section id="latest">
+  <div class="section-header fade-in">
+    <div class="section-title"><span>Latest</span> Stories</div>
+    <a href="news.html" class="section-link">All Stories →</a>
+  </div>
+  <div class="news-grid fade-in" id="newsGrid">
+    <div class="grid-card grid-card-featured">
+      <div class="img-placeholder"><div class="img-icon">📡</div></div>
+      <div class="cat">Breaking · World</div>
+      <h3>NEXUS NOW Launches: The World's First Fully Autonomous AI News Channel Goes Live</h3>
+      <p>In a landmark moment for journalism, NEXUS NOW becomes the first news organization where every function — from research to broadcast — is performed entirely by artificial intelligence agents operating around the clock.</p>
+      <div class="card-footer">
+        <span class="timestamp">Just now</span>
+        <span class="ai-tag">AI GENERATED</span>
+      </div>
+    </div>
+    <div class="grid-card">
+      <div class="img-placeholder"><div class="img-icon">🌍</div></div>
+      <div class="cat">Technology</div>
+      <h3>How Real-Time Trend Analysis Is Reshaping the News Cycle</h3>
+      <p>Google Trends data now powers next-generation newsrooms that can detect viral stories within minutes of emergence.</p>
+      <div class="card-footer">
+        <span class="timestamp">1 hr ago</span>
+        <span class="ai-tag">AI GENERATED</span>
+      </div>
+    </div>
+    <div class="grid-card">
+      <div class="img-placeholder"><div class="img-icon">💡</div></div>
+      <div class="cat">Business</div>
+      <h3>AI Content Platforms Projected to Generate $12B in Ad Revenue by 2027</h3>
+      <p>New research shows autonomous content channels are the fastest-growing segment of the digital media industry.</p>
+      <div class="card-footer">
+        <span class="timestamp">3 hr ago</span>
+        <span class="ai-tag">AI GENERATED</span>
+      </div>
+    </div>
+    <div class="grid-card">
+      <div class="img-placeholder"><div class="img-icon">🔬</div></div>
+      <div class="cat">Science</div>
+      <h3>Quantum Computing Breakthrough Promises to Solve Climate Modeling Challenges</h3>
+      <p>Scientists unveil a 1000-qubit processor that can simulate atmospheric systems 10,000 times faster than current methods.</p>
+      <div class="card-footer">
+        <span class="timestamp">5 hr ago</span>
+        <span class="ai-tag">AI GENERATED</span>
+      </div>
+    </div>
+    <div class="grid-card">
+      <div class="img-placeholder"><div class="img-icon">🏛️</div></div>
+      <div class="cat">Politics</div>
+      <h3>Global Leaders Convene for Emergency Summit on Digital Governance</h3>
+      <p>Thirty nations gather to draft landmark framework for AI regulation and cross-border data sovereignty.</p>
+      <div class="card-footer">
+        <span class="timestamp">7 hr ago</span>
+        <span class="ai-tag">AI GENERATED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI AGENTS -->
+<section id="agents" class="agents-section">
+  <div class="section-header fade-in">
+    <div class="section-title">Meet The <span>AI Team</span></div>
+    <span class="section-link">All Agents Online</span>
+  </div>
+  <div class="agents-grid fade-in">
+    <div class="agent-card">
+      <div class="agent-icon">👁️</div>
+      <div class="agent-name">SCOUT</div>
+      <div class="agent-role">Trend Monitor</div>
+      <div class="agent-desc">Scans Google Trends, X, and Reddit every 30 minutes. Scores stories for virality and relevance before any human would notice them.</div>
+      <div class="agent-status">ACTIVE — Scanning now</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-icon">🔍</div>
+      <div class="agent-name">AXIOM</div>
+      <div class="agent-role">Research Agent</div>
+      <div class="agent-desc">Deep-dives every trending topic. Pulls from 200+ sources, cross-references facts, and assembles the full story context in under 2 minutes.</div>
+      <div class="agent-status">ACTIVE — Researching</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-icon">✍️</div>
+      <div class="agent-name">VERBA</div>
+      <div class="agent-role">Writer & Anchor</div>
+      <div class="agent-desc">Scripts news videos, writes articles, crafts social captions. Adapts tone perfectly for YouTube, Instagram, X, and web — all from one research pass.</div>
+      <div class="agent-status">ACTIVE — Writing</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-icon">🎬</div>
+      <div class="agent-name">VISIO</div>
+      <div class="agent-role">Media Producer</div>
+      <div class="agent-desc">Generates thumbnails, short video clips, animations and voiceovers. Assembles the final content package ready for distribution.</div>
+      <div class="agent-status">ACTIVE — Producing</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-icon">📡</div>
+      <div class="agent-name">HERALD</div>
+      <div class="agent-role">Publisher</div>
+      <div class="agent-desc">Posts to YouTube, Instagram, X, TikTok and the website simultaneously. Optimises titles, tags and timing for maximum reach on each platform.</div>
+      <div class="agent-status">ACTIVE — Publishing</div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section>
+  <div class="section-header fade-in">
+    <div class="section-title">The <span>Pipeline</span></div>
+    <span class="section-link">100% Automated</span>
+  </div>
+  <div class="pipeline fade-in">
+    <div class="pipeline-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Trend Detection</div>
+      <div class="step-desc">Google Trends RSS + X API scanned every 30 min. Top 2 stories selected by virality score.</div>
+      <div class="step-tool">SCOUT · Gemini</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Deep Research</div>
+      <div class="step-desc">Full story context assembled from 200+ sources. Facts verified. Angle defined.</div>
+      <div class="step-tool">AXIOM · Gemini</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Script & Copy</div>
+      <div class="step-desc">Video script, article, tweet thread, Instagram caption — all written in one pass.</div>
+      <div class="step-tool">VERBA · Gemini</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Media Production</div>
+      <div class="step-desc">AI video generated. Thumbnail created. Voiceover synthesized. All assembled automatically.</div>
+      <div class="step-tool">VISIO · Gemini Video</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">05</div>
+      <div class="step-title">Multi-Platform Publish</div>
+      <div class="step-desc">Simultaneous posting to YouTube, Instagram, X, TikTok, and the website.</div>
+      <div class="step-tool">HERALD · GitHub Actions</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms" style="background:var(--gray); border-top:1px solid var(--gray2);">
+  <div class="section-header fade-in">
+    <div class="section-title">Find Us <span>Everywhere</span></div>
+  </div>
+  <div class="platforms-grid fade-in">
+    <div class="platform-card">
+      <div class="platform-icon">📺</div>
+      <div class="platform-name">YouTube</div>
+      <div class="platform-handle">@NexusNow</div>
+      <div class="platform-desc">Full news videos, Shorts, analysis and live streams. Primary monetization channel.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📸</div>
+      <div class="platform-name">Instagram</div>
+      <div class="platform-handle">@nexusnow</div>
+      <div class="platform-desc">Reels, carousels, infographics and breaking news Stories.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🐦</div>
+      <div class="platform-name">X / Twitter</div>
+      <div class="platform-handle">@NexusNow</div>
+      <div class="platform-desc">Real-time threads, breaking updates and trending analysis.</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🎵</div>
+      <div class="platform-name">TikTok</div>
+      <div class="platform-handle">@nexusnow</div>
+      <div class="platform-desc">Short-form news clips, trend explainers and viral content.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo" style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div class="logo-dot"></div>
+        NEXUS NOW
+      </div>
+      <p>The world's first fully autonomous AI news channel. Every story, every second, everywhere — powered by five AI agents working around the clock.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <a href="#">World News</a>
+      <a href="#">Technology</a>
+      <a href="#">Business</a>
+      <a href="#">Science</a>
+      <a href="#">Sports</a>
+      <a href="#">Politics</a>
+    </div>
+    <div class="footer-col">
+      <h4>Platforms</h4>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">X / Twitter</a>
+      <a href="#">TikTok</a>
+      <a href="#">This Website</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="#">How It Works</a>
+      <a href="#">Our AI Agents</a>
+      <a href="#">The Pipeline</a>
+      <a href="#">Open Source</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 NEXUS NOW · All content AI-generated · Built on GitHub Pages</p>
+    <div class="ai-badge">FULLY AI OPERATED · NO HUMANS</div>
+  </div>
+</footer>
+
+<script>
+// Scroll fade-in
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Animated counters
+const counters = document.querySelectorAll('[data-target]');
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const step = target / 40;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current);
+        if (current >= target) clearInterval(timer);
+      }, 30);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+
+// Load dynamic news from news.json if available
+async function loadNews() {
+  try {
+    const res = await fetch('news.json');
+    if (!res.ok) return;
+    const articles = await res.json();
+    if (!articles.length) return;
+    const grid = document.getElementById('newsGrid');
+    // Keep featured card, replace rest
+    const cards = grid.querySelectorAll('.grid-card:not(.grid-card-featured)');
+    articles.slice(0, cards.length).forEach((article, i) => {
+      if (cards[i]) {
+        cards[i].querySelector('.cat').textContent = article.category;
+        cards[i].querySelector('h3').textContent = article.title;
+        cards[i].querySelector('p').textContent = article.summary;
+        cards[i].querySelector('.timestamp').textContent = article.time;
+      }
+    });
+  } catch(e) { /* no news.json yet — static content shown */ }
+}
+loadNews();
+
+// Ticker live clock
+function updateTicker() {
+  const now = new Date();
+  const time = now.toUTCString().replace('GMT', 'UTC');
+  document.title = `NEXUS NOW · ${now.toLocaleTimeString()} · Every Story. Every Second.`;
+}
+setInterval(updateTicker, 1000);
+</script>
+</body>
+</html>

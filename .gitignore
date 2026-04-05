@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# Local secrets — NEVER commit these
+.env.local
+secrets.json
+*_credentials.json
+
+# Large media (stored in Google Drive instead)
+assets/images/*.jpg
+assets/images/*.jpeg
+assets/images/*.png
+assets/audio/*.mp3
+assets/audio/*.wav
+
+# Logs (keep structure, not content)
+logs/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training datasets (large — keep only .jsonl agent memories)
+agent_memory/datasets/
+agent_memory/training/*_colab_finetune.py
+
+# Keep these
+!assets/images/.gitkeep
+!assets/audio/.gitkeep
+!agent_memory/.gitkeep
+!logs/.gitkeep
