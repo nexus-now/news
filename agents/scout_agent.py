@@ -1,126 +1,132 @@
 """
-NEXUS NOW — SCOUT Agent (Upgraded)
-=====================================
-Monitors Google Trends, classifies each trend into a category,
-then routes it to the correct specialist agent.
-
-Self-improves its scoring model based on which stories
-performed best historically.
+NEXUS NOW — SCOUT Agent
+Monitors Google Trends, classifies trends, routes to specialists.
 """
-
-import json
-import datetime
-import feedparser
-import requests
+import json, datetime, requests
 from agents.base_agent import NexusAgent, gemini_raw, extract_json
+
+try:
+    import feedparser
+except ImportError:
+    feedparser = None
 
 
 class ScoutAgent(NexusAgent):
-    BASE_SYSTEM_PROMPT = """
-You are SCOUT, the Trend Intelligence Agent for NEXUS NOW.
-
-Your job is to:
-1. Evaluate trending topics for news value
-2. Accurately classify each topic into the correct category
-3. Identify the best content angle for that category's specialist agent
-4. Score topics to select the top 2 per run
-
-SCORING CRITERIA:
-- Global significance (not just local/niche)
-- Content potential (video + article + social all work?)
-- Brand safety (no graphic violence, pure gossip, or misinformation)
-- Audience interest across demographics
-- Trending velocity (rising fast = higher score)
-
-CATEGORIES: business, science, technology, sports, politics, entertainment, environment, crime
-
-OUTPUT: Always structured JSON. Always route to exactly one category.
-"""
+    BASE_SYSTEM_PROMPT = """You are SCOUT, the Trend Intelligence Agent for NEXUS NOW.
+Evaluate trending topics for news value. Classify into exactly one category:
+business, science, technology, sports, politics, entertainment, environment, crime.
+Score each topic 1-10. Select the top N with most content potential.
+Always return valid JSON only."""
 
     def __init__(self):
         super().__init__("scout_master", "trend_detection")
-        self.system_prompt = self.evolve_prompt(self.BASE_SYSTEM_PROMPT)
 
-    def fetch_trends(self, geo: str = "US") -> list[str]:
-        """Fetch from multiple Google Trends RSS feeds."""
-        self.log("Fetching Google Trends RSS feeds...")
+    def fetch_trends(self, geo: str = "US") -> list:
+        """Fetch Google Trends via RSS — free, no key needed."""
+        self.log("Fetching Google Trends RSS...")
         topics = []
-        feeds = [
+        urls = [
             f"https://trends.google.com/trends/trendingsearches/daily/rss?geo={geo}",
             "https://trends.google.com/trends/trendingsearches/daily/rss?geo=GB",
             "https://trends.google.com/trends/trendingsearches/daily/rss?geo=IN",
         ]
-        for url in feeds:
-            try:
-                feed = feedparser.parse(url)
-                for entry in feed.entries[:15]:
-                    title = entry.get("title", "").strip()
-                    if title and title not in topics:
-                        topics.append(title)
-            except Exception as e:
-                self.log(f"Feed error ({url}): {e}")
+        if feedparser:
+            for url in urls:
+                try:
+                    feed = feedparser.parse(url)
+                    for entry in feed.entries[:15]:
+                        title = entry.get("title", "").strip()
+                        if title and title not in topics:
+                            topics.append(title)
+                except Exception as e:
+                    self.log(f"Feed error: {e}")
+        else:
+            # Fallback: scrape via requests
+            for url in urls[:1]:
+                try:
+                    r = requests.get(url, timeout=15,
+                                     headers={"User-Agent": "Mozilla/5.0"})
+                    import re
+                    found = re.findall(r"<title><!\[CDATA\[(.+?)\]\]></title>", r.text)
+                    topics.extend([t for t in found if t not in topics][:15])
+                except Exception as e:
+                    self.log(f"RSS fallback error: {e}")
+
+        # Always add some evergreen topics if trends fail
+        if len(topics) < 4:
+            self.log("Using fallback topics")
+            topics = [
+                "artificial intelligence latest developments",
+                "global economy markets update",
+                "climate change news",
+                "technology innovation 2026",
+                "world politics breaking news",
+                "science discovery research",
+            ]
 
         self.log(f"Fetched {len(topics)} raw trends")
         return topics
 
-    def classify_and_score(self, topics: list[str], n: int = 2) -> list[dict]:
-        """
-        Ask Gemini to classify each trend, score it, and select the best n.
-        Self-improves scoring using past performance data.
-        """
-        expertise = self.get_expertise_context()
-        past_winners = self.memory.get("top_performing", [])[:5]
+    def classify_and_score(self, topics: list, n: int = 2) -> list:
+        """Ask AI to classify and score each trend."""
+        prompt = f"""You are SCOUT for NEXUS NOW news channel. Today: {datetime.datetime.utcnow().strftime('%B %d, %Y')}.
 
-        prompt = f"""
-{self.system_prompt}
+Classify and score these {len(topics)} trending topics. Select TOP {n}.
 
-{expertise}
+Topics: {json.dumps(topics[:20])}
 
-PAST TOP-PERFORMING STORY TYPES (for calibration):
-{json.dumps(past_winners)}
-
-TODAY: {datetime.datetime.utcnow().strftime('%B %d, %Y %H:%M UTC')}
-
-TRENDING TOPICS TO CLASSIFY AND SCORE:
-{json.dumps(topics, indent=2)}
-
-For each topic, classify and score. Then select the TOP {n} highest-scoring topics.
-
-Return ONLY a JSON array of the top {n} selected topics:
+Return ONLY a JSON array of exactly {n} items:
 [
   {{
-    "topic": "exact topic string",
+    "topic": "exact topic string from list",
     "category": "one of: business/science/technology/sports/politics/entertainment/environment/crime",
     "agent": "one of: TITAN/PULSE/VOLT/ARENA/NEXUS/PRISM/TERRA/CIPHER",
     "score": 8.5,
-    "score_reasoning": "Why this scored high",
-    "content_angle": "The specific news angle to pursue",
-    "why_trending": "Brief explanation of why this is trending now",
-    "estimated_audience": "Who will be most interested in this story",
-    "content_types": ["youtube_video", "instagram_reel", "tweet_thread", "article"]
+    "content_angle": "specific news angle to pursue",
+    "why_trending": "brief reason this is trending now"
   }}
 ]
 
-Select exactly {n} topics. Ensure they cover DIFFERENT categories if possible.
-"""
+Rules: Select exactly {n} topics. Cover DIFFERENT categories if possible."""
         try:
             self.increment_run()
-            raw = gemini_raw(prompt, max_tokens=1200, system=self.system_prompt)
+            raw      = gemini_raw(prompt, max_tokens=600)
             selected = json.loads(extract_json(raw))
-            self.log(f"Selected topics: {[t['topic'] for t in selected]}")
-            return selected
+            if not isinstance(selected, list):
+                raise ValueError("Not a list")
+            # Ensure we have exactly n items
+            if len(selected) < n:
+                # Pad with fallbacks
+                cats = ["technology", "politics", "business", "science"]
+                agents_map = {"technology":"VOLT","politics":"NEXUS",
+                              "business":"TITAN","science":"PULSE"}
+                for i in range(n - len(selected)):
+                    cat = cats[i % len(cats)]
+                    selected.append({
+                        "topic": topics[len(selected) % len(topics)],
+                        "category": cat,
+                        "agent": agents_map.get(cat, "NEXUS"),
+                        "score": 5.0,
+                        "content_angle": "Latest developments",
+                        "why_trending": "Currently trending"
+                    })
+            self.log(f"Selected: {[t['topic'][:40] for t in selected[:n]]}")
+            return selected[:n]
         except Exception as e:
-            self.log(f"Classification error: {e}")
-            # Fallback: return first n topics with default category
-            return [{"topic": t, "category": "politics", "agent": "NEXUS",
-                     "score": 5.0, "content_angle": "Latest developments",
-                     "why_trending": "Trending now", "content_types": ["article"]}
-                    for t in topics[:n]]
+            self.log(f"Classification failed: {e} — using fallback")
+            # Safe fallback
+            fallbacks = [
+                {"topic": topics[0] if topics else "AI technology news",
+                 "category": "technology", "agent": "VOLT",
+                 "score": 6.0, "content_angle": "Latest tech developments",
+                 "why_trending": "Trending now"},
+                {"topic": topics[1] if len(topics) > 1 else "global economy update",
+                 "category": "business", "agent": "TITAN",
+                 "score": 6.0, "content_angle": "Market impact",
+                 "why_trending": "Trending now"},
+            ]
+            return fallbacks[:n]
 
-    def run(self, geo: str = "US", n: int = 2) -> list[dict]:
-        """Full scout run: fetch → classify → return top n."""
+    def run(self, geo: str = "US", n: int = 2) -> list:
         raw_topics = self.fetch_trends(geo)
-        if not raw_topics:
-            self.log("No topics fetched — check network access")
-            return []
         return self.classify_and_score(raw_topics, n)
