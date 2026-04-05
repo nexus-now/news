@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+.DS_Store
+Thumbs.db
+!assets/images/.gitkeep
+!assets/audio/.gitkeep
+!agent_memory/.gitkeep
+!logs/.gitkeep
