@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NEXUS NOW — All Files & Deployment Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#030609;--s1:#060c14;--s2:#0a1220;--border:#0f1e2e;
+  --red:#E81A1A;--green:#00ff88;--blue:#38bdf8;--yellow:#fbbf24;
+  --orange:#fb923c;--purple:#c084fc;--cyan:#22d3ee;
+  --white:#e2e8f0;--muted:#3d5470;--dim:#040810;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--white);font-family:'Syne',sans-serif;font-size:14px;line-height:1.6}
+.page{max-width:1000px;margin:0 auto;padding:40px}
+
+/* HERO */
+.hero{text-align:center;padding:64px 40px 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(232,26,26,0.07) 0%,transparent 60%);pointer-events:none}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:6px;line-height:.95;margin-bottom:16px}
+.hero h1 span{color:var(--red)}
+.hero-sub{color:var(--muted);font-size:14px;letter-spacing:2px;text-transform:uppercase}
+.hero-badges{display:flex;justify-content:center;gap:10px;margin-top:24px;flex-wrap:wrap}
+.hb{padding:5px 14px;border:1px solid;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px}
+.hb.r{color:var(--red);border-color:var(--red)}
+.hb.g{color:var(--green);border-color:var(--green)}
+.hb.b{color:var(--blue);border-color:var(--blue)}
+.hb.y{color:var(--yellow);border-color:var(--yellow)}
+.hb.p{color:var(--purple);border-color:var(--purple)}
+
+/* SECTION */
+.sec{margin-bottom:56px}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.sec-title-bar{width:4px;height:30px;background:var(--red);flex-shrink:0}
+
+/* FILE TREE */
+.tree{background:#000;border:1px solid var(--border);padding:24px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2;overflow-x:auto}
+.tree-root{color:var(--yellow);font-weight:600}
+.tree-folder{color:var(--blue)}
+.tree-file{color:var(--white)}
+.tree-file.html{color:#f472b6}
+.tree-file.py{color:#4ade80}
+.tree-file.json{color:var(--yellow)}
+.tree-file.yml{color:var(--orange)}
+.tree-file.md{color:var(--cyan)}
+.tree-file.img{color:var(--purple)}
+.tree-file.keep{color:var(--muted)}
+.tree-comment{color:var(--muted);font-size:11px;margin-left:8px}
+.indent1{padding-left:20px}
+.indent2{padding-left:40px}
+.indent3{padding-left:60px}
+
+/* FILE TABLE */
+.file-table{width:100%;border-collapse:collapse;margin-bottom:20px}
+.file-table th{text-align:left;padding:10px 14px;font-size:10px;letter-spacing:2px;color:var(--muted);border-bottom:1px solid var(--border);background:var(--s2);font-family:'JetBrains Mono',monospace}
+.file-table td{padding:11px 14px;border-bottom:1px solid rgba(15,30,46,0.7);font-size:12px;vertical-align:top}
+.file-table tr:hover td{background:var(--s1)}
+.fname{font-family:'JetBrains Mono',monospace;color:var(--blue)}
+.fname.py{color:#4ade80}
+.fname.html{color:#f472b6}
+.fname.yml{color:var(--orange)}
+.fname.json{color:var(--yellow)}
+.fname.img{color:var(--purple)}
+.ftype{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border:1px solid var(--border)}
+.ftype.code{color:#4ade80;border-color:#4ade80}
+.ftype.web{color:#f472b6;border-color:#f472b6}
+.ftype.config{color:var(--orange);border-color:var(--orange)}
+.ftype.asset{color:var(--purple);border-color:var(--purple)}
+.ftype.data{color:var(--yellow);border-color:var(--yellow)}
+.fdesc{color:var(--muted);font-size:12px}
+.fdeploy{font-size:11px}
+.dep-github{color:var(--green)}
+.dep-brand{color:var(--purple)}
+
+/* STEP BOXES */
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{background:var(--s1);border:1px solid var(--border)}
+.step-hd{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--s2)}
+.step-n{width:34px;height:34px;border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red);flex-shrink:0}
+.step-t{font-family:'Syne',sans-serif;font-weight:800;font-size:15px}
+.step-body{padding:18px 20px}
+.step-body p{color:var(--muted);font-size:13px;margin-bottom:10px;line-height:1.7}
+.step-body p:last-child{margin-bottom:0}
+.step-body strong{color:var(--white)}
+
+/* ALERTS */
+.alert{padding:13px 16px;border-left:3px solid;font-size:13px;margin:12px 0;line-height:1.6}
+.alert.red{border-color:var(--red);background:rgba(232,26,26,0.06);color:#ffaaaa}
+.alert.green{border-color:var(--green);background:rgba(0,255,136,0.05);color:var(--green)}
+.alert.yellow{border-color:var(--yellow);background:rgba(251,191,36,0.05);color:var(--yellow)}
+.alert.blue{border-color:var(--blue);background:rgba(56,189,248,0.05);color:var(--blue)}
+
+/* CLICK PATH */
+.path{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 14px;background:var(--dim);border:1px solid var(--border);margin:10px 0}
+.pi{background:var(--s2);border:1px solid var(--border);padding:3px 10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);white-space:nowrap}
+.pa{color:var(--muted);font-size:12px}
+
+/* CODE BLOCK */
+.code{background:#000;border:1px solid var(--border);border-left:3px solid var(--green);padding:16px;margin:12px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:#aaffcc;overflow-x:auto;white-space:pre}
+.code .c{color:var(--muted)}
+.code .k{color:var(--blue)}
+.code .v{color:var(--yellow)}
+
+/* DEPLOY MAP */
+.deploy-map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.dm-card{background:var(--s1);border:1px solid var(--border);padding:20px}
+.dm-title{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dm-files{list-style:none}
+.dm-files li{padding:5px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dm-files li::before{content:'→';color:var(--red)}
+
+/* PLATFORM TABLE */
+.platform-deploy{width:100%;border-collapse:collapse}
+.platform-deploy th{text-align:left;padding:10px 14px;font-size:10px;letter-spacing:2px;color:var(--muted);border-bottom:1px solid var(--border);background:var(--s2)}
+.platform-deploy td{padding:12px 14px;border-bottom:1px solid rgba(15,30,46,0.5);font-size:12px;vertical-align:top}
+.platform-deploy tr:hover td{background:var(--s1)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>NEXUS NOW<br/><span>All Files &</span><br/>Deployment</h1>
+  <div class="hero-sub">Every file. Where it goes. How to upload it. Step by step.</div>
+  <div class="hero-badges">
+    <span class="hb r">33 FILES TOTAL</span>
+    <span class="hb g">11 AI AGENTS</span>
+    <span class="hb b">1 GITHUB REPO</span>
+    <span class="hb y">FREE HOSTING</span>
+    <span class="hb p">ZERO CS KNOWLEDGE NEEDED</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PART 1: FULL FILE TREE -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-title"><div class="sec-title-bar"></div>Part 1 — Complete File Structure</div>
+  <p style="color:var(--muted);margin-bottom:16px;font-size:13px">This is the exact folder and file structure that must exist in your GitHub repository. Every file is listed. Colour coding: <span style="color:#f472b6">pink=website</span>, <span style="color:#4ade80">green=code</span>, <span style="color:#fbbf24">yellow=data</span>, <span style="color:#fb923c">orange=automation</span>, <span style="color:#c084fc">purple=brand assets</span>.</p>
+
+  <div class="tree">
+<span class="tree-root">nexus-now/</span>  <span class="tree-comment">← your GitHub repository root</span>
+│
+├── <span class="tree-file html">index.html</span>              <span class="tree-comment">← NEXUS NOW public website (homepage)</span>
+├── <span class="tree-file html">dashboard.html</span>          <span class="tree-comment">← Mission Control dashboard</span>
+├── <span class="tree-file html">training-dashboard.html</span> <span class="tree-comment">← Agent training intelligence dashboard</span>
+├── <span class="tree-file html">setup-guide.html</span>        <span class="tree-comment">← Setup guide (can delete after setup)</span>
+├── <span class="tree-file html">SETUP-GUIDE-COMPLETE.html</span> <span class="tree-comment">← Full zero-knowledge setup guide</span>
+│
+├── <span class="tree-file json">news.json</span>               <span class="tree-comment">← Auto-updated article feed for website</span>
+├── <span class="tree-file json">pipeline_results.json</span>   <span class="tree-comment">← Auto-created: log of every pipeline run</span>
+│
+├── <span class="tree-file py">orchestrator.py</span>         <span class="tree-comment">← MASTER: runs the full pipeline end-to-end</span>
+├── <span class="tree-file py">pipeline.py</span>             <span class="tree-comment">← Legacy pipeline (kept as backup reference)</span>
+├── <span class="tree-file md">requirements.txt</span>        <span class="tree-comment">← Python packages GitHub Actions installs</span>
+├── <span class="tree-file md">README.md</span>               <span class="tree-comment">← Project description shown on GitHub</span>
+├── <span class="tree-file keep">.gitignore</span>              <span class="tree-comment">← Tells git which files NOT to upload</span>
+│
+├── <span class="tree-folder">agents/</span>                 <span class="tree-comment">← All 11 AI agent brain files</span>
+│   ├── <span class="tree-file py">__init__.py</span>         <span class="tree-comment">← Empty file (makes agents/ a Python package)</span>
+│   ├── <span class="tree-file py">base_agent.py</span>       <span class="tree-comment">← Parent class all agents inherit from</span>
+│   ├── <span class="tree-file py">free_ai_provider.py</span> <span class="tree-comment">← AI failover engine (8 providers)</span>
+│   ├── <span class="tree-file py">training_engine.py</span>  <span class="tree-comment">← 5-layer self-training system</span>
+│   ├── <span class="tree-file py">scout_agent.py</span>      <span class="tree-comment">← SCOUT: trend detection + routing</span>
+│   ├── <span class="tree-file py">category_agents.py</span>  <span class="tree-comment">← TITAN,PULSE,VOLT,ARENA,NEXUS,PRISM,TERRA,CIPHER</span>
+│   ├── <span class="tree-file py">aegis_agent.py</span>      <span class="tree-comment">← AEGIS: fact-check + copyright</span>
+│   ├── <span class="tree-file py">herald_agent.py</span>     <span class="tree-comment">← HERALD: media production + publishing</span>
+│   └── <span class="tree-file py">storage_manager.py</span>  <span class="tree-comment">← Google Drive/Sheets storage + cleanup</span>
+│
+├── <span class="tree-folder">.github/</span>
+│   └── <span class="tree-folder">workflows/</span>
+│       └── <span class="tree-file yml">pipeline.yml</span>    <span class="tree-comment">← GitHub Actions: runs pipeline 2x daily</span>
+│
+├── <span class="tree-folder">brand/</span>                  <span class="tree-comment">← All logo and brand files</span>
+│   ├── <span class="tree-file img">logo-dark.png</span>       <span class="tree-comment">← Main logo (dark background)</span>
+│   ├── <span class="tree-file img">logo-light.png</span>      <span class="tree-comment">← Logo for white backgrounds</span>
+│   ├── <span class="tree-file img">logo-full.svg</span>       <span class="tree-comment">← Vector logo (scalable, no quality loss)</span>
+│   ├── <span class="tree-file img">logo-light.svg</span>      <span class="tree-comment">← Vector logo light version</span>
+│   ├── <span class="tree-file img">icon-512.png</span>        <span class="tree-comment">← Square icon (all profile pictures)</span>
+│   ├── <span class="tree-file img">icon-512.svg</span>        <span class="tree-comment">← Vector icon</span>
+│   ├── <span class="tree-file img">favicon.ico</span>         <span class="tree-comment">← Browser tab icon</span>
+│   ├── <span class="tree-file img">favicon.svg</span>         <span class="tree-comment">← Modern favicon</span>
+│   ├── <span class="tree-file img">favicon-32.png</span>      <span class="tree-comment">← 32px favicon</span>
+│   ├── <span class="tree-file img">favicon-64.png</span>      <span class="tree-comment">← 64px favicon</span>
+│   ├── <span class="tree-file img">watermark.png</span>       <span class="tree-comment">← Video watermark (transparent background)</span>
+│   ├── <span class="tree-file img">watermark.svg</span>       <span class="tree-comment">← Vector watermark</span>
+│   └── <span class="tree-file html">brand-identity.html</span> <span class="tree-comment">← Brand guidelines + download page</span>
+│
+├── <span class="tree-folder">agent_memory/</span>           <span class="tree-comment">← Auto-created: agent brains persist here</span>
+│   └── <span class="tree-file keep">.gitkeep</span>            <span class="tree-comment">← Placeholder so folder exists in git</span>
+│
+├── <span class="tree-folder">assets/</span>
+│   ├── <span class="tree-folder">images/</span>             <span class="tree-comment">← AI-generated thumbnails (auto-cleaned)</span>
+│   │   └── <span class="tree-file keep">.gitkeep</span>
+│   └── <span class="tree-folder">audio/</span>              <span class="tree-comment">← AI-generated voiceovers (auto-cleaned)</span>
+│       └── <span class="tree-file keep">.gitkeep</span>
+│
+└── <span class="tree-folder">logs/</span>                   <span class="tree-comment">← Pipeline run logs</span>
+    └── <span class="tree-file keep">.gitkeep</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PART 2: EVERY FILE EXPLAINED -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-title"><div class="sec-title-bar"></div>Part 2 — Every File Explained</div>
+
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px">What each file does, in plain English.</p>
+
+  <!-- ROOT FILES -->
+  <p style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--red);margin-bottom:10px">ROOT FILES (go directly into the repo, no subfolder)</p>
+  <table class="file-table">
+    <thead><tr><th>FILE NAME</th><th>TYPE</th><th>WHAT IT DOES</th></tr></thead>
+    <tbody>
+      <tr><td><span class="fname html">index.html</span></td><td><span class="ftype web">WEBSITE</span></td><td class="fdesc">The public-facing NEXUS NOW website. Live news ticker, hero section, latest stories grid, AI team showcase, pipeline diagram. Automatically updated with new articles via news.json.</td></tr>
+      <tr><td><span class="fname html">dashboard.html</span></td><td><span class="ftype web">WEBSITE</span></td><td class="fdesc">Mission Control panel. Shows all 11 agents online, quality scores, pipeline live log, platform publishing status.</td></tr>
+      <tr><td><span class="fname html">training-dashboard.html</span></td><td><span class="ftype web">WEBSITE</span></td><td class="fdesc">Training Intelligence dashboard. Shows all 5 self-training layers for every agent — samples collected, wisdom rules learned, cross-agent pool, adversarial rewrites.</td></tr>
+      <tr><td><span class="fname html">setup-guide.html</span></td><td><span class="ftype web">GUIDE</span></td><td class="fdesc">Original setup guide with architecture diagrams. Can keep for reference.</td></tr>
+      <tr><td><span class="fname html">SETUP-GUIDE-COMPLETE.html</span></td><td><span class="ftype web">GUIDE</span></td><td class="fdesc">Full zero-knowledge step-by-step setup guide for every platform.</td></tr>
+      <tr><td><span class="fname json">news.json</span></td><td><span class="ftype data">DATA</span></td><td class="fdesc">Starts empty (just "[]"). Every time the pipeline runs, it adds the new articles here. The website reads this file to show latest stories. Auto-trimmed to 100 articles max.</td></tr>
+      <tr><td><span class="fname py">orchestrator.py</span></td><td><span class="ftype code">CODE</span></td><td class="fdesc">The MASTER brain. GitHub Actions calls this file twice daily. It coordinates all 11 agents: SCOUT finds trends → specialist agent writes → AEGIS verifies → HERALD publishes → training records everything.</td></tr>
+      <tr><td><span class="fname py">pipeline.py</span></td><td><span class="ftype code">CODE</span></td><td class="fdesc">Original simpler pipeline from v1. Kept as backup reference. Not actively used — orchestrator.py is the current one.</td></tr>
+      <tr><td><span class="fname">requirements.txt</span></td><td><span class="ftype config">CONFIG</span></td><td class="fdesc">List of Python libraries the code needs. GitHub Actions reads this and installs them automatically before every run. You never touch this file.</td></tr>
+      <tr><td><span class="fname">README.md</span></td><td><span class="ftype config">CONFIG</span></td><td class="fdesc">Description shown on your GitHub repo page. Explains what NEXUS NOW is.</td></tr>
+      <tr><td><span class="fname">.gitignore</span></td><td><span class="ftype config">CONFIG</span></td><td class="fdesc">Tells GitHub which files to ignore. Prevents large media files and secret files from being accidentally uploaded.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- AGENTS FOLDER -->
+  <p style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--green);margin-bottom:10px;margin-top:28px">agents/ FOLDER (the intelligence)</p>
+  <table class="file-table">
+    <thead><tr><th>FILE NAME</th><th>AGENT</th><th>WHAT IT DOES</th></tr></thead>
+    <tbody>
+      <tr><td><span class="fname py">__init__.py</span></td><td>—</td><td class="fdesc">Empty file. Makes the agents/ folder recognisable as a Python package. Required. Don't delete it.</td></tr>
+      <tr><td><span class="fname py">base_agent.py</span></td><td>BASE CLASS</td><td class="fdesc">The parent brain all agents inherit from. Contains: memory loading/saving, prompt evolution, self-evaluation, performance tracking, and the generate_with_training() method that fires all 5 training layers.</td></tr>
+      <tr><td><span class="fname py">free_ai_provider.py</span></td><td>AI ROUTER</td><td class="fdesc">8-provider failover engine. Tries Gemini → Groq → Together → Cohere → HuggingFace → Mistral → OpenRouter in order. Also handles image generation (Pollinations.ai free) and TTS (Edge TTS free). System never stops when one provider fails.</td></tr>
+      <tr><td><span class="fname py">training_engine.py</span></td><td>TRAINER</td><td class="fdesc">All 5 self-training layers: (1) Experience Memory JSONL store, (2) Few-shot injection, (3) Pattern extraction every 3 runs, (4) Cross-agent wisdom pool, (5) Adversarial self-challenge rewriter. Also exports HuggingFace datasets and generates Google Colab fine-tuning scripts.</td></tr>
+      <tr><td><span class="fname py">scout_agent.py</span></td><td>SCOUT 👁️</td><td class="fdesc">Fetches Google Trends RSS (free, no key needed). Classifies each trend into a category. Scores them. Selects the top 2. Routes each to the correct specialist agent.</td></tr>
+      <tr><td><span class="fname py">category_agents.py</span></td><td>8 AGENTS</td><td class="fdesc">Contains all 8 specialist category agents in one file: TITAN (Business), PULSE (Science), VOLT (Technology), ARENA (Sports), NEXUS (World Politics), PRISM (Entertainment), TERRA (Environment), CIPHER (Crime). Each has deep domain expertise and its own training loop.</td></tr>
+      <tr><td><span class="fname py">aegis_agent.py</span></td><td>AEGIS 🛡️</td><td class="fdesc">Fact-checks every story before publishing. Assigns VERIFIED/DEVELOPING/UNVERIFIED/BLOCKED status. Generates unique copyright ID (e.g. NN-2026-0404-143022-TEC-A7F3). Stamps the ID into YouTube description, Instagram caption, tweets, video script, and website JSON-LD. Blocks unsafe content.</td></tr>
+      <tr><td><span class="fname py">herald_agent.py</span></td><td>HERALD 📡</td><td class="fdesc">The publisher. Generates thumbnail image (Gemini/Pollinations), voiceover audio (Google TTS/Edge TTS), posts to Twitter thread, Instagram, YouTube, updates news.json for website, uploads media to Google Drive.</td></tr>
+      <tr><td><span class="fname py">storage_manager.py</span></td><td>STORAGE</td><td class="fdesc">Manages all free Google Workspace storage. Saves articles to Google Sheets. Logs pipeline to Sheets (capped at 500 rows). Uploads media to Drive with auto-expiry dates. Runs cleanup at pipeline start. Monitors Drive usage — alerts if approaching 15GB limit.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- GITHUB WORKFLOWS -->
+  <p style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;margin-top:28px">.github/workflows/ FOLDER (automation)</p>
+  <table class="file-table">
+    <thead><tr><th>FILE NAME</th><th>TYPE</th><th>WHAT IT DOES</th></tr></thead>
+    <tbody>
+      <tr><td><span class="fname yml">pipeline.yml</span></td><td><span class="ftype config">AUTOMATION</span></td><td class="fdesc">The timer that runs everything. Tells GitHub: "At 8:00 AM UTC and 6:00 PM UTC every day, run orchestrator.py automatically." Also lets you trigger it manually. Loads your secrets and passes them to the code. After running, commits news.json and agent memories back to the repo.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- BRAND FILES -->
+  <p style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--purple);margin-bottom:10px;margin-top:28px">brand/ FOLDER (brand identity)</p>
+  <table class="file-table">
+    <thead><tr><th>FILE NAME</th><th>USE IT FOR</th><th>WHERE TO UPLOAD IT</th></tr></thead>
+    <tbody>
+      <tr><td><span class="fname img">logo-dark.png</span></td><td class="fdesc">Website header, YouTube banner background, dark presentations</td><td class="fdeploy dep-github">GitHub repo + YouTube Studio</td></tr>
+      <tr><td><span class="fname img">logo-light.png</span></td><td class="fdesc">Documents, emails, white backgrounds, LinkedIn cover</td><td class="fdeploy dep-brand">Download &amp; use manually</td></tr>
+      <tr><td><span class="fname img">logo-full.svg</span></td><td class="fdesc">Print, large format signage, any size without quality loss</td><td class="fdeploy dep-brand">Keep locally, use in Canva etc.</td></tr>
+      <tr><td><span class="fname img">icon-512.png</span></td><td class="fdesc">Profile picture on ALL platforms (YouTube, Instagram, Twitter, LinkedIn)</td><td class="fdeploy dep-brand">Upload manually to each platform</td></tr>
+      <tr><td><span class="fname img">favicon.ico</span></td><td class="fdesc">Browser tab icon for the website</td><td class="fdeploy dep-github">GitHub repo (root folder)</td></tr>
+      <tr><td><span class="fname img">favicon.svg</span></td><td class="fdesc">Modern browsers — better quality than .ico</td><td class="fdeploy dep-github">GitHub repo (root folder)</td></tr>
+      <tr><td><span class="fname img">watermark.png</span></td><td class="fdesc">Overlay bottom-right of every video you produce</td><td class="fdeploy dep-brand">Keep locally, import into video editor</td></tr>
+      <tr><td><span class="fname html">brand-identity.html</span></td><td class="fdesc">Your brand guidelines — colours, fonts, usage rules</td><td class="fdeploy dep-github">GitHub repo brand/ folder</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PART 3: DEPLOY MAP -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-title"><div class="sec-title-bar"></div>Part 3 — Where Each File Gets Deployed</div>
+
+  <div class="deploy-map">
+    <div class="dm-card" style="border-top:2px solid var(--green)">
+      <div class="dm-title">🐙 GitHub Repository<br/><span style="font-size:11px;color:var(--muted);font-weight:400">github.com/nexus-now/nexus-now</span></div>
+      <ul class="dm-files">
+        <li style="color:var(--white)">index.html</li>
+        <li style="color:var(--white)">dashboard.html</li>
+        <li style="color:var(--white)">training-dashboard.html</li>
+        <li style="color:var(--white)">news.json</li>
+        <li style="color:var(--white)">orchestrator.py</li>
+        <li style="color:var(--white)">pipeline.py</li>
+        <li style="color:var(--white)">requirements.txt</li>
+        <li style="color:var(--white)">README.md</li>
+        <li style="color:var(--white)">.gitignore</li>
+        <li style="color:var(--white)">agents/ (all 9 files)</li>
+        <li style="color:var(--white)">.github/workflows/pipeline.yml</li>
+        <li style="color:var(--white)">brand/ (all brand files)</li>
+        <li style="color:var(--white)">agent_memory/.gitkeep</li>
+        <li style="color:var(--white)">assets/images/.gitkeep</li>
+        <li style="color:var(--white)">assets/audio/.gitkeep</li>
+        <li style="color:var(--white)">logs/.gitkeep</li>
+      </ul>
+    </div>
+    <div class="dm-card" style="border-top:2px solid var(--blue)">
+      <div class="dm-title">🌐 GitHub Pages (auto)<br/><span style="font-size:11px;color:var(--muted);font-weight:400">nexus-now.github.io/nexus-now/</span></div>
+      <ul class="dm-files">
+        <li style="color:var(--white)">index.html → homepage</li>
+        <li style="color:var(--white)">dashboard.html → /dashboard.html</li>
+        <li style="color:var(--white)">training-dashboard.html → /training-dashboard.html</li>
+        <li style="color:var(--white)">brand/brand-identity.html → /brand/brand-identity.html</li>
+        <li style="color:var(--white)">news.json → /news.json (API)</li>
+        <li style="color:var(--white)">brand/favicon.ico → browser tab icon</li>
+        <li style="color:var(--white)">brand/logo-dark.png → /brand/logo-dark.png</li>
+      </ul>
+      <div style="margin-top:12px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace">GitHub Pages auto-serves everything in the repo as a website. No separate deployment needed.</div>
+    </div>
+    <div class="dm-card" style="border-top:2px solid var(--purple)">
+      <div class="dm-title">📱 Social Platforms<br/><span style="font-size:11px;color:var(--muted);font-weight:400">Manual upload once</span></div>
+      <ul class="dm-files">
+        <li style="color:var(--white)">icon-512.png → YouTube profile pic</li>
+        <li style="color:var(--white)">icon-512.png → Instagram profile pic</li>
+        <li style="color:var(--white)">icon-512.png → Twitter profile pic</li>
+        <li style="color:var(--white)">icon-512.png → LinkedIn logo</li>
+        <li style="color:var(--white)">logo-dark.png → YouTube banner</li>
+        <li style="color:var(--white)">logo-light.png → LinkedIn cover</li>
+        <li style="color:var(--white)">watermark.png → video editor template</li>
+      </ul>
+    </div>
+    <div class="dm-card" style="border-top:2px solid var(--yellow)">
+      <div class="dm-title">☁️ Auto-Created at Runtime<br/><span style="font-size:11px;color:var(--muted);font-weight:400">Generated by the pipeline</span></div>
+      <ul class="dm-files">
+        <li style="color:var(--white)">agent_memory/*.json → agent brains</li>
+        <li style="color:var(--white)">agent_memory/training/*.jsonl → training data</li>
+        <li style="color:var(--white)">pipeline_results.json → run history</li>
+        <li style="color:var(--white)">assets/images/*.jpg → AI thumbnails</li>
+        <li style="color:var(--white)">assets/audio/*.mp3 → voiceovers</li>
+        <li style="color:var(--white)">logs/pipeline.log → run log</li>
+      </ul>
+      <div style="margin-top:12px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace">You don't create these. The pipeline creates them automatically and commits them back to the repo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PART 4: HOW TO UPLOAD — STEP BY STEP -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-title"><div class="sec-title-bar"></div>Part 4 — Exact Upload Instructions</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-hd"><div class="step-n">1</div><div class="step-t">Download all files from Claude to your computer</div></div>
+      <div class="step-body">
+        <p>Every file I've given you in this chat has a <strong>download button</strong> (the arrow icon at the top right of each file card). Click it for each file. Save them all to a single folder on your computer — name it <strong>nexus-now</strong>.</p>
+        <p>Make sure you recreate the folder structure: create an <strong>agents</strong> subfolder, put all the agent .py files inside it. Create a <strong>brand</strong> subfolder, put all logo files inside it. Create a <strong>.github/workflows</strong> subfolder, put pipeline.yml inside it.</p>
+        <div class="alert yellow">The .github folder starts with a dot — on Windows/Mac it may be hidden. Make sure it's included. The pipeline.yml file MUST be at exactly: .github/workflows/pipeline.yml</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">2</div><div class="step-t">Go to your GitHub repository</div></div>
+      <div class="step-body">
+        <p>Open your browser. Go to:</p>
+        <div class="code">https://github.com/nexus-now/nexus-now</div>
+        <p>Sign in if asked. You should see your empty repository (just a README.md).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">3</div><div class="step-t">Upload the root files first</div></div>
+      <div class="step-body">
+        <div class="path">
+          <span class="pi">Your repo page</span><span class="pa">→</span>
+          <span class="pi">Add file button</span><span class="pa">→</span>
+          <span class="pi">Upload files</span>
+        </div>
+        <p>Drag and drop these files from your nexus-now folder (NOT from any subfolder — just the root files):</p>
+        <div class="code">index.html
+dashboard.html
+training-dashboard.html
+setup-guide.html
+SETUP-GUIDE-COMPLETE.html
+news.json
+orchestrator.py
+pipeline.py
+requirements.txt
+README.md
+.gitignore</div>
+        <p>At the bottom of the page, in the <strong>Commit changes</strong> box, type: <strong>Initial upload - root files</strong>. Click the green <strong>Commit changes</strong> button.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">4</div><div class="step-t">Upload the agents/ folder</div></div>
+      <div class="step-body">
+        <p>GitHub's web interface can't create folders directly. Use this trick:</p>
+        <div class="path">
+          <span class="pi">Add file</span><span class="pa">→</span>
+          <span class="pi">Upload files</span><span class="pa">→</span>
+          <span class="pi">Drag the entire "agents" folder</span><span class="pa">→</span>
+          <span class="pi">GitHub will detect the folder structure</span>
+        </div>
+        <p>If dragging a folder doesn't work, click <strong>"Add file" → "Create new file"</strong>, then type the file path as: <strong>agents/__init__.py</strong> — GitHub will automatically create the agents/ folder. Repeat for each file:</p>
+        <div class="code">agents/__init__.py          (empty file - no content needed)
+agents/base_agent.py
+agents/free_ai_provider.py
+agents/training_engine.py
+agents/scout_agent.py
+agents/category_agents.py
+agents/aegis_agent.py
+agents/herald_agent.py
+agents/storage_manager.py</div>
+        <p>For each: click Add file → Create new file → type the path including "agents/" prefix → paste the file content → Commit.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">5</div><div class="step-t">Upload the .github/workflows/pipeline.yml file</div></div>
+      <div class="step-body">
+        <p>This is the most important file — it's what makes everything run automatically.</p>
+        <div class="path">
+          <span class="pi">Add file</span><span class="pa">→</span>
+          <span class="pi">Create new file</span><span class="pa">→</span>
+          <span class="pi">In name box type: .github/workflows/pipeline.yml</span><span class="pa">→</span>
+          <span class="pi">Paste the content</span><span class="pa">→</span>
+          <span class="pi">Commit</span>
+        </div>
+        <div class="alert green">When you type .github/workflows/pipeline.yml in the name box, GitHub automatically creates the nested folders. You'll see the path appear above the text area.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">6</div><div class="step-t">Upload the brand/ folder and placeholder folders</div></div>
+      <div class="step-body">
+        <p>Upload all brand files the same way — using "Create new file" with path like <strong>brand/logo-dark.png</strong>. But wait — PNG files can't be pasted as text. For images, use "Upload files" and drag them while you're inside the brand/ folder.</p>
+        <p>Create placeholder files for the empty folders:</p>
+        <div class="path">
+          <span class="pi">Add file → Create new file</span><span class="pa">→</span>
+          <span class="pi">Name: agent_memory/.gitkeep</span><span class="pa">→</span>
+          <span class="pi">Leave content empty</span><span class="pa">→</span>
+          <span class="pi">Commit</span>
+        </div>
+        <p>Repeat for: <strong>assets/images/.gitkeep</strong>, <strong>assets/audio/.gitkeep</strong>, <strong>logs/.gitkeep</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">7</div><div class="step-t">Enable GitHub Pages</div></div>
+      <div class="step-body">
+        <div class="path">
+          <span class="pi">Settings tab</span><span class="pa">→</span>
+          <span class="pi">Pages (left sidebar)</span><span class="pa">→</span>
+          <span class="pi">Source: Deploy from a branch</span><span class="pa">→</span>
+          <span class="pi">Branch: main</span><span class="pa">→</span>
+          <span class="pi">Folder: / (root)</span><span class="pa">→</span>
+          <span class="pi">Save</span>
+        </div>
+        <p>Wait 2 minutes. Your website is now live at:</p>
+        <div class="code">https://nexus-now.github.io/nexus-now/</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">8</div><div class="step-t">Add all GitHub Secrets</div></div>
+      <div class="step-body">
+        <div class="path">
+          <span class="pi">Settings tab</span><span class="pa">→</span>
+          <span class="pi">Secrets and variables</span><span class="pa">→</span>
+          <span class="pi">Actions</span><span class="pa">→</span>
+          <span class="pi">New repository secret</span>
+        </div>
+        <p>Add these one at a time. The minimum set to get started:</p>
+        <div class="code"><span class="k">Name:</span> <span class="v">GEMINI_API_KEY</span>     <span class="c">← your new Gemini key from aistudio.google.com</span>
+<span class="k">Name:</span> <span class="v">GITHUB_USERNAME</span>    <span class="c">← type exactly: nexus-now</span>
+<span class="k">Name:</span> <span class="v">GROQ_API_KEY</span>       <span class="c">← from console.groq.com → API Keys → Create</span></div>
+        <p>Add the rest as you complete each platform setup (see SETUP-GUIDE-COMPLETE.html).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">9</div><div class="step-t">Upload brand assets to social platforms (manual, one-time)</div></div>
+      <div class="step-body">
+        <table class="platform-deploy">
+          <thead><tr><th>PLATFORM</th><th>FILE TO UPLOAD</th><th>WHERE IN THE PLATFORM</th></tr></thead>
+          <tbody>
+            <tr><td>📺 YouTube</td><td>icon-512.png</td><td>YouTube Studio → Customisation → Branding → Profile picture</td></tr>
+            <tr><td>📺 YouTube</td><td>logo-dark.png</td><td>YouTube Studio → Customisation → Branding → Banner image</td></tr>
+            <tr><td>📸 Instagram</td><td>icon-512.png</td><td>Profile → Edit Profile → Change profile photo</td></tr>
+            <tr><td>🐦 Twitter/X</td><td>icon-512.png</td><td>Profile → Edit Profile → Avatar (circle image)</td></tr>
+            <tr><td>💼 LinkedIn</td><td>icon-512.png</td><td>Company Page → Edit → Logo</td></tr>
+            <tr><td>💼 LinkedIn</td><td>logo-light.png</td><td>Company Page → Edit → Cover image</td></tr>
+            <tr><td>🌐 Website</td><td>favicon.ico</td><td>Already in repo → auto-shown in browser tab</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-hd"><div class="step-n">10</div><div class="step-t">Test the pipeline manually</div></div>
+      <div class="step-body">
+        <div class="path">
+          <span class="pi">Actions tab</span><span class="pa">→</span>
+          <span class="pi">Left sidebar: NEXUS NOW Pipeline</span><span class="pa">→</span>
+          <span class="pi">Run workflow button (right side)</span><span class="pa">→</span>
+          <span class="pi">Run workflow</span>
+        </div>
+        <p>Watch the yellow spinning icons. They turn green ✅ when each step succeeds. Click into the run to see detailed logs. Any ❌ red icon means an error — click on it and read the error message to know which secret is missing or wrong.</p>
+        <div class="alert green">Once it runs green, NEXUS NOW is fully live. The pipeline now runs forever, automatically, twice a day, with zero human intervention. All 11 agents are live, self-training, and getting smarter with every article.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PART 5: YOUR LIVE URLS -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-title"><div class="sec-title-bar"></div>Part 5 — Your Live URLs After Deployment</div>
+  <div class="code"><span class="c"># Your public website</span>
+<span class="v">https://nexus-now.github.io/nexus-now/</span>
+
+<span class="c"># Mission Control dashboard</span>
+<span class="v">https://nexus-now.github.io/nexus-now/dashboard.html</span>
+
+<span class="c"># Training intelligence dashboard</span>
+<span class="v">https://nexus-now.github.io/nexus-now/training-dashboard.html</span>
+
+<span class="c"># Brand guide + logo downloads</span>
+<span class="v">https://nexus-now.github.io/nexus-now/brand/brand-identity.html</span>
+
+<span class="c"># Live article feed (used by website)</span>
+<span class="v">https://nexus-now.github.io/nexus-now/news.json</span>
+
+<span class="c"># Pipeline run history</span>
+<span class="v">https://nexus-now.github.io/nexus-now/pipeline_results.json</span></div>
+</div>
+
+<div style="text-align:center;padding:48px 0 32px;color:var(--muted);font-size:11px;letter-spacing:3px;border-top:1px solid var(--border)">
+  © 2026 NEXUS NOW · ceo.nexusnow@gmail.com · 33 FILES · 11 AGENTS · 0 HUMANS
+</div>
+
+</div>
+</body>
+</html>

@@ -44,14 +44,14 @@ nexus-now/
 ```bash
 # On GitHub: click "Fork" on this repo
 # Then clone your fork:
-git clone https://github.com/YOUR_USERNAME/nexus-now.git
+git clone https://github.com/nexus-now/news.git
 cd nexus-now
 ```
 
 ### STEP 2 — Enable GitHub Pages
 1. Go to your repo → **Settings** → **Pages**
 2. Source: **Deploy from branch** → `main` → `/ (root)`
-3. Your site will be live at: `https://YOUR_USERNAME.github.io/nexus-now/`
+3. Your site will be live at: `https://nexus-now.github.io/news/`
 
 ### STEP 3 — Get Your API Keys
 
@@ -104,9 +104,9 @@ Add these secrets one by one:
 ### STEP 5 — Update Your GitHub Pages URL in pipeline.py
 Open `pipeline.py` and find this line:
 ```python
-"image_url": f"https://YOUR_GITHUB_USERNAME.github.io/nexus-now/{image_path}"
+"image_url": f"https://nexus-now.github.io/news/{image_path}"
 ```
-Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username.
+Replace `nexus-now` with your actual GitHub username.
 
 ### STEP 6 — Push and Activate
 ```bash
