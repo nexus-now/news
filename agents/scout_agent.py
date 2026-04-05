@@ -3,8 +3,7 @@ NEXUS NOW — SCOUT Agent
 Monitors Google Trends, classifies trends, routes to specialists.
 """
 import json, datetime, requests
-from agents.base_agent import NexusAgent, gemini_raw, extract_json
-
+from .base_agent import NexusAgent, gemini_raw, extract_json
 try:
     import feedparser
 except ImportError:
