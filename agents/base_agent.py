@@ -5,8 +5,8 @@ so all other agents can import them from here.
 """
 import os, json, datetime, requests
 from pathlib import Path
-from agents.free_ai_provider import ai_generate
-from agents.training_engine  import AgentTrainer
+from .free_ai_provider import ai_generate
+from .training_engine  import AgentTrainer
 
 # ── SHARED HELPERS (exported — other agents import these) ──────────────────
 def extract_json(text: str) -> str:
