@@ -1,0 +1,68 @@
+name: NEXUS NOW — Multi-Agent Autonomous Pipeline
+
+on:
+  schedule:
+    - cron: "0 8  * * *"
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+    inputs:
+      category_override:
+        description: "Force category (business/science/tech/sports/politics/entertainment/environment/crime)"
+        required: false
+        default: ""
+      posts_override:
+        description: "Number of stories (default: 2)"
+        required: false
+        default: "2"
+
+jobs:
+  nexus-pipeline:
+    name: NEXUS NOW Multi-Agent Pipeline
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - run: mkdir -p agent_memory assets/images assets/audio logs
+
+      - name: Run Pipeline
+        env:
+          GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_CREDENTIALS_JSON: ${{ secrets.YOUTUBE_CREDENTIALS_JSON }}
+          YOUTUBE_CHANNEL_ID:       ${{ secrets.YOUTUBE_CHANNEL_ID }}
+          INSTAGRAM_TOKEN:          ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTAGRAM_BUSINESS_ID:    ${{ secrets.INSTAGRAM_BUSINESS_ID }}
+          TWITTER_API_KEY:          ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET:       ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN:     ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET:    ${{ secrets.TWITTER_ACCESS_SECRET }}
+          GITHUB_USERNAME:          ${{ secrets.GITHUB_USERNAME }}
+          POSTS_PER_RUN:            ${{ github.event.inputs.posts_override || '2' }}
+        run: python orchestrator.py
+
+      - name: Commit Updates
+        run: |
+          git config user.name  "NEXUS NOW AI"
+          git config user.email "ai@nexusnow.media"
+          git add news.json agent_memory/ assets/ logs/ pipeline_results.json || true
+          git diff --staged --quiet || git commit -m "🤖 Auto-publish $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-${{ github.run_number }}
+          path: logs/pipeline.log
+          retention-days: 90
