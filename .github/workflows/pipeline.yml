@@ -2,16 +2,16 @@ name: NEXUS NOW — Multi-Agent Autonomous Pipeline
 
 on:
   schedule:
-    - cron: "0 8  * * *"
+    - cron: "0 8 * * *"
     - cron: "0 18 * * *"
   workflow_dispatch:
     inputs:
       category_override:
-        description: "Force category (business/science/tech/sports/politics/entertainment/environment/crime)"
+        description: "Force category"
         required: false
         default: ""
       posts_override:
-        description: "Number of stories (default: 2)"
+        description: "Number of stories"
         required: false
         default: "2"
 
@@ -23,46 +23,65 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: pip
+          cache: 'pip'
 
-      - run: pip install -r requirements.txt
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - run: mkdir -p agent_memory assets/images assets/audio logs
+      - name: Initialize Directories
+        run: mkdir -p agent_memory assets/images assets/audio logs
 
       - name: Run Pipeline
         env:
-          GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_CREDENTIALS_JSON: ${{ secrets.YOUTUBE_CREDENTIALS_JSON }}
-          YOUTUBE_CHANNEL_ID:       ${{ secrets.YOUTUBE_CHANNEL_ID }}
-          INSTAGRAM_TOKEN:          ${{ secrets.INSTAGRAM_TOKEN }}
-          INSTAGRAM_BUSINESS_ID:    ${{ secrets.INSTAGRAM_BUSINESS_ID }}
-          TWITTER_API_KEY:          ${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_SECRET:       ${{ secrets.TWITTER_API_SECRET }}
-          TWITTER_ACCESS_TOKEN:     ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_SECRET:    ${{ secrets.TWITTER_ACCESS_SECRET }}
-          GITHUB_USERNAME:          ${{ secrets.GITHUB_USERNAME }}
-          POSTS_PER_RUN:            ${{ github.event.inputs.posts_override || '2' }}
+          YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTAGRAM_BUSINESS_ID: ${{ secrets.INSTAGRAM_BUSINESS_ID }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+          # UPDATED TO YOUR NEW SECRET NAME
+          GITHUB_USERNAME: ${{ secrets.MY_GITHUB_USERNAME }}
+          POSTS_PER_RUN: ${{ github.event.inputs.posts_override || '2' }}
         run: python orchestrator.py
 
-      - name: Commit Updates
+      - name: Commit and Push Updates
+        env:
+          # PASS THE SECRET HERE FOR THE GIT CONFIG
+          GH_USER: ${{ secrets.MY_GITHUB_USERNAME }}
         run: |
-          git config user.name  "NEXUS NOW AI"
-          git config user.email "ai@nexusnow.media"
-          git add news.json agent_memory/ assets/ logs/ pipeline_results.json || true
-          git diff --staged --quiet || git commit -m "🤖 Auto-publish $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git config --global user.name "$GH_USER"
+          git config --global user.email "ai@nexusnow.media"
+          git config --global --add safe.directory /home/runner/work/news/news
+          
+          # Add output files if they exist
+          git add news.json agent_memory/ assets/ logs/ pipeline_results.json 2>/dev/null || true
+          
+          # Check if there are changes before committing
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🤖 Auto-publish $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          else
+            echo "No changes to commit. Skipping."
+          fi
 
-      - if: always()
+      - name: Upload Logs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: log-${{ github.run_number }}
-          path: logs/pipeline.log
-          retention-days: 90
+          name: pipeline-logs
+          path: logs/
+          retention-days: 7
