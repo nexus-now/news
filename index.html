@@ -2,1054 +2,428 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NEXUS NOW — Every Story. Every Second. Everywhere.</title>
-<meta name="description" content="NEXUS NOW — AI-powered global news channel. Real-time stories, analysis, and breaking news delivered instantly."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"/>
+<title>NEXUS NOW — Live AI News</title>
 <link rel="icon" type="image/x-icon" href="brand/favicon.ico"/>
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg"/>
 <link rel="apple-touch-icon" href="brand/icon-512.png"/>
-<meta property="og:title" content="NEXUS NOW — Every Story. Every Second. Everywhere."/>
-<meta property="og:description" content="World's first fully autonomous AI news channel."/>
-<meta property="og:image" content="brand/logo-dark.png"/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:site" content="@NexusNow"/>
-<meta name="twitter:image" content="brand/logo-dark.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --red: #E81A1A;
-  --red-dim: #b01010;
-  --black: #080808;
-  --white: #F5F2ED;
-  --gray: #1a1a1a;
-  --gray2: #2a2a2a;
-  --muted: #888;
-  --ticker-h: 40px;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  overflow-x: hidden;
-}
-
-/* ── TICKER ── */
-.ticker-bar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-  height: var(--ticker-h);
-  background: var(--red);
-  display: flex; align-items: center;
-  overflow: hidden;
-  border-bottom: 2px solid #ff3a3a;
-}
-.ticker-label {
-  flex-shrink: 0;
-  background: var(--black);
-  color: var(--red);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 15px;
-  letter-spacing: 3px;
-  padding: 0 18px;
-  height: 100%;
-  display: flex; align-items: center;
-  border-right: 2px solid var(--red);
-}
-.ticker-track {
-  display: flex;
-  animation: ticker 40s linear infinite;
-  white-space: nowrap;
-}
-.ticker-track span {
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  color: var(--white);
-  padding: 0 40px;
-  letter-spacing: 0.5px;
-}
-.ticker-track span::after {
-  content: '◆';
-  color: rgba(255,255,255,0.4);
-  margin-left: 40px;
-}
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ── HEADER ── */
-header {
-  position: fixed; top: var(--ticker-h); left: 0; right: 0; z-index: 100;
-  height: 64px;
-  background: rgba(8,8,8,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--gray2);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 32px;
-}
-.logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 5px;
-  color: var(--white);
-  text-decoration: none;
-  display: flex; align-items: center; gap: 10px;
-}
-.logo-dot {
-  width: 10px; height: 10px;
-  background: var(--red);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232,26,26,0.6); }
-  50% { box-shadow: 0 0 0 8px rgba(232,26,26,0); }
-}
-nav { display: flex; align-items: center; gap: 28px; }
-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-nav a:hover { color: var(--white); }
-.live-badge {
-  background: var(--red);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 4px 10px;
-  border-radius: 2px;
-  animation: blink 2s infinite;
-}
-@keyframes blink {
-  0%, 90%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* ── HERO ── */
-.hero {
-  margin-top: calc(var(--ticker-h) + 64px);
-  min-height: 92vh;
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-main {
-  padding: 60px 48px 60px 48px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  position: relative;
-  border-right: 1px solid var(--gray2);
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #0e0e0e 0%, #1a0000 50%, #080808 100%);
-  z-index: 0;
-}
-.hero-grid-lines {
-  position: absolute; inset: 0; z-index: 1;
-  background-image:
-    linear-gradient(rgba(232,26,26,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,26,26,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-.hero-content { position: relative; z-index: 2; }
-.breaking-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--red);
-  color: #fff;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  padding: 6px 16px;
-  margin-bottom: 24px;
-}
-.breaking-label::before {
-  content: '';
-  width: 8px; height: 8px;
-  background: #fff;
-  border-radius: 50%;
-  animation: pulse 1s infinite;
-}
-.hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 7vw, 96px);
-  line-height: 0.92;
-  letter-spacing: 2px;
-  margin-bottom: 24px;
-  color: var(--white);
-}
-.hero h1 em {
-  font-style: normal;
-  color: var(--red);
-}
-.hero-desc {
-  font-size: 16px;
-  color: var(--muted);
-  max-width: 560px;
-  margin-bottom: 36px;
-  line-height: 1.7;
-}
-.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-.btn-primary {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 14px 32px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.btn-primary:hover { background: var(--red-dim); transform: translateY(-1px); }
-.btn-outline {
-  background: transparent;
-  color: var(--white);
-  border: 1px solid var(--gray2);
-  padding: 14px 32px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s;
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.btn-outline:hover { border-color: var(--red); color: var(--red); }
-
-/* HERO SIDEBAR */
-.hero-sidebar {
-  padding: 32px 24px;
-  display: flex; flex-direction: column; gap: 0;
-  overflow-y: auto;
-  max-height: calc(92vh);
-}
-.sidebar-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: var(--red);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--gray2);
-}
-.news-card {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--gray2);
-  cursor: pointer;
-  transition: padding-left 0.2s;
-}
-.news-card:hover { padding-left: 8px; }
-.news-card .tag {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 8px;
-}
-.news-card h3 {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.news-card .meta {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* ── STATS BAR ── */
-.stats-bar {
-  background: var(--gray);
-  border-top: 1px solid var(--gray2);
-  border-bottom: 1px solid var(--gray2);
-  padding: 24px 48px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-}
-.stat { text-align: center; }
-.stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  color: var(--red);
-  letter-spacing: 2px;
-  line-height: 1;
-}
-.stat-label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-/* ── SECTION ── */
-section { padding: 80px 48px; }
-.section-header {
-  display: flex; align-items: baseline; justify-content: space-between;
-  margin-bottom: 40px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--gray2);
-}
-.section-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  letter-spacing: 3px;
-  color: var(--white);
-}
-.section-title span { color: var(--red); }
-.section-link {
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-}
-.section-link:hover { color: var(--red); }
-
-/* ── NEWS GRID ── */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--gray2);
-  border: 1px solid var(--gray2);
-}
-.grid-card {
-  background: var(--black);
-  padding: 32px;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.2s;
-}
-.grid-card:hover { background: #0f0f0f; }
-.grid-card .img-placeholder {
-  width: 100%; height: 180px;
-  background: var(--gray);
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.grid-card .img-placeholder .img-icon {
-  font-size: 40px;
-  opacity: 0.3;
-}
-.grid-card .img-placeholder::after {
-  content: 'AI GENERATED';
-  position: absolute; bottom: 8px; right: 8px;
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--muted);
-  background: rgba(0,0,0,0.8);
-  padding: 3px 8px;
-}
-.grid-card .cat {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 10px;
-}
-.grid-card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 12px;
-}
-.grid-card p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-.grid-card .card-footer {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.grid-card .timestamp {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-}
-.grid-card .ai-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--red);
-  border: 1px solid var(--red);
-  padding: 2px 8px;
-  letter-spacing: 1px;
-}
-.grid-card-featured {
-  grid-column: span 2;
-}
-.grid-card-featured .img-placeholder {
-  height: 280px;
-}
-
-/* ── AI AGENTS SECTION ── */
-.agents-section {
-  background: var(--gray);
-  border-top: 1px solid var(--gray2);
-  border-bottom: 1px solid var(--gray2);
-}
-.agents-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: var(--gray2);
-  border: 1px solid var(--gray2);
-}
-.agent-card {
-  background: var(--black);
-  padding: 32px 24px;
-  text-align: center;
-  transition: background 0.2s;
-}
-.agent-card:hover { background: #0a0a0a; }
-.agent-icon {
-  width: 60px; height: 60px;
-  border: 1px solid var(--gray2);
-  border-radius: 50%;
-  margin: 0 auto 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  position: relative;
-}
-.agent-icon::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--red);
-  opacity: 0;
-  animation: radar 3s infinite;
-}
-.agent-card:nth-child(1) .agent-icon::after { animation-delay: 0s; }
-.agent-card:nth-child(2) .agent-icon::after { animation-delay: 0.6s; }
-.agent-card:nth-child(3) .agent-icon::after { animation-delay: 1.2s; }
-.agent-card:nth-child(4) .agent-icon::after { animation-delay: 1.8s; }
-.agent-card:nth-child(5) .agent-icon::after { animation-delay: 2.4s; }
-@keyframes radar {
-  0% { opacity: 0.8; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.8); }
-}
-.agent-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
-.agent-role {
-  font-size: 11px;
-  color: var(--red);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.agent-desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-.agent-status {
-  margin-top: 16px;
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: #4caf50;
-}
-.agent-status::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: #4caf50;
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-
-/* ── PLATFORMS SECTION ── */
-.platforms-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.platform-card {
-  border: 1px solid var(--gray2);
-  padding: 28px;
-  text-align: center;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.platform-card:hover { border-color: var(--red); transform: translateY(-4px); }
-.platform-icon { font-size: 36px; margin-bottom: 14px; }
-.platform-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
-.platform-handle {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  color: var(--red);
-  margin-bottom: 12px;
-}
-.platform-desc { font-size: 12px; color: var(--muted); }
-
-/* ── PIPELINE SECTION ── */
-.pipeline {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  overflow-x: auto;
-  padding-bottom: 20px;
-}
-.pipeline-step {
-  flex: 1;
-  min-width: 160px;
-  text-align: center;
-  position: relative;
-  padding: 0 16px;
-}
-.pipeline-step:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -12px; top: 28px;
-  color: var(--red);
-  font-size: 24px;
-  font-weight: 300;
-}
-.step-num {
-  width: 56px; height: 56px;
-  border: 1px solid var(--red);
-  border-radius: 50%;
-  margin: 0 auto 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  color: var(--red);
-}
-.step-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-.step-desc {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.step-tool {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--red);
-  margin-top: 10px;
-  letter-spacing: 1px;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: var(--gray);
-  border-top: 1px solid var(--gray2);
-  padding: 60px 48px 32px;
-}
-.footer-top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--gray2);
-}
-.footer-brand .logo { font-size: 36px; margin-bottom: 16px; }
-.footer-brand p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 260px;
-}
-.footer-col h4 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
-  letter-spacing: 3px;
-  color: var(--red);
-  margin-bottom: 20px;
-}
-.footer-col a {
-  display: block;
-  font-size: 13px;
-  color: var(--muted);
-  text-decoration: none;
-  margin-bottom: 10px;
-  transition: color 0.2s;
-}
-.footer-col a:hover { color: var(--white); }
-.footer-bottom {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.footer-bottom p {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-}
-.ai-badge {
-  background: transparent;
-  border: 1px solid var(--gray2);
-  padding: 6px 14px;
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  display: flex; align-items: center; gap: 8px;
-}
-.ai-badge::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: #4caf50;
-  border-radius: 50%;
-}
-
-/* ── SCROLL ANIMATIONS ── */
-.fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-sidebar { display: none; }
-  .news-grid { grid-template-columns: 1fr 1fr; }
-  .grid-card-featured { grid-column: span 2; }
-  .agents-grid { grid-template-columns: repeat(3, 1fr); }
-  .platforms-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 640px) {
-  header { padding: 0 16px; }
-  section { padding: 48px 20px; }
-  .stats-bar { padding: 24px 20px; }
-  nav { display: none; }
-  .news-grid { grid-template-columns: 1fr; }
-  .grid-card-featured { grid-column: span 1; }
-  .agents-grid { grid-template-columns: 1fr 1fr; }
-  .platforms-grid { grid-template-columns: 1fr 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
-  .hero-main { padding: 40px 20px; }
-}
+:root{--red:#E81A1A;--red2:#b01010;--black:#080808;--white:#F5F2ED;--gray:#111;--gray2:#1c1c1c;--gray3:#2a2a2a;--muted:#666;--green:#00c853;--yellow:#ffd600;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+/* BREAKING */
+#breakBanner{background:var(--red);color:#fff;padding:9px 20px;display:none;align-items:center;gap:12px;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1001;}
+#breakBanner.on{display:flex}
+.bb-tag{background:#fff;color:var(--red);font-size:9px;letter-spacing:3px;padding:3px 10px;flex-shrink:0;}
+.bb-x{margin-left:auto;cursor:pointer;font-size:20px;opacity:.8;padding:0 4px;}
+/* TICKER */
+.ticker{position:sticky;top:0;z-index:1000;height:38px;background:var(--red);display:flex;align-items:center;overflow:hidden;border-bottom:2px solid rgba(255,255,255,.15);}
+#breakBanner.on~.ticker{top:39px}
+.t-label{flex-shrink:0;background:var(--black);color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:0 14px;height:100%;display:flex;align-items:center;border-right:2px solid rgba(255,255,255,.15);}
+.t-label::before{content:'●';margin-right:6px;animation:blink 1.2s infinite;}
+.t-wrap{flex:1;overflow:hidden;}
+.t-track{display:flex;white-space:nowrap;animation:scroll 80s linear infinite;}
+.t-track:hover{animation-play-state:paused}
+.t-track span{font-family:'DM Mono',monospace;font-size:12px;color:#fff;padding:0 32px;}
+.t-track span::after{content:'◆';margin-left:32px;opacity:.35;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.t-clock{flex-shrink:0;padding:0 14px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.8);border-left:1px solid rgba(255,255,255,.2);letter-spacing:1px;}
+/* HEADER */
+header{position:sticky;top:38px;z-index:999;height:56px;background:rgba(8,8,8,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray2);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:16px;}
+.logo{display:flex;align-items:center;gap:9px;font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:5px;flex-shrink:0;}
+.ldot{width:9px;height:9px;background:var(--red);border-radius:50%;box-shadow:0 0 10px var(--red);animation:pdot 1.5s infinite;}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(232,26,26,.7)}50%{box-shadow:0 0 0 8px rgba(232,26,26,0)}}
+.hnav{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.nbtn{padding:5px 12px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--gray3);color:var(--muted);cursor:pointer;background:transparent;transition:all .15s;}
+.nbtn:hover,.nbtn.on{background:var(--red);color:#fff;border-color:var(--red);}
+.hright{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.livebadge{background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 10px;display:flex;align-items:center;gap:5px;}
+.livebadge::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;animation:blink 1s infinite;}
+.upd{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+#lupd{color:var(--green);}
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 350px;min-height:500px;border-bottom:1px solid var(--gray2);}
+.hmain{padding:40px;position:relative;overflow:hidden;border-right:1px solid var(--gray2);background:linear-gradient(135deg,#0a0000,var(--black) 60%);}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,26,26,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,26,26,.03) 1px,transparent 1px);background-size:48px 48px;}
+.hcon{position:relative;z-index:2;}
+.htag{display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:3px;padding:5px 14px;margin-bottom:18px;}
+.htag::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;animation:blink 1s infinite;}
+.hh1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,72px);line-height:.93;letter-spacing:1px;margin-bottom:16px;}
+.hh1 mark{background:none;color:var(--red);}
+.hsum{font-size:14px;color:rgba(245,242,237,.6);max-width:580px;line-height:1.65;margin-bottom:24px;}
+.hmeta{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap;}
+.hmi{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.hmi .g{width:5px;height:5px;border-radius:50%;background:var(--green);}
+.hcta{display:flex;gap:10px;}
+.bred{background:var(--red);color:#fff;border:none;padding:11px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+.bred:hover{background:var(--red2);}
+.bline{background:transparent;color:var(--white);border:1px solid var(--gray3);padding:11px 22px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:border-color .15s;}
+.bline:hover{border-color:var(--red);color:var(--red);}
+/* SIDEBAR */
+.hside{display:flex;flex-direction:column;overflow:hidden;}
+.shd{padding:13px 16px;border-bottom:1px solid var(--gray2);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:4px;color:var(--red);background:var(--gray);display:flex;align-items:center;justify-content:space-between;}
+.shd small{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;}
+.sfeed{flex:1;overflow-y:auto;}
+.scard{padding:14px 16px;border-bottom:1px solid var(--gray2);cursor:pointer;transition:background .15s;position:relative;}
+.scard:hover{background:var(--gray);}
+.scard.brk::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);}
+.sc-cat{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.sc-t{font-size:12px;font-weight:600;line-height:1.35;margin-bottom:7px;}
+.sc-m{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
+.vbadge{font-size:9px;padding:1px 6px;border:1px solid rgba(0,200,83,.4);color:var(--green);letter-spacing:1px;}
+.vbadge.dev{border-color:rgba(255,214,0,.4);color:var(--yellow);}
+/* STATBAR */
+.sbar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--gray2);background:var(--gray);}
+.sc{padding:16px 24px;border-right:1px solid var(--gray2);text-align:center;}
+.sc:last-child{border-right:none;}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--red);letter-spacing:2px;line-height:1;margin-bottom:3px;}
+.sl{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+/* SECTION */
+.sec{padding:32px 32px 0;}
+.sechd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gray2);}
+.sect{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;}
+.sect span{color:var(--red);}
+.frow{display:flex;gap:5px;flex-wrap:wrap;}
+.fbtn{padding:4px 11px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--gray3);color:var(--muted);background:transparent;cursor:pointer;transition:all .15s;}
+.fbtn:hover,.fbtn.on{background:var(--red);color:#fff;border-color:var(--red);}
+/* GRID */
+.ngrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray2);border:1px solid var(--gray2);margin-bottom:1px;}
+.ncard{background:var(--black);padding:22px;cursor:pointer;transition:background .15s;position:relative;display:flex;flex-direction:column;}
+.ncard:hover{background:#0d0d0d;}
+.ncard.feat{grid-column:span 2;}
+.ncard.brk::after{content:'BREAKING';position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-size:8px;font-weight:700;letter-spacing:2px;padding:3px 7px;}
+.ni{width:100%;background:var(--gray2);margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative;}
+.ni.tall{height:200px;}
+.ni.sh{height:150px;}
+.nilabel{position:absolute;bottom:7px;right:7px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);background:rgba(0,0,0,.7);padding:2px 6px;}
+.ncat{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.nt{font-size:16px;font-weight:700;line-height:1.3;margin-bottom:8px;flex:1;}
+.ncard.feat .nt{font-size:20px;}
+.ns{font-size:12px;color:rgba(245,242,237,.5);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.nfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;flex-wrap:wrap;gap:4px;}
+.ntime{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.nagent{font-size:9px;letter-spacing:1.5px;color:var(--muted);border:1px solid var(--gray3);padding:2px 6px;}
+/* LOADING */
+.lgrid{grid-column:1/-1;padding:60px;text-align:center;}
+.spin{width:30px;height:30px;border:2px solid var(--gray3);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltext{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;}
+/* MODAL */
+.mover{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;}
+.mover.on{display:flex;}
+.modal{background:var(--gray);border:1px solid var(--gray2);max-width:740px;width:100%;position:relative;animation:min .25s ease;}
+@keyframes min{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.mcl{position:absolute;top:12px;right:12px;width:30px;height:30px;background:var(--gray3);border:none;color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mhd{padding:26px 26px 18px;border-bottom:1px solid var(--gray2);}
+.mcat{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:9px;}
+.mt{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:.95;letter-spacing:1px;margin-bottom:11px;}
+.mmeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.mbody{padding:22px 26px;}
+.msum{font-size:14px;line-height:1.7;color:rgba(245,242,237,.8);margin-bottom:18px;}
+.manal{font-size:12px;line-height:1.75;color:rgba(245,242,237,.5);margin-bottom:18px;}
+.msect{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--red);margin:18px 0 10px;}
+.facts{list-style:none;}
+.facts li{padding:6px 0;border-bottom:1px solid var(--gray2);font-size:12px;color:rgba(245,242,237,.6);display:flex;gap:9px;line-height:1.5;}
+.facts li::before{content:'▶';color:var(--red);font-size:8px;margin-top:3px;flex-shrink:0;}
+.mcopy{margin-top:20px;padding-top:14px;border-top:1px solid var(--gray2);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--gray);border:1px solid var(--gray2);border-left:3px solid var(--green);padding:12px 18px;max-width:300px;animation:tin .3s ease;display:none;font-size:13px;}
+.toast.on{display:block;}
+.toast.err{border-left-color:var(--red);}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* FOOTER */
+footer{background:var(--gray);border-top:1px solid var(--gray2);padding:28px 32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;display:flex;align-items:center;gap:8px;}
+.ftag{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:3px;}
+.flinks{display:flex;gap:14px;}
+.flinks a{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.flinks a:hover{color:var(--red);}
+.fcopy{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+/* RESPONSIVE */
+@media(max-width:900px){.hero{grid-template-columns:1fr;}.hside{display:none;}.ngrid{grid-template-columns:1fr 1fr;}.ncard.feat{grid-column:span 2;}.sbar{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){header{padding:0 12px;}.hnav{display:none;}.hmain{padding:22px 16px;}.sec{padding:22px 14px 0;}.ngrid{grid-template-columns:1fr;}.ncard.feat{grid-column:span 1;}.sbar{grid-template-columns:repeat(2,1fr);}.sn{font-size:28px;}}
 </style>
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker-bar">
-  <div class="ticker-label">BREAKING</div>
-  <div class="ticker-track" id="tickerTrack">
-    <span>AI-powered journalism launches globally — NEXUS NOW goes live 24/7</span>
-    <span>Google Trends monitored in real-time across 90+ countries</span>
-    <span>All content generated, edited and published by autonomous AI agents</span>
-    <span>NEXUS NOW available on YouTube, Instagram, X, TikTok and web</span>
-    <span>Zero human intervention — fully autonomous news production pipeline</span>
-    <span>AI-powered journalism launches globally — NEXUS NOW goes live 24/7</span>
-    <span>Google Trends monitored in real-time across 90+ countries</span>
-    <span>All content generated, edited and published by autonomous AI agents</span>
-    <span>NEXUS NOW available on YouTube, Instagram, X, TikTok and web</span>
-    <span>Zero human intervention — fully autonomous news production pipeline</span>
-  </div>
+<div id="breakBanner">
+  <span class="bb-tag">⚡ BREAKING</span>
+  <span id="btext">Loading latest story...</span>
+  <span class="bb-x" onclick="document.getElementById('breakBanner').classList.remove('on')">✕</span>
 </div>
 
-<!-- HEADER -->
+<div class="ticker">
+  <div class="t-label">LIVE</div>
+  <div class="t-wrap">
+    <div class="t-track" id="ttrack">
+      <span>NEXUS NOW · Autonomous AI News Channel · Loading live stories...</span>
+      <span>NEXUS NOW · Autonomous AI News Channel · Loading live stories...</span>
+    </div>
+  </div>
+  <div class="t-clock" id="tclock">--:-- UTC</div>
+</div>
+
 <header>
-  <a href="#" class="logo">
-    <div class="logo-dot"></div>
-    NEXUS NOW
-  </a>
-  <nav>
-    <a href="#latest">Latest</a>
-    <a href="#world">World</a>
-    <a href="#tech">Tech</a>
-    <a href="#business">Business</a>
-    <a href="#agents">Our AI Team</a>
-    <span class="live-badge">● LIVE</span>
+  <a href="/" class="logo"><div class="ldot"></div>NEXUS NOW</a>
+  <nav class="hnav" id="cnav">
+    <button class="nbtn on" onclick="fcat('all',this)">All</button>
+    <button class="nbtn" onclick="fcat('Technology',this)">Tech</button>
+    <button class="nbtn" onclick="fcat('Business',this)">Business</button>
+    <button class="nbtn" onclick="fcat('Science',this)">Science</button>
+    <button class="nbtn" onclick="fcat('Sports',this)">Sports</button>
+    <button class="nbtn" onclick="fcat('World Politics',this)">World</button>
+    <button class="nbtn" onclick="fcat('Environment',this)">Climate</button>
+    <button class="nbtn" onclick="fcat('Entertainment',this)">Culture</button>
+    <button class="nbtn" onclick="fcat('Crime',this)">Justice</button>
   </nav>
+  <div class="hright">
+    <div class="upd">Refreshed: <span id="lupd">--</span></div>
+    <span class="livebadge">LIVE AI</span>
+  </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-main">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-    <div class="hero-content">
-      <div class="breaking-label">Breaking Now</div>
-      <h1>Every Story.<br/>Every Second.<br/><em>Everywhere.</em></h1>
-      <p class="hero-desc">
-        NEXUS NOW is the world's first fully autonomous AI news channel. Our AI agents monitor global trends in real-time, research every story, write scripts, produce videos, and publish across every major platform — without a single human in the loop.
-      </p>
-      <div class="hero-actions">
-        <a href="https://youtube.com/@NexusNow" class="btn-primary">▶ Watch Now</a>
-        <a href="#latest" class="btn-outline">Latest Stories →</a>
+  <div class="hmain">
+    <div class="hgrid"></div>
+    <div class="hcon">
+      <div class="htag" id="htag">LOADING LATEST STORY</div>
+      <h1 class="hh1" id="hh">Fetching<br/>Latest <mark>News</mark><br/>Now...</h1>
+      <p class="hsum" id="hsum">NEXUS NOW is loading stories from our autonomous AI agents. All content is researched, written, verified and published with zero human intervention.</p>
+      <div class="hmeta">
+        <div class="hmi"><div class="g"></div><span id="hmeta">Loading...</span></div>
+        <div class="hmi" id="hverify"></div>
+      </div>
+      <div class="hcta">
+        <button class="bred" onclick="openHero()">▶ Read Full Story</button>
+        <button class="bline" onclick="doRefresh()">↻ Refresh Now</button>
       </div>
     </div>
   </div>
-  <div class="hero-sidebar">
-    <div class="sidebar-title">Top Stories Right Now</div>
-    <div id="sidebarNews">
-      <!-- Dynamically loaded from news.json -->
-      <div class="news-card">
-        <div class="tag">Technology</div>
-        <h3>AI Systems Now Outperform Human Analysts in Real-Time Market Predictions</h3>
-        <div class="meta">2 min ago · AI Generated · 3.2K views</div>
-      </div>
-      <div class="news-card">
-        <div class="tag">World</div>
-        <h3>Global Climate Summit Reaches Historic Agreement on Carbon Neutrality</h3>
-        <div class="meta">18 min ago · AI Generated · 8.1K views</div>
-      </div>
-      <div class="news-card">
-        <div class="tag">Business</div>
-        <h3>Tech Giants Report Record Q1 Earnings Amid AI Investment Surge</h3>
-        <div class="meta">34 min ago · AI Generated · 5.7K views</div>
-      </div>
-      <div class="news-card">
-        <div class="tag">Science</div>
-        <h3>Researchers Discover New Gene Sequence That May Slow Aging</h3>
-        <div class="meta">1 hr ago · AI Generated · 12.4K views</div>
-      </div>
-      <div class="news-card">
-        <div class="tag">Sports</div>
-        <h3>Champions League Quarter-Final Produces Stunning Comeback in Extra Time</h3>
-        <div class="meta">2 hr ago · AI Generated · 19.8K views</div>
-      </div>
+  <div class="hside">
+    <div class="shd">Top Stories <small id="scnt">--</small></div>
+    <div class="sfeed" id="sfeed"></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <div class="sc"><div class="sn" id="sstories">0</div><div class="sl">Stories Published</div></div>
+  <div class="sc"><div class="sn">11</div><div class="sl">AI Agents Active</div></div>
+  <div class="sc"><div class="sn">2×</div><div class="sl">Daily Auto-Publish</div></div>
+  <div class="sc"><div class="sn" id="scats">8</div><div class="sl">Categories Covered</div></div>
+</div>
+
+<div class="sec">
+  <div class="sechd">
+    <div class="sect"><span>Latest</span> Stories</div>
+    <div class="frow" id="frow"></div>
+  </div>
+  <div class="ngrid" id="ngrid">
+    <div class="lgrid"><div class="spin"></div><div class="ltext">AI AGENTS GENERATING STORIES...</div></div>
+  </div>
+</div>
+
+<div class="mover" id="modal" onclick="if(event.target===this)closeM()">
+  <div class="modal">
+    <button class="mcl" onclick="closeM()">✕</button>
+    <div class="mhd">
+      <div class="mcat" id="mcat"></div>
+      <div class="mt" id="mt"></div>
+      <div class="mmeta"><span id="mtime"></span><span id="magent"></span><span id="mverify"></span><span id="mcid"></span></div>
+    </div>
+    <div class="mbody">
+      <p class="msum" id="msum"></p>
+      <div class="msect">KEY FACTS</div>
+      <ul class="facts" id="mfacts"></ul>
+      <div class="msect">FULL ANALYSIS</div>
+      <p class="manal" id="manal"></p>
+      <div class="mcopy" id="mcopy"></div>
     </div>
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-num" data-target="24">0</div>
-    <div class="stat-label">Hours Active Daily</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num" data-target="2">0</div>
-    <div class="stat-label">Stories Published Today</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num" data-target="5">0</div>
-    <div class="stat-label">AI Agents Working</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num" data-target="6">0</div>
-    <div class="stat-label">Platforms Covered</div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
-<!-- LATEST NEWS -->
-<section id="latest">
-  <div class="section-header fade-in">
-    <div class="section-title"><span>Latest</span> Stories</div>
-    <a href="news.html" class="section-link">All Stories →</a>
-  </div>
-  <div class="news-grid fade-in" id="newsGrid">
-    <div class="grid-card grid-card-featured">
-      <div class="img-placeholder"><div class="img-icon">📡</div></div>
-      <div class="cat">Breaking · World</div>
-      <h3>NEXUS NOW Launches: The World's First Fully Autonomous AI News Channel Goes Live</h3>
-      <p>In a landmark moment for journalism, NEXUS NOW becomes the first news organization where every function — from research to broadcast — is performed entirely by artificial intelligence agents operating around the clock.</p>
-      <div class="card-footer">
-        <span class="timestamp">Just now</span>
-        <span class="ai-tag">AI GENERATED</span>
-      </div>
-    </div>
-    <div class="grid-card">
-      <div class="img-placeholder"><div class="img-icon">🌍</div></div>
-      <div class="cat">Technology</div>
-      <h3>How Real-Time Trend Analysis Is Reshaping the News Cycle</h3>
-      <p>Google Trends data now powers next-generation newsrooms that can detect viral stories within minutes of emergence.</p>
-      <div class="card-footer">
-        <span class="timestamp">1 hr ago</span>
-        <span class="ai-tag">AI GENERATED</span>
-      </div>
-    </div>
-    <div class="grid-card">
-      <div class="img-placeholder"><div class="img-icon">💡</div></div>
-      <div class="cat">Business</div>
-      <h3>AI Content Platforms Projected to Generate $12B in Ad Revenue by 2027</h3>
-      <p>New research shows autonomous content channels are the fastest-growing segment of the digital media industry.</p>
-      <div class="card-footer">
-        <span class="timestamp">3 hr ago</span>
-        <span class="ai-tag">AI GENERATED</span>
-      </div>
-    </div>
-    <div class="grid-card">
-      <div class="img-placeholder"><div class="img-icon">🔬</div></div>
-      <div class="cat">Science</div>
-      <h3>Quantum Computing Breakthrough Promises to Solve Climate Modeling Challenges</h3>
-      <p>Scientists unveil a 1000-qubit processor that can simulate atmospheric systems 10,000 times faster than current methods.</p>
-      <div class="card-footer">
-        <span class="timestamp">5 hr ago</span>
-        <span class="ai-tag">AI GENERATED</span>
-      </div>
-    </div>
-    <div class="grid-card">
-      <div class="img-placeholder"><div class="img-icon">🏛️</div></div>
-      <div class="cat">Politics</div>
-      <h3>Global Leaders Convene for Emergency Summit on Digital Governance</h3>
-      <p>Thirty nations gather to draft landmark framework for AI regulation and cross-border data sovereignty.</p>
-      <div class="card-footer">
-        <span class="timestamp">7 hr ago</span>
-        <span class="ai-tag">AI GENERATED</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI AGENTS -->
-<section id="agents" class="agents-section">
-  <div class="section-header fade-in">
-    <div class="section-title">Meet The <span>AI Team</span></div>
-    <span class="section-link">All Agents Online</span>
-  </div>
-  <div class="agents-grid fade-in">
-    <div class="agent-card">
-      <div class="agent-icon">👁️</div>
-      <div class="agent-name">SCOUT</div>
-      <div class="agent-role">Trend Monitor</div>
-      <div class="agent-desc">Scans Google Trends, X, and Reddit every 30 minutes. Scores stories for virality and relevance before any human would notice them.</div>
-      <div class="agent-status">ACTIVE — Scanning now</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🔍</div>
-      <div class="agent-name">AXIOM</div>
-      <div class="agent-role">Research Agent</div>
-      <div class="agent-desc">Deep-dives every trending topic. Pulls from 200+ sources, cross-references facts, and assembles the full story context in under 2 minutes.</div>
-      <div class="agent-status">ACTIVE — Researching</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">✍️</div>
-      <div class="agent-name">VERBA</div>
-      <div class="agent-role">Writer & Anchor</div>
-      <div class="agent-desc">Scripts news videos, writes articles, crafts social captions. Adapts tone perfectly for YouTube, Instagram, X, and web — all from one research pass.</div>
-      <div class="agent-status">ACTIVE — Writing</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🎬</div>
-      <div class="agent-name">VISIO</div>
-      <div class="agent-role">Media Producer</div>
-      <div class="agent-desc">Generates thumbnails, short video clips, animations and voiceovers. Assembles the final content package ready for distribution.</div>
-      <div class="agent-status">ACTIVE — Producing</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">📡</div>
-      <div class="agent-name">HERALD</div>
-      <div class="agent-role">Publisher</div>
-      <div class="agent-desc">Posts to YouTube, Instagram, X, TikTok and the website simultaneously. Optimises titles, tags and timing for maximum reach on each platform.</div>
-      <div class="agent-status">ACTIVE — Publishing</div>
-    </div>
-  </div>
-</section>
-
-<!-- PIPELINE -->
-<section>
-  <div class="section-header fade-in">
-    <div class="section-title">The <span>Pipeline</span></div>
-    <span class="section-link">100% Automated</span>
-  </div>
-  <div class="pipeline fade-in">
-    <div class="pipeline-step">
-      <div class="step-num">01</div>
-      <div class="step-title">Trend Detection</div>
-      <div class="step-desc">Google Trends RSS + X API scanned every 30 min. Top 2 stories selected by virality score.</div>
-      <div class="step-tool">SCOUT · Gemini</div>
-    </div>
-    <div class="pipeline-step">
-      <div class="step-num">02</div>
-      <div class="step-title">Deep Research</div>
-      <div class="step-desc">Full story context assembled from 200+ sources. Facts verified. Angle defined.</div>
-      <div class="step-tool">AXIOM · Gemini</div>
-    </div>
-    <div class="pipeline-step">
-      <div class="step-num">03</div>
-      <div class="step-title">Script & Copy</div>
-      <div class="step-desc">Video script, article, tweet thread, Instagram caption — all written in one pass.</div>
-      <div class="step-tool">VERBA · Gemini</div>
-    </div>
-    <div class="pipeline-step">
-      <div class="step-num">04</div>
-      <div class="step-title">Media Production</div>
-      <div class="step-desc">AI video generated. Thumbnail created. Voiceover synthesized. All assembled automatically.</div>
-      <div class="step-tool">VISIO · Gemini Video</div>
-    </div>
-    <div class="pipeline-step">
-      <div class="step-num">05</div>
-      <div class="step-title">Multi-Platform Publish</div>
-      <div class="step-desc">Simultaneous posting to YouTube, Instagram, X, TikTok, and the website.</div>
-      <div class="step-tool">HERALD · GitHub Actions</div>
-    </div>
-  </div>
-</section>
-
-<!-- PLATFORMS -->
-<section id="platforms" style="background:var(--gray); border-top:1px solid var(--gray2);">
-  <div class="section-header fade-in">
-    <div class="section-title">Find Us <span>Everywhere</span></div>
-  </div>
-  <div class="platforms-grid fade-in">
-    <div class="platform-card">
-      <div class="platform-icon">📺</div>
-      <div class="platform-name">YouTube</div>
-      <div class="platform-handle">@NexusNow</div>
-      <div class="platform-desc">Full news videos, Shorts, analysis and live streams. Primary monetization channel.</div>
-    </div>
-    <div class="platform-card">
-      <div class="platform-icon">📸</div>
-      <div class="platform-name">Instagram</div>
-      <div class="platform-handle">@nexusnow</div>
-      <div class="platform-desc">Reels, carousels, infographics and breaking news Stories.</div>
-    </div>
-    <div class="platform-card">
-      <div class="platform-icon">🐦</div>
-      <div class="platform-name">X / Twitter</div>
-      <div class="platform-handle">@NexusNow</div>
-      <div class="platform-desc">Real-time threads, breaking updates and trending analysis.</div>
-    </div>
-    <div class="platform-card">
-      <div class="platform-icon">🎵</div>
-      <div class="platform-name">TikTok</div>
-      <div class="platform-handle">@nexusnow</div>
-      <div class="platform-desc">Short-form news clips, trend explainers and viral content.</div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="logo" style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-        <div class="logo-dot"></div>
-        NEXUS NOW
-      </div>
-      <p>The world's first fully autonomous AI news channel. Every story, every second, everywhere — powered by five AI agents working around the clock.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Sections</h4>
-      <a href="#">World News</a>
-      <a href="#">Technology</a>
-      <a href="#">Business</a>
-      <a href="#">Science</a>
-      <a href="#">Sports</a>
-      <a href="#">Politics</a>
-    </div>
-    <div class="footer-col">
-      <h4>Platforms</h4>
-      <a href="#">YouTube</a>
-      <a href="#">Instagram</a>
-      <a href="#">X / Twitter</a>
-      <a href="#">TikTok</a>
-      <a href="#">This Website</a>
-    </div>
-    <div class="footer-col">
-      <h4>About</h4>
-      <a href="#">How It Works</a>
-      <a href="#">Our AI Agents</a>
-      <a href="#">The Pipeline</a>
-      <a href="#">Open Source</a>
-      <a href="#">Contact</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 NEXUS NOW · All content AI-generated · Built on GitHub Pages</p>
-    <div class="ai-badge">FULLY AI OPERATED · NO HUMANS</div>
-  </div>
+  <div><div class="flogo"><div class="ldot"></div>NEXUS NOW</div><div class="ftag">Every Story · Every Second · Everywhere</div></div>
+  <div class="flinks"><a href="dashboard.html">Dashboard</a><a href="training-dashboard.html">Training</a><a href="brand/brand-identity.html">Brand</a><a href="news.json" target="_blank">Live Feed</a></div>
+  <div class="fcopy">© 2026 NEXUS NOW · AI-Generated · ceo.nexusnow@gmail.com</div>
 </footer>
 
 <script>
-// Scroll fade-in
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+var arts=[],filtered=[],hero=null,curCat='all',rtimer=null;
+var ICONS={TITAN:'💼',PULSE:'🔬',VOLT:'⚡',ARENA:'🏆',NEXUS:'🌍',PRISM:'🎬',TERRA:'🌿',CIPHER:'⚖️',SCOUT:'👁️',AEGIS:'🛡️',HERALD:'📡'};
+var CICONS={'Technology':'⚡','Business':'💼','Science':'🔬','Sports':'🏆','World Politics':'🌍','Entertainment':'🎬','Environment':'🌿','Crime & Justice':'⚖️','Crime':'⚖️','Crime & Justice':'⚖️'};
+function ci(cat){return CICONS[cat]||'📰';}
+function ai(ag){return ICONS[ag]||'🤖';}
 
-// Animated counters
-const counters = document.querySelectorAll('[data-target]');
-const countObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.dataset.target);
-      let current = 0;
-      const step = target / 40;
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        el.textContent = Math.floor(current);
-        if (current >= target) clearInterval(timer);
-      }, 30);
-      countObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-counters.forEach(c => countObserver.observe(c));
-
-// Load dynamic news from news.json if available
-async function loadNews() {
-  try {
-    const res = await fetch('news.json');
-    if (!res.ok) return;
-    const articles = await res.json();
-    if (!articles.length) return;
-    const grid = document.getElementById('newsGrid');
-    // Keep featured card, replace rest
-    const cards = grid.querySelectorAll('.grid-card:not(.grid-card-featured)');
-    articles.slice(0, cards.length).forEach((article, i) => {
-      if (cards[i]) {
-        cards[i].querySelector('.cat').textContent = article.category;
-        cards[i].querySelector('h3').textContent = article.title;
-        cards[i].querySelector('p').textContent = article.summary;
-        cards[i].querySelector('.timestamp').textContent = article.time;
-      }
-    });
-  } catch(e) { /* no news.json yet — static content shown */ }
+// ── CLOCK ──
+function tick(){
+  var u=new Date().toUTCString(),t=u.split(' ')[4];
+  document.getElementById('tclock').textContent=t+' UTC';
+  document.title='NEXUS NOW · '+t+' · '+arts.length+' Stories Live';
 }
-loadNews();
+setInterval(tick,1000);tick();
 
-// Ticker live clock
-function updateTicker() {
-  const now = new Date();
-  const time = now.toUTCString().replace('GMT', 'UTC');
-  document.title = `NEXUS NOW · ${now.toLocaleTimeString()} · Every Story. Every Second.`;
+// ── FETCH ──
+async function load(toast){
+  try{
+    var r=await fetch('news.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var d=await r.json();
+    if(!Array.isArray(d))throw new Error('bad data');
+    var prev=arts.length;
+    arts=d;
+    var t=new Date().toUTCString().split(' ')[4];
+    document.getElementById('lupd').textContent=t+' UTC';
+    renderAll();
+    if(toast&&arts.length>prev)showT('Stories refreshed: '+arts.length+' total','ok');
+    return true;
+  }catch(e){
+    console.warn(e);
+    if(toast)showT('Reload error — will retry','err');
+    return false;
+  }
 }
-setInterval(updateTicker, 1000);
+
+async function doRefresh(){
+  document.getElementById('ngrid').innerHTML='<div class="lgrid"><div class="spin"></div><div class="ltext">REFRESHING...</div></div>';
+  await load(true);
+}
+
+// ── RENDER ALL ──
+function renderAll(){
+  applyF(curCat);
+  renderHero();renderSide();renderTicker();renderStats();renderGrid();renderBreaking();
+}
+
+// ── FILTER ──
+function fcat(c,btn){
+  curCat=c;
+  document.querySelectorAll('.nbtn').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  applyF(c);renderGrid();
+}
+function applyF(c){
+  filtered=c==='all'?[...arts]:arts.filter(a=>a.category&&a.category.toLowerCase().includes(c.toLowerCase()));
+}
+
+// ── HERO ──
+function renderHero(){
+  if(!arts.length)return;
+  hero=arts[0];
+  document.getElementById('htag').textContent=(hero.breaking?'🔴 BREAKING: ':'📡 LATEST: ')+(hero.category||'');
+  var words=(hero.title||'').split(' '),mid=Math.floor(words.length/2);
+  document.getElementById('hh').innerHTML=words.map(function(w,i){return(i===mid||i===mid+1)?'<mark>'+w+'</mark>':w;}).join(' ');
+  document.getElementById('hsum').textContent=hero.summary||'';
+  document.getElementById('hmeta').textContent=(ai(hero.agent)+' '+hero.agent+' · '+hero.time+' · Q'+(hero.quality_score?hero.quality_score.toFixed(1):'?')+'/10');
+  document.getElementById('hverify').textContent=hero.verification||'';
+}
+function openHero(){if(hero)openM(hero);}
+
+// ── SIDEBAR ──
+function renderSide(){
+  var f=document.getElementById('sfeed');
+  document.getElementById('scnt').textContent=arts.length+' stories';
+  if(!arts.length){f.innerHTML='<div style="padding:20px;color:var(--muted);font-size:12px;font-family:DM Mono,monospace">No stories yet — pipeline will run soon</div>';return;}
+  f.innerHTML=arts.slice(0,8).map(function(a){
+    return '<div class="scard '+(a.breaking?'brk':'')+'" onclick="openM(arts['+arts.indexOf(a)+'])">'
+      +'<div class="sc-cat">'+ci(a.category)+' '+(a.category||'')+'</div>'
+      +'<div class="sc-t">'+(a.title||'')+'</div>'
+      +'<div class="sc-m"><span>'+(a.time||'')+'</span>'
+      +'<span class="vbadge '+(a.verification&&a.verification.includes('DEVELOPING')?'dev':'')+'">'+(a.verification||'')+'</span></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── TICKER ──
+function renderTicker(){
+  if(!arts.length)return;
+  var items=arts.map(function(a){return'<span>'+(a.breaking?'⚡ BREAKING: ':'')+a.title+'</span>';}).join('');
+  document.getElementById('ttrack').innerHTML=items+items;
+}
+
+// ── STATS ──
+function renderStats(){
+  document.getElementById('sstories').textContent=arts.length;
+  var cats=new Set(arts.map(function(a){return a.category;}).filter(Boolean));
+  document.getElementById('scats').textContent=cats.size||8;
+}
+
+// ── GRID ──
+function renderGrid(){
+  var g=document.getElementById('ngrid');
+  var list=filtered.slice(0,9);
+  if(!list.length){
+    g.innerHTML='<div class="lgrid"><div style="font-size:36px;margin-bottom:12px">📡</div><div class="ltext">'+(arts.length?'NO STORIES IN THIS CATEGORY YET':'PIPELINE HAS NOT RUN YET — CHECK BACK AFTER 8AM OR 6PM UTC')+'</div></div>';
+    return;
+  }
+  var fallbacks=['📡','🌍','💡','🔬','🏛️','🎬','🌿','⚖️','💼'];
+  g.innerHTML=list.map(function(a,i){
+    var icon=ci(a.category)||fallbacks[i%fallbacks.length];
+    var feat=i===0;
+    return '<div class="ncard '+(feat?'feat ':'')+(a.breaking?'brk':'')+'" onclick="openM(filtered['+i+'])">'
+      +'<div class="ni '+(feat?'tall':'sh')+'"><span>'+icon+'</span><div class="nilabel">AI GENERATED</div></div>'
+      +'<div class="ncat">'+(a.category||'World')+'</div>'
+      +'<h3 class="nt">'+(a.title||'')+'</h3>'
+      +(feat||a.summary?'<p class="ns">'+(a.summary||'')+'</p>':'')
+      +'<div class="nfoot"><span class="ntime">'+(a.time||'')+'</span>'
+      +'<span class="ntime">'+(a.verification||'')+'</span>'
+      +'<span class="nagent">'+ai(a.agent)+' '+(a.agent||'AI')+'</span></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── BREAKING BANNER ──
+function renderBreaking(){
+  var b=arts.find(function(a){return a.breaking;});
+  if(!b)return;
+  document.getElementById('btext').textContent=b.title||'';
+  document.getElementById('breakBanner').classList.add('on');
+}
+
+// ── MODAL ──
+function openM(a){
+  if(!a)return;
+  document.getElementById('mcat').textContent=a.category||'';
+  document.getElementById('mt').textContent=a.title||'';
+  document.getElementById('mtime').textContent=a.time||'';
+  document.getElementById('magent').textContent=ai(a.agent)+' '+(a.agent||'AI');
+  document.getElementById('mverify').textContent=a.verification||'';
+  document.getElementById('mcid').textContent=a.copyright_id?'ID: '+a.copyright_id:'';
+  document.getElementById('msum').textContent=a.summary||'';
+  var facts=a.key_facts||[];
+  document.getElementById('mfacts').innerHTML=facts.length?facts.map(function(f){return'<li>'+f+'</li>';}).join(''):'<li>Story developing — facts loading</li>';
+  document.getElementById('manal').textContent=a.deep_analysis||'Full analysis available after next pipeline run.';
+  document.getElementById('mcopy').textContent='© 2026 NEXUS NOW · '+(a.copyright_id||'')+'· AI-Generated Content · All Rights Reserved';
+  document.getElementById('modal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeM(){document.getElementById('modal').classList.remove('on');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+
+// ── TOAST ──
+function showT(msg,type){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast on '+(type==='err'?'err':'');
+  setTimeout(function(){el.classList.remove('on');},4000);
+}
+
+// ── AUTO-REFRESH every 5 min ──
+function startAuto(){
+  if(rtimer)clearInterval(rtimer);
+  rtimer=setInterval(function(){load(false);},5*60*1000);
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){clearInterval(rtimer);}
+  else{load(false);startAuto();}
+});
+
+// ── INIT ──
+load(false).then(function(){renderGrid();startAuto();});
 </script>
 </body>
 </html>
