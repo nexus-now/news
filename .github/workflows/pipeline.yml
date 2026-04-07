@@ -2,38 +2,36 @@ name: NEXUS NOW Pipeline
 
 on:
   schedule:
-    - cron: "0 8 * * *"    # 8:00 AM UTC every day
-    - cron: "0 18 * * *"   # 6:00 PM UTC every day
-  workflow_dispatch:        # Allow manual trigger from Actions tab
+    - cron: "0 8 * * *"
+    - cron: "0 18 * * *"
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
-    name: NEXUS NOW — Run Pipeline
+    name: NEXUS NOW Pipeline
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0        # Full history needed for rebasing
+          fetch-depth: 0
 
-      - name: Set up Python 3.11
+      - name: Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install packages
         run: pip install -r requirements.txt
 
-      - name: Create required directories
-        run: |
-          mkdir -p agent_memory/training agent_memory/datasets
-          mkdir -p assets/images assets/audio logs
+      - name: Make directories
+        run: mkdir -p agent_memory/training agent_memory/datasets assets/images assets/audio logs
 
-      - name: Run NEXUS NOW Pipeline
+      - name: Run pipeline
         env:
           GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY:             ${{ secrets.GROQ_API_KEY }}
@@ -50,43 +48,12 @@ jobs:
           NEXUS_GITHUB_USERNAME:    ${{ secrets.NEXUS_GITHUB_USERNAME }}
         run: python orchestrator.py
 
-      - name: Push results to repository
+      - name: Push to repo
         run: |
-          git config user.name  "NEXUS NOW Bot"
+          git config user.name "NEXUS NOW Bot"
           git config user.email "ceo.nexusnow@gmail.com"
-
-          # Pull latest remote changes first to avoid non-fast-forward rejection
           git pull --rebase origin main
-
-          # Stage all generated files
           git add -A
-
-          # Only commit if there are actual changes
-          if git diff --staged --quiet; then
-            echo "Nothing to commit — no changes generated"
-          else
-            git commit -m "AUTO $(date -u '+%Y-%m-%d %H:%M UTC') — $(python -c "
-import json,sys
-try:
-  d=json.load(open('pipeline_results.json'))
-  s=d[0].get('stories',[]) if d else []
-  print(' | '.join([x.get('headline','?')[:35] for x in s[:2]]))
-except:
-  print('pipeline run')
-")"
-            # Push with retry logic
-            for i in 1 2 3; do
-              git push origin main && break
-              echo "Push attempt $i failed, pulling and retrying..."
-              git pull --rebase origin main
-            done
-          fi
-        continue-on-error: false
-
-      - name: Upload pipeline logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pipeline-log-${{ github.run_number }}
-          path: logs/
-          retention-days: 30
+          git diff --staged --quiet && echo "Nothing to commit" || git commit -m "AUTO pipeline run"
+          git pull --rebase origin main
+          git push origin main
