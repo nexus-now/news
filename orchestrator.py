@@ -49,6 +49,9 @@ def run():
     log(f"YouTube:   {'Yes' if os.environ.get('YOUTUBE_CREDENTIALS_JSON') else 'No'}")
     log("=" * 60)
 
+    # Clean up old assets to keep repo lean
+    cleanup_old_assets(max_age_days=7)
+
     # Ensure directories exist
     for d in ["agent_memory", "agent_memory/training",
               "assets/images", "assets/audio", "logs"]:
@@ -198,3 +201,25 @@ def run():
 
 if __name__ == "__main__":
     run()
+
+
+def cleanup_old_assets(max_age_days: int = 7):
+    """
+    Delete media files older than max_age_days.
+    Keeps the repo lean — GitHub has a 1GB soft limit.
+    news.json and agent memories are kept forever.
+    """
+    import time as _time
+    now = _time.time()
+    cutoff = now - (max_age_days * 86400)
+    removed = 0
+    for folder in ["assets/images", "assets/audio"]:
+        p = Path(folder)
+        if not p.exists():
+            continue
+        for f in p.iterdir():
+            if f.is_file() and f.suffix not in ('.gitkeep',) and f.stat().st_mtime < cutoff:
+                f.unlink()
+                removed += 1
+    if removed:
+        log(f"Cleanup: removed {removed} old media files (>{max_age_days} days old)")
