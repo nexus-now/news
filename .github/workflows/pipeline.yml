@@ -31,7 +31,7 @@ jobs:
       - name: Create directories
         run: mkdir -p agent_memory/training agent_memory/datasets assets/images assets/audio logs
 
-      - name: Run NEXUS NOW Pipeline
+      - name: Run pipeline
         env:
           GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY:             ${{ secrets.GROQ_API_KEY }}
@@ -48,11 +48,14 @@ jobs:
           NEXUS_GITHUB_USERNAME:    ${{ secrets.NEXUS_GITHUB_USERNAME }}
         run: python orchestrator.py
 
-      - name: Commit and push results
+      - name: Save results to repo
         run: |
           git config user.name "NEXUS NOW Bot"
           git config user.email "ceo.nexusnow@gmail.com"
-          git pull --rebase origin main
           git add -A
-          git diff --staged --quiet && echo "No changes" || git commit -m "AUTO pipeline run"
+          git stash
+          git pull origin main
+          git stash pop
+          git add -A
+          git diff --staged --quiet && echo "Nothing to commit" || git commit -m "AUTO pipeline run"
           git push origin main
