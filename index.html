@@ -250,10 +250,10 @@ footer{background:var(--gray);border-top:1px solid var(--gray2);padding:28px 32p
 <footer>
   <div><div class="flogo"><div class="ldot"></div>NEXUS NOW</div><div class="ftag">Every Story · Every Second · Everywhere</div></div>
   <div class="flinks"><a href="dashboard.html">Dashboard</a><a href="training-dashboard.html">Training</a><a href="brand/brand-identity.html">Brand</a><a href="news.json" target="_blank">Live Feed</a></div>
-  <div class="fcopy">© 2026 NEXUS NOW · AI-Generated · ceo.nexusnow@gmail.com</div>
+  <div class="fcopy">© 2026 NEXUS NOW · AI-Generated · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e586808acb8b809d90968b8a92a58288848c89cb868a88">[email&#160;protected]</a></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var arts=[],filtered=[],hero=null,curCat='all',rtimer=null;
 var ICONS={TITAN:'💼',PULSE:'🔬',VOLT:'⚡',ARENA:'🏆',NEXUS:'🌍',PRISM:'🎬',TERRA:'🌿',CIPHER:'⚖️',SCOUT:'👁️',AEGIS:'🛡️',HERALD:'📡'};
 var CICONS={'Technology':'⚡','Business':'💼','Science':'🔬','Sports':'🏆','World Politics':'🌍','Entertainment':'🎬','Environment':'🌿','Crime & Justice':'⚖️','Crime':'⚖️','Crime & Justice':'⚖️'};
@@ -417,13 +417,9 @@ function startAuto(){
   if(rtimer)clearInterval(rtimer);
   rtimer=setInterval(function(){load(false);},5*60*1000);
 }
+// Pause refresh when tab hidden, resume when visible
 document.addEventListener('visibilitychange',function(){
   if(document.hidden){clearInterval(rtimer);}
   else{load(false);startAuto();}
 });
-
-// ── INIT ──
-load(false).then(function(){renderGrid();startAuto();});
-</script>
-</body>
-</html>
+document.addE
