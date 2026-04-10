@@ -126,3 +126,33 @@
 [2026-04-06 20:04:27 UTC] Duration: 38s
 [2026-04-06 20:04:27 UTC] Avg quality: 4.0/10
 [2026-04-06 20:04:27 UTC] ============================================================
+[2026-04-10 09:36:52 UTC] ============================================================
+[2026-04-10 09:36:52 UTC] NEXUS NOW PIPELINE STARTING
+[2026-04-10 09:36:52 UTC] Posts per run: 2
+[2026-04-10 09:36:52 UTC] Gemini key:  YES
+[2026-04-10 09:36:52 UTC] Groq key:    YES
+[2026-04-10 09:36:52 UTC] Twitter:     YES
+[2026-04-10 09:36:52 UTC] Instagram:   No
+[2026-04-10 09:36:52 UTC] YouTube:     No
+[2026-04-10 09:36:52 UTC] ============================================================
+[2026-04-10 09:36:52 UTC] 
+[STEP 1] SCOUT — Trend Detection
+[2026-04-10 09:36:54 UTC] Scout found 2 topics
+[2026-04-10 09:36:54 UTC] 
+[STORY 1/2] TECHNOLOGY: artificial intelligence breakthroughs 2026
+[2026-04-10 09:36:54 UTC]   Agent: volt_technology Gen=0 AvgQ=0.0/10
+[2026-04-10 09:36:59 UTC]   Written: 'Breaking: artificial intelligence breakthroughs 2026' Q=4.0/10
+[2026-04-10 09:36:59 UTC]   AEGIS: ⚠️ UNVERIFIED ID=NN-2026-0410-093659-GEN-6675F4
+[2026-04-10 09:37:06 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-10 09:37:06 UTC]   Pausing 10s between stories...
+[2026-04-10 09:37:16 UTC] 
+[STORY 2/2] ENVIRONMENT: climate change extreme weather events
+[2026-04-10 09:37:16 UTC]   Agent: terra_environment Gen=0 AvgQ=0.0/10
+[2026-04-10 09:37:23 UTC]   Written: 'Breaking: climate change extreme weather events' Q=4.0/10
+[2026-04-10 09:37:23 UTC]   AEGIS: ✅ VERIFIED ID=NN-2026-0410-093723-GEN-72FE58
+[2026-04-10 09:37:30 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-10 09:37:30 UTC] 
+============================================================
+[2026-04-10 09:37:30 UTC] PIPELINE COMPLETE: 2 stories in 37s
+[2026-04-10 09:37:30 UTC] Average quality: 4.0/10
+[2026-04-10 09:37:30 UTC] ============================================================
