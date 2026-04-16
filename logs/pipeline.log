@@ -516,3 +516,33 @@
 [2026-04-15 20:32:10 UTC] PIPELINE COMPLETE: 2 stories in 35s
 [2026-04-15 20:32:10 UTC] Average quality: 4.0/10
 [2026-04-15 20:32:10 UTC] ============================================================
+[2026-04-16 11:41:13 UTC] ============================================================
+[2026-04-16 11:41:13 UTC] NEXUS NOW PIPELINE STARTING
+[2026-04-16 11:41:13 UTC] Posts per run: 2
+[2026-04-16 11:41:13 UTC] Gemini key:  YES
+[2026-04-16 11:41:13 UTC] Groq key:    YES
+[2026-04-16 11:41:13 UTC] Twitter:     YES
+[2026-04-16 11:41:13 UTC] Instagram:   No
+[2026-04-16 11:41:13 UTC] YouTube:     No
+[2026-04-16 11:41:13 UTC] ============================================================
+[2026-04-16 11:41:13 UTC] 
+[STEP 1] SCOUT — Trend Detection
+[2026-04-16 11:41:15 UTC] Scout found 2 topics
+[2026-04-16 11:41:15 UTC] 
+[STORY 1/2] TECHNOLOGY: artificial intelligence breakthroughs 2026
+[2026-04-16 11:41:15 UTC]   Agent: volt_technology Gen=3 AvgQ=0.0/10
+[2026-04-16 11:41:19 UTC]   Written: 'Breaking: artificial intelligence breakthroughs 2026' Q=4.0/10
+[2026-04-16 11:41:20 UTC]   AEGIS: ⚠️ UNVERIFIED ID=NN-2026-0416-114120-GEN-6675F4
+[2026-04-16 11:41:28 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-16 11:41:28 UTC]   Pausing 10s between stories...
+[2026-04-16 11:41:38 UTC] 
+[STORY 2/2] ENVIRONMENT: climate change extreme weather events
+[2026-04-16 11:41:38 UTC]   Agent: terra_environment Gen=3 AvgQ=0.0/10
+[2026-04-16 11:41:43 UTC]   Written: 'Breaking: climate change extreme weather events' Q=4.0/10
+[2026-04-16 11:41:44 UTC]   AEGIS: ✅ VERIFIED ID=NN-2026-0416-114144-GEN-72FE58
+[2026-04-16 11:41:51 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-04-16 11:41:51 UTC] 
+============================================================
+[2026-04-16 11:41:51 UTC] PIPELINE COMPLETE: 2 stories in 38s
+[2026-04-16 11:41:51 UTC] Average quality: 4.0/10
+[2026-04-16 11:41:51 UTC] ============================================================
