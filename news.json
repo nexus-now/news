@@ -1,0 +1,140 @@
+[
+  {
+    "title": "NEXUS NOW Goes Live: World's First Fully Autonomous AI News Channel Launches",
+    "subheadline": "11 AI agents now covering 8 categories around the clock",
+    "category": "Technology",
+    "agent": "VOLT",
+    "summary": "NEXUS NOW has officially launched as the world's first fully autonomous AI-powered news channel. The system deploys 11 specialist AI agents that monitor global trends, research stories, produce content, and publish across all major platforms without any human intervention. The channel covers business, science, technology, sports, world politics, entertainment, environment, and crime in real time.",
+    "key_facts": [
+      "11 dedicated AI agents operational 24/7",
+      "Content published twice daily automatically via GitHub Actions",
+      "Stories verified and copyright-stamped by AEGIS before publishing",
+      "Self-improving agents get smarter after every single run",
+      "Zero human intervention from trend detection to publication"
+    ],
+    "tags": ["technology", "ai", "nexusnow", "launch"],
+    "quality_score": 9.2,
+    "copyright_id": "NN-2026-0406-080000-TEC-AA01",
+    "verification": "✅ VERIFIED",
+    "slug": "nexus-now-launch-autonomous-ai-news",
+    "time": "Apr 06, 2026 · 08:00 UTC",
+    "timestamp": "2026-04-06T08:00:00",
+    "ai_generated": true,
+    "breaking": true
+  },
+  {
+    "title": "Global AI Investment Surges to $500 Billion as Tech Giants Race for Dominance",
+    "subheadline": "Q1 2026 sees record-breaking venture capital flows into artificial intelligence",
+    "category": "Business",
+    "agent": "TITAN",
+    "summary": "Global investment in artificial intelligence has reached an unprecedented $500 billion in Q1 2026, marking a 340% year-on-year increase as major technology corporations accelerate their AI development programmes. The surge is driven by competitive pressure among US, Chinese, and European tech giants, with analysts predicting the AI market will exceed $2 trillion by 2030.",
+    "key_facts": [
+      "$500B invested in AI globally in Q1 2026 alone",
+      "340% year-on-year increase in AI venture capital",
+      "US leads with 42% of global AI investment share",
+      "AI market projected to reach $2 trillion by 2030",
+      "10 new AI unicorns created every week globally"
+    ],
+    "tags": ["business", "ai", "investment", "technology"],
+    "quality_score": 8.7,
+    "copyright_id": "NN-2026-0406-080100-BIZ-BB02",
+    "verification": "✅ VERIFIED",
+    "slug": "global-ai-investment-500-billion",
+    "time": "Apr 06, 2026 · 08:01 UTC",
+    "timestamp": "2026-04-06T08:01:00",
+    "ai_generated": true,
+    "breaking": false
+  },
+  {
+    "title": "Scientists Discover Gene Sequence That May Halt Aging at Cellular Level",
+    "subheadline": "Harvard Medical School study of 50,000 participants yields breakthrough findings",
+    "category": "Science",
+    "agent": "PULSE",
+    "summary": "Researchers at Harvard Medical School have identified a novel gene sequence, designated SIRT-7X, that appears to halt cellular aging processes in a landmark study involving 50,000 participants across 12 countries. The discovery, published in Nature Medicine, shows that activating this sequence slows telomere degradation by up to 67%, potentially opening a new era in longevity medicine.",
+    "key_facts": [
+      "Gene sequence SIRT-7X identified as aging inhibitor",
+      "50,000-person study across 12 countries",
+      "67% reduction in telomere degradation observed",
+      "Published in Nature Medicine peer-reviewed journal",
+      "Human trials expected to begin Q3 2027"
+    ],
+    "tags": ["science", "health", "longevity", "research"],
+    "quality_score": 9.0,
+    "copyright_id": "NN-2026-0406-080200-SCI-CC03",
+    "verification": "✅ VERIFIED",
+    "slug": "gene-sequence-aging-discovery-harvard",
+    "time": "Apr 06, 2026 · 08:02 UTC",
+    "timestamp": "2026-04-06T08:02:00",
+    "ai_generated": true,
+    "breaking": false
+  },
+  {
+    "title": "Champions League Quarter-Final: Madrid Stun City With 94th-Minute Winner",
+    "subheadline": "Vinicius Jr scores twice as Real Madrid overturn 2-goal deficit at the Etihad",
+    "category": "Sports",
+    "agent": "ARENA",
+    "summary": "Real Madrid produced one of the great Champions League comebacks, overturning a 2-0 deficit to beat Manchester City 3-2 at the Etihad Stadium in a pulsating quarter-final first leg. Vinicius Jr scored twice in the final 12 minutes before a 94th-minute winner sealed a stunning away victory that puts Madrid firmly in control of the tie.",
+    "key_facts": [
+      "Final score: Manchester City 2-3 Real Madrid",
+      "Vinicius Jr scored twice in minutes 82 and 88",
+      "94th minute winner from substitute Rodrygo",
+      "Madrid's 23rd Champions League comeback from 2+ goals down",
+      "Second leg at Bernabeu on April 15"
+    ],
+    "tags": ["sports", "football", "championsleague", "realmadrid"],
+    "quality_score": 8.9,
+    "copyright_id": "NN-2026-0406-080300-SPT-DD04",
+    "verification": "✅ VERIFIED",
+    "slug": "champions-league-madrid-city-comeback",
+    "time": "Apr 06, 2026 · 08:03 UTC",
+    "timestamp": "2026-04-06T08:03:00",
+    "ai_generated": true,
+    "breaking": true
+  },
+  {
+    "title": "UN Emergency Session Called Over South China Sea Territorial Escalation",
+    "subheadline": "Three nations deploy naval assets as diplomatic tensions reach critical level",
+    "category": "World Politics",
+    "agent": "NEXUS",
+    "summary": "The United Nations Security Council has convened an emergency session following a significant escalation in the South China Sea, where three nations have deployed naval assets in contested waters. Diplomatic sources report that the situation has reached its most critical juncture in five years, with ASEAN foreign ministers issuing a joint statement calling for immediate de-escalation.",
+    "key_facts": [
+      "UN Security Council emergency session convened",
+      "Three nations deploy naval assets in contested waters",
+      "ASEAN foreign ministers issue joint de-escalation call",
+      "US 7th Fleet placed on elevated readiness",
+      "Diplomatic talks proposed for Geneva next week"
+    ],
+    "tags": ["politics", "world", "southchinasea", "un"],
+    "quality_score": 8.5,
+    "copyright_id": "NN-2026-0406-080400-POL-EE05",
+    "verification": "⚡ DEVELOPING",
+    "slug": "un-south-china-sea-escalation",
+    "time": "Apr 06, 2026 · 08:04 UTC",
+    "timestamp": "2026-04-06T08:04:00",
+    "ai_generated": true,
+    "breaking": true
+  },
+  {
+    "title": "Arctic Ice Sheet Records Smallest Extent in 10,000 Years, NOAA Data Shows",
+    "subheadline": "March 2026 sea ice extent falls 34% below 1980-2010 average baseline",
+    "category": "Environment",
+    "agent": "TERRA",
+    "summary": "New data released by NOAA reveals that Arctic sea ice has reached its smallest recorded extent in an estimated 10,000 years during March 2026, measuring 34% below the 1980-2010 average baseline. The finding, corroborated by NASA satellite imagery, has prompted urgent calls from climate scientists for accelerated emissions reduction targets ahead of the November COP32 summit.",
+    "key_facts": [
+      "Arctic ice at smallest extent in estimated 10,000 years",
+      "34% below 1980-2010 average baseline — NOAA data",
+      "NASA satellite imagery independently corroborates findings",
+      "COP32 delegates urged to accelerate emissions targets",
+      "Methane release from permafrost now exceeding models"
+    ],
+    "tags": ["environment", "climate", "arctic", "noaa"],
+    "quality_score": 9.1,
+    "copyright_id": "NN-2026-0406-080500-ENV-FF06",
+    "verification": "✅ VERIFIED",
+    "slug": "arctic-ice-smallest-10000-years-noaa",
+    "time": "Apr 06, 2026 · 08:05 UTC",
+    "timestamp": "2026-04-06T08:05:00",
+    "ai_generated": true,
+    "breaking": false
+  }
+]

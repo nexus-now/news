@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"/>
+<title>NEXUS NOW — Live AI News</title>
+<link rel="icon" type="image/x-icon" href="brand/favicon.ico"/>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg"/>
+<link rel="apple-touch-icon" href="brand/icon-512.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#E81A1A;--red2:#b01010;--black:#080808;--white:#F5F2ED;--gray:#111;--gray2:#1c1c1c;--gray3:#2a2a2a;--muted:#666;--green:#00c853;--yellow:#ffd600;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+/* BREAKING */
+#breakBanner{background:var(--red);color:#fff;padding:9px 20px;display:none;align-items:center;gap:12px;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1001;}
+#breakBanner.on{display:flex}
+.bb-tag{background:#fff;color:var(--red);font-size:9px;letter-spacing:3px;padding:3px 10px;flex-shrink:0;}
+.bb-x{margin-left:auto;cursor:pointer;font-size:20px;opacity:.8;padding:0 4px;}
+/* TICKER */
+.ticker{position:sticky;top:0;z-index:1000;height:38px;background:var(--red);display:flex;align-items:center;overflow:hidden;border-bottom:2px solid rgba(255,255,255,.15);}
+#breakBanner.on~.ticker{top:39px}
+.t-label{flex-shrink:0;background:var(--black);color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:0 14px;height:100%;display:flex;align-items:center;border-right:2px solid rgba(255,255,255,.15);}
+.t-label::before{content:'●';margin-right:6px;animation:blink 1.2s infinite;}
+.t-wrap{flex:1;overflow:hidden;}
+.t-track{display:flex;white-space:nowrap;animation:scroll 80s linear infinite;}
+.t-track:hover{animation-play-state:paused}
+.t-track span{font-family:'DM Mono',monospace;font-size:12px;color:#fff;padding:0 32px;}
+.t-track span::after{content:'◆';margin-left:32px;opacity:.35;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.t-clock{flex-shrink:0;padding:0 14px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.8);border-left:1px solid rgba(255,255,255,.2);letter-spacing:1px;}
+/* HEADER */
+header{position:sticky;top:38px;z-index:999;height:56px;background:rgba(8,8,8,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray2);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:16px;}
+.logo{display:flex;align-items:center;gap:9px;font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:5px;flex-shrink:0;}
+.ldot{width:9px;height:9px;background:var(--red);border-radius:50%;box-shadow:0 0 10px var(--red);animation:pdot 1.5s infinite;}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(232,26,26,.7)}50%{box-shadow:0 0 0 8px rgba(232,26,26,0)}}
+.hnav{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.nbtn{padding:5px 12px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--gray3);color:var(--muted);cursor:pointer;background:transparent;transition:all .15s;}
+.nbtn:hover,.nbtn.on{background:var(--red);color:#fff;border-color:var(--red);}
+.hright{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.livebadge{background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 10px;display:flex;align-items:center;gap:5px;}
+.livebadge::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;animation:blink 1s infinite;}
+.upd{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+#lupd{color:var(--green);}
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 350px;min-height:500px;border-bottom:1px solid var(--gray2);}
+.hmain{padding:40px;position:relative;overflow:hidden;border-right:1px solid var(--gray2);background:linear-gradient(135deg,#0a0000,var(--black) 60%);}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,26,26,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,26,26,.03) 1px,transparent 1px);background-size:48px 48px;}
+.hcon{position:relative;z-index:2;}
+.htag{display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:3px;padding:5px 14px;margin-bottom:18px;}
+.htag::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;animation:blink 1s infinite;}
+.hh1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,72px);line-height:.93;letter-spacing:1px;margin-bottom:16px;}
+.hh1 mark{background:none;color:var(--red);}
+.hsum{font-size:14px;color:rgba(245,242,237,.6);max-width:580px;line-height:1.65;margin-bottom:24px;}
+.hmeta{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap;}
+.hmi{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.hmi .g{width:5px;height:5px;border-radius:50%;background:var(--green);}
+.hcta{display:flex;gap:10px;}
+.bred{background:var(--red);color:#fff;border:none;padding:11px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+.bred:hover{background:var(--red2);}
+.bline{background:transparent;color:var(--white);border:1px solid var(--gray3);padding:11px 22px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:border-color .15s;}
+.bline:hover{border-color:var(--red);color:var(--red);}
+/* SIDEBAR */
+.hside{display:flex;flex-direction:column;overflow:hidden;}
+.shd{padding:13px 16px;border-bottom:1px solid var(--gray2);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:4px;color:var(--red);background:var(--gray);display:flex;align-items:center;justify-content:space-between;}
+.shd small{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;}
+.sfeed{flex:1;overflow-y:auto;}
+.scard{padding:14px 16px;border-bottom:1px solid var(--gray2);cursor:pointer;transition:background .15s;position:relative;}
+.scard:hover{background:var(--gray);}
+.scard.brk::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);}
+.sc-cat{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.sc-t{font-size:12px;font-weight:600;line-height:1.35;margin-bottom:7px;}
+.sc-m{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
+.vbadge{font-size:9px;padding:1px 6px;border:1px solid rgba(0,200,83,.4);color:var(--green);letter-spacing:1px;}
+.vbadge.dev{border-color:rgba(255,214,0,.4);color:var(--yellow);}
+/* STATBAR */
+.sbar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--gray2);background:var(--gray);}
+.sc{padding:16px 24px;border-right:1px solid var(--gray2);text-align:center;}
+.sc:last-child{border-right:none;}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--red);letter-spacing:2px;line-height:1;margin-bottom:3px;}
+.sl{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+/* SECTION */
+.sec{padding:32px 32px 0;}
+.sechd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gray2);}
+.sect{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;}
+.sect span{color:var(--red);}
+.frow{display:flex;gap:5px;flex-wrap:wrap;}
+.fbtn{padding:4px 11px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--gray3);color:var(--muted);background:transparent;cursor:pointer;transition:all .15s;}
+.fbtn:hover,.fbtn.on{background:var(--red);color:#fff;border-color:var(--red);}
+/* GRID */
+.ngrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray2);border:1px solid var(--gray2);margin-bottom:1px;}
+.ncard{background:var(--black);padding:22px;cursor:pointer;transition:background .15s;position:relative;display:flex;flex-direction:column;}
+.ncard:hover{background:#0d0d0d;}
+.ncard.feat{grid-column:span 2;}
+.ncard.brk::after{content:'BREAKING';position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-size:8px;font-weight:700;letter-spacing:2px;padding:3px 7px;}
+.ni{width:100%;background:var(--gray2);margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative;}
+.ni.tall{height:200px;}
+.ni.sh{height:150px;}
+.nilabel{position:absolute;bottom:7px;right:7px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);background:rgba(0,0,0,.7);padding:2px 6px;}
+.ncat{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.nt{font-size:16px;font-weight:700;line-height:1.3;margin-bottom:8px;flex:1;}
+.ncard.feat .nt{font-size:20px;}
+.ns{font-size:12px;color:rgba(245,242,237,.5);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.nfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;flex-wrap:wrap;gap:4px;}
+.ntime{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.nagent{font-size:9px;letter-spacing:1.5px;color:var(--muted);border:1px solid var(--gray3);padding:2px 6px;}
+/* LOADING */
+.lgrid{grid-column:1/-1;padding:60px;text-align:center;}
+.spin{width:30px;height:30px;border:2px solid var(--gray3);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltext{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;}
+/* MODAL */
+.mover{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;}
+.mover.on{display:flex;}
+.modal{background:var(--gray);border:1px solid var(--gray2);max-width:740px;width:100%;position:relative;animation:min .25s ease;}
+@keyframes min{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.mcl{position:absolute;top:12px;right:12px;width:30px;height:30px;background:var(--gray3);border:none;color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mhd{padding:26px 26px 18px;border-bottom:1px solid var(--gray2);}
+.mcat{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:9px;}
+.mt{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:.95;letter-spacing:1px;margin-bottom:11px;}
+.mmeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.mbody{padding:22px 26px;}
+.msum{font-size:14px;line-height:1.7;color:rgba(245,242,237,.8);margin-bottom:18px;}
+.manal{font-size:12px;line-height:1.75;color:rgba(245,242,237,.5);margin-bottom:18px;}
+.msect{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--red);margin:18px 0 10px;}
+.facts{list-style:none;}
+.facts li{padding:6px 0;border-bottom:1px solid var(--gray2);font-size:12px;color:rgba(245,242,237,.6);display:flex;gap:9px;line-height:1.5;}
+.facts li::before{content:'▶';color:var(--red);font-size:8px;margin-top:3px;flex-shrink:0;}
+.mcopy{margin-top:20px;padding-top:14px;border-top:1px solid var(--gray2);font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--gray);border:1px solid var(--gray2);border-left:3px solid var(--green);padding:12px 18px;max-width:300px;animation:tin .3s ease;display:none;font-size:13px;}
+.toast.on{display:block;}
+.toast.err{border-left-color:var(--red);}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* FOOTER */
+footer{background:var(--gray);border-top:1px solid var(--gray2);padding:28px 32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;display:flex;align-items:center;gap:8px;}
+.ftag{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:3px;}
+.flinks{display:flex;gap:14px;}
+.flinks a{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.flinks a:hover{color:var(--red);}
+.fcopy{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+/* RESPONSIVE */
+@media(max-width:900px){.hero{grid-template-columns:1fr;}.hside{display:none;}.ngrid{grid-template-columns:1fr 1fr;}.ncard.feat{grid-column:span 2;}.sbar{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){header{padding:0 12px;}.hnav{display:none;}.hmain{padding:22px 16px;}.sec{padding:22px 14px 0;}.ngrid{grid-template-columns:1fr;}.ncard.feat{grid-column:span 1;}.sbar{grid-template-columns:repeat(2,1fr);}.sn{font-size:28px;}}
+</style>
+</head>
+<body>
+
+<div id="breakBanner">
+  <span class="bb-tag">⚡ BREAKING</span>
+  <span id="btext">Loading latest story...</span>
+  <span class="bb-x" onclick="document.getElementById('breakBanner').classList.remove('on')">✕</span>
+</div>
+
+<div class="ticker">
+  <div class="t-label">LIVE</div>
+  <div class="t-wrap">
+    <div class="t-track" id="ttrack">
+      <span>NEXUS NOW · Autonomous AI News Channel · Loading live stories...</span>
+      <span>NEXUS NOW · Autonomous AI News Channel · Loading live stories...</span>
+    </div>
+  </div>
+  <div class="t-clock" id="tclock">--:-- UTC</div>
+</div>
+
+<header>
+  <a href="/" class="logo"><div class="ldot"></div>NEXUS NOW</a>
+  <nav class="hnav" id="cnav">
+    <button class="nbtn on" onclick="fcat('all',this)">All</button>
+    <button class="nbtn" onclick="fcat('Technology',this)">Tech</button>
+    <button class="nbtn" onclick="fcat('Business',this)">Business</button>
+    <button class="nbtn" onclick="fcat('Science',this)">Science</button>
+    <button class="nbtn" onclick="fcat('Sports',this)">Sports</button>
+    <button class="nbtn" onclick="fcat('World Politics',this)">World</button>
+    <button class="nbtn" onclick="fcat('Environment',this)">Climate</button>
+    <button class="nbtn" onclick="fcat('Entertainment',this)">Culture</button>
+    <button class="nbtn" onclick="fcat('Crime',this)">Justice</button>
+  </nav>
+  <div class="hright">
+    <div class="upd">Refreshed: <span id="lupd">--</span></div>
+    <span class="livebadge">LIVE AI</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hmain">
+    <div class="hgrid"></div>
+    <div class="hcon">
+      <div class="htag" id="htag">LOADING LATEST STORY</div>
+      <h1 class="hh1" id="hh">Fetching<br/>Latest <mark>News</mark><br/>Now...</h1>
+      <p class="hsum" id="hsum">NEXUS NOW is loading stories from our autonomous AI agents. All content is researched, written, verified and published with zero human intervention.</p>
+      <div class="hmeta">
+        <div class="hmi"><div class="g"></div><span id="hmeta">Loading...</span></div>
+        <div class="hmi" id="hverify"></div>
+      </div>
+      <div class="hcta">
+        <button class="bred" onclick="openHero()">▶ Read Full Story</button>
+        <button class="bline" onclick="doRefresh()">↻ Refresh Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="hside">
+    <div class="shd">Top Stories <small id="scnt">--</small></div>
+    <div class="sfeed" id="sfeed"></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <div class="sc"><div class="sn" id="sstories">0</div><div class="sl">Stories Published</div></div>
+  <div class="sc"><div class="sn">11</div><div class="sl">AI Agents Active</div></div>
+  <div class="sc"><div class="sn">2×</div><div class="sl">Daily Auto-Publish</div></div>
+  <div class="sc"><div class="sn" id="scats">8</div><div class="sl">Categories Covered</div></div>
+</div>
+
+<div class="sec">
+  <div class="sechd">
+    <div class="sect"><span>Latest</span> Stories</div>
+    <div class="frow" id="frow"></div>
+  </div>
+  <div class="ngrid" id="ngrid">
+    <div class="lgrid"><div class="spin"></div><div class="ltext">AI AGENTS GENERATING STORIES...</div></div>
+  </div>
+</div>
+
+<div class="mover" id="modal" onclick="if(event.target===this)closeM()">
+  <div class="modal">
+    <button class="mcl" onclick="closeM()">✕</button>
+    <div class="mhd">
+      <div class="mcat" id="mcat"></div>
+      <div class="mt" id="mt"></div>
+      <div class="mmeta"><span id="mtime"></span><span id="magent"></span><span id="mverify"></span><span id="mcid"></span></div>
+    </div>
+    <div class="mbody">
+      <p class="msum" id="msum"></p>
+      <div class="msect">KEY FACTS</div>
+      <ul class="facts" id="mfacts"></ul>
+      <div class="msect">FULL ANALYSIS</div>
+      <p class="manal" id="manal"></p>
+      <div class="mcopy" id="mcopy"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div><div class="flogo"><div class="ldot"></div>NEXUS NOW</div><div class="ftag">Every Story · Every Second · Everywhere</div></div>
+  <div class="flinks"><a href="dashboard.html">Dashboard</a><a href="training-dashboard.html">Training</a><a href="brand/brand-identity.html">Brand</a><a href="news.json" target="_blank">Live Feed</a></div>
+  <div class="fcopy">© 2026 NEXUS NOW · AI-Generated · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e586808acb8b809d90968b8a92a58288848c89cb868a88">[email&#160;protected]</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var arts=[],filtered=[],hero=null,curCat='all',rtimer=null;
+var ICONS={TITAN:'💼',PULSE:'🔬',VOLT:'⚡',ARENA:'🏆',NEXUS:'🌍',PRISM:'🎬',TERRA:'🌿',CIPHER:'⚖️',SCOUT:'👁️',AEGIS:'🛡️',HERALD:'📡'};
+var CICONS={'Technology':'⚡','Business':'💼','Science':'🔬','Sports':'🏆','World Politics':'🌍','Entertainment':'🎬','Environment':'🌿','Crime & Justice':'⚖️','Crime':'⚖️','Crime & Justice':'⚖️'};
+function ci(cat){return CICONS[cat]||'📰';}
+function ai(ag){return ICONS[ag]||'🤖';}
+
+// ── CLOCK ──
+function tick(){
+  var u=new Date().toUTCString(),t=u.split(' ')[4];
+  document.getElementById('tclock').textContent=t+' UTC';
+  document.title='NEXUS NOW · '+t+' · '+arts.length+' Stories Live';
+}
+setInterval(tick,1000);tick();
+
+// ── FETCH ──
+async function load(toast){
+  try{
+    var r=await fetch('news.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var d=await r.json();
+    if(!Array.isArray(d))throw new Error('bad data');
+    var prev=arts.length;
+    arts=d;
+    var t=new Date().toUTCString().split(' ')[4];
+    document.getElementById('lupd').textContent=t+' UTC';
+    renderAll();
+    if(toast&&arts.length>prev)showT('Stories refreshed: '+arts.length+' total','ok');
+    return true;
+  }catch(e){
+    console.warn(e);
+    if(toast)showT('Reload error — will retry','err');
+    return false;
+  }
+}
+
+async function doRefresh(){
+  document.getElementById('ngrid').innerHTML='<div class="lgrid"><div class="spin"></div><div class="ltext">REFRESHING...</div></div>';
+  await load(true);
+}
+
+// ── RENDER ALL ──
+function renderAll(){
+  applyF(curCat);
+  renderHero();renderSide();renderTicker();renderStats();renderGrid();renderBreaking();
+}
+
+// ── FILTER ──
+function fcat(c,btn){
+  curCat=c;
+  document.querySelectorAll('.nbtn').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  applyF(c);renderGrid();
+}
+function applyF(c){
+  filtered=c==='all'?[...arts]:arts.filter(a=>a.category&&a.category.toLowerCase().includes(c.toLowerCase()));
+}
+
+// ── HERO ──
+function renderHero(){
+  if(!arts.length)return;
+  hero=arts[0];
+  document.getElementById('htag').textContent=(hero.breaking?'🔴 BREAKING: ':'📡 LATEST: ')+(hero.category||'');
+  var words=(hero.title||'').split(' '),mid=Math.floor(words.length/2);
+  document.getElementById('hh').innerHTML=words.map(function(w,i){return(i===mid||i===mid+1)?'<mark>'+w+'</mark>':w;}).join(' ');
+  document.getElementById('hsum').textContent=hero.summary||'';
+  document.getElementById('hmeta').textContent=(ai(hero.agent)+' '+hero.agent+' · '+hero.time+' · Q'+(hero.quality_score?hero.quality_score.toFixed(1):'?')+'/10');
+  document.getElementById('hverify').textContent=hero.verification||'';
+}
+function openHero(){if(hero)openM(hero);}
+
+// ── SIDEBAR ──
+function renderSide(){
+  var f=document.getElementById('sfeed');
+  document.getElementById('scnt').textContent=arts.length+' stories';
+  if(!arts.length){f.innerHTML='<div style="padding:20px;color:var(--muted);font-size:12px;font-family:DM Mono,monospace">No stories yet — pipeline will run soon</div>';return;}
+  f.innerHTML=arts.slice(0,8).map(function(a){
+    return '<div class="scard '+(a.breaking?'brk':'')+'" onclick="openM(arts['+arts.indexOf(a)+'])">'
+      +'<div class="sc-cat">'+ci(a.category)+' '+(a.category||'')+'</div>'
+      +'<div class="sc-t">'+(a.title||'')+'</div>'
+      +'<div class="sc-m"><span>'+(a.time||'')+'</span>'
+      +'<span class="vbadge '+(a.verification&&a.verification.includes('DEVELOPING')?'dev':'')+'">'+(a.verification||'')+'</span></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── TICKER ──
+function renderTicker(){
+  if(!arts.length)return;
+  var items=arts.map(function(a){return'<span>'+(a.breaking?'⚡ BREAKING: ':'')+a.title+'</span>';}).join('');
+  document.getElementById('ttrack').innerHTML=items+items;
+}
+
+// ── STATS ──
+function renderStats(){
+  document.getElementById('sstories').textContent=arts.length;
+  var cats=new Set(arts.map(function(a){return a.category;}).filter(Boolean));
+  document.getElementById('scats').textContent=cats.size||8;
+}
+
+// ── GRID ──
+function renderGrid(){
+  var g=document.getElementById('ngrid');
+  var list=filtered.slice(0,9);
+  if(!list.length){
+    g.innerHTML='<div class="lgrid"><div style="font-size:36px;margin-bottom:12px">📡</div><div class="ltext">'+(arts.length?'NO STORIES IN THIS CATEGORY YET':'PIPELINE HAS NOT RUN YET — CHECK BACK AFTER 8AM OR 6PM UTC')+'</div></div>';
+    return;
+  }
+  var fallbacks=['📡','🌍','💡','🔬','🏛️','🎬','🌿','⚖️','💼'];
+  g.innerHTML=list.map(function(a,i){
+    var icon=ci(a.category)||fallbacks[i%fallbacks.length];
+    var feat=i===0;
+    return '<div class="ncard '+(feat?'feat ':'')+(a.breaking?'brk':'')+'" onclick="openM(filtered['+i+'])">'
+      +'<div class="ni '+(feat?'tall':'sh')+'"><span>'+icon+'</span><div class="nilabel">AI GENERATED</div></div>'
+      +'<div class="ncat">'+(a.category||'World')+'</div>'
+      +'<h3 class="nt">'+(a.title||'')+'</h3>'
+      +(feat||a.summary?'<p class="ns">'+(a.summary||'')+'</p>':'')
+      +'<div class="nfoot"><span class="ntime">'+(a.time||'')+'</span>'
+      +'<span class="ntime">'+(a.verification||'')+'</span>'
+      +'<span class="nagent">'+ai(a.agent)+' '+(a.agent||'AI')+'</span></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── BREAKING BANNER ──
+function renderBreaking(){
+  var b=arts.find(function(a){return a.breaking;});
+  if(!b)return;
+  document.getElementById('btext').textContent=b.title||'';
+  document.getElementById('breakBanner').classList.add('on');
+}
+
+// ── MODAL ──
+function openM(a){
+  if(!a)return;
+  document.getElementById('mcat').textContent=a.category||'';
+  document.getElementById('mt').textContent=a.title||'';
+  document.getElementById('mtime').textContent=a.time||'';
+  document.getElementById('magent').textContent=ai(a.agent)+' '+(a.agent||'AI');
+  document.getElementById('mverify').textContent=a.verification||'';
+  document.getElementById('mcid').textContent=a.copyright_id?'ID: '+a.copyright_id:'';
+  document.getElementById('msum').textContent=a.summary||'';
+  var facts=a.key_facts||[];
+  document.getElementById('mfacts').innerHTML=facts.length?facts.map(function(f){return'<li>'+f+'</li>';}).join(''):'<li>Story developing — facts loading</li>';
+  document.getElementById('manal').textContent=a.deep_analysis||'Full analysis available after next pipeline run.';
+  document.getElementById('mcopy').textContent='© 2026 NEXUS NOW · '+(a.copyright_id||'')+'· AI-Generated Content · All Rights Reserved';
+  document.getElementById('modal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeM(){document.getElementById('modal').classList.remove('on');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+
+// ── TOAST ──
+function showT(msg,type){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast on '+(type==='err'?'err':'');
+  setTimeout(function(){el.classList.remove('on');},4000);
+}
+
+// ── AUTO-REFRESH every 5 min ──
+function startAuto(){
+  if(rtimer)clearInterval(rtimer);
+  rtimer=setInterval(function(){load(false);},5*60*1000);
+}
+// Pause refresh when tab hidden, resume when visible
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){clearInterval(rtimer);}
+  else{load(false);startAuto();}
+});
+document.addE

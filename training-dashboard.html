@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NEXUS NOW — Agent Training Intelligence</title>
+<link rel="icon" type="image/x-icon" href="brand/favicon.ico"/>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg"/>
+<link rel="apple-touch-icon" href="brand/icon-512.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#020408;--s1:#060c14;--s2:#0a1220;--border:#0f1e30;
+  --red:#E81A1A;--green:#00ff88;--blue:#38bdf8;--yellow:#fbbf24;
+  --purple:#c084fc;--cyan:#22d3ee;--orange:#fb923c;
+  --white:#e2e8f0;--muted:#3a5068;--dim:#080f18;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:12px}
+
+/* GRID LAYOUT */
+.grid{display:grid;grid-template-rows:48px 1fr;height:100vh}
+
+/* TOP BAR */
+.topbar{background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:16px}
+.topbar-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;display:flex;align-items:center;gap:8px}
+.live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.topbar-metrics{display:flex;gap:20px;align-items:center}
+.tm{display:flex;align-items:center;gap:6px;font-size:11px}
+.tm-val{font-weight:600}
+.tm-val.g{color:var(--green)}.tm-val.b{color:var(--blue)}.tm-val.y{color:var(--yellow)}.tm-val.p{color:var(--purple)}
+.topbar-right{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--muted)}
+.sys-ok{color:var(--green);border:1px solid var(--green);padding:3px 10px;letter-spacing:2px;font-size:10px}
+
+/* MAIN BODY */
+.body{display:grid;grid-template-columns:240px 1fr 300px;overflow:hidden}
+
+/* LEFT PANEL — Agent List */
+.left{background:var(--s1);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.panel-title{padding:14px 16px;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:3px;color:var(--muted);font-family:'Syne',sans-serif;font-weight:700}
+.agent-list{flex:1;overflow-y:auto}
+.agent-row{padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
+.agent-row:hover,.agent-row.active{background:var(--s2)}
+.agent-row.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--red)}
+.ar-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ar-icon{font-size:14px}
+.ar-name{font-family:'Syne',sans-serif;font-weight:800;font-size:12px;flex:1}
+.ar-gen{font-size:9px;padding:1px 6px;border:1px solid;letter-spacing:1px}
+.ar-score{font-size:11px;font-weight:600}
+.ar-bar{height:2px;background:var(--border);margin-top:6px;position:relative}
+.ar-fill{position:absolute;left:0;top:0;bottom:0;transition:width 1s ease}
+.ar-meta{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:4px}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 4px var(--green);display:inline-block;margin-right:4px}
+
+/* CENTER — Main Dashboard */
+.center{overflow-y:auto;padding:20px}
+
+.section-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-hd-title{font-family:'Syne',sans-serif;font-weight:800;font-size:16px}
+.section-hd-badge{font-size:9px;padding:2px 8px;letter-spacing:2px;border:1px solid}
+
+/* TRAINING LAYERS */
+.layers-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.layer-card{background:var(--s1);border:1px solid var(--border);padding:16px;position:relative;overflow:hidden}
+.layer-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.lc1::after{background:var(--blue)}
+.lc2::after{background:var(--green)}
+.lc3::after{background:var(--yellow)}
+.lc4::after{background:var(--purple)}
+.lc5::after{background:var(--red)}
+.layer-num{font-family:'Bebas Neue',sans-serif;font-size:32px;opacity:0.15;position:absolute;right:12px;top:8px}
+.layer-icon{font-size:18px;margin-bottom:8px}
+.layer-title{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;margin-bottom:4px}
+.layer-desc{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.layer-stats{display:flex;gap:12px}
+.ls-item{text-align:center}
+.ls-val{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1}
+.ls-label{font-size:9px;color:var(--muted);letter-spacing:1px}
+.layer-progress{height:3px;background:var(--border);margin-top:10px}
+.layer-prog-fill{height:100%;transition:width 1.5s ease}
+
+/* QUALITY TREND CHART */
+.chart-area{background:var(--s1);border:1px solid var(--border);padding:16px;margin-bottom:16px}
+.chart-title{font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:12px;font-family:'Syne',sans-serif}
+.chart-svg{width:100%;height:120px}
+
+/* WISDOM TREE */
+.wisdom-card{background:var(--s1);border:1px solid var(--border);padding:16px;margin-bottom:16px}
+.wisdom-section{margin-bottom:14px}
+.wisdom-label{font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.wisdom-label::before{content:'';width:3px;height:10px;background:var(--green)}
+.wisdom-rule{font-size:11px;padding:5px 10px;border-left:2px solid var(--green);margin-bottom:4px;background:rgba(0,255,136,0.03);color:var(--white);line-height:1.4}
+.wisdom-rule.anti{border-left-color:var(--red);background:rgba(232,26,26,0.03)}
+
+/* TRAINING FEED */
+.train-feed{background:var(--s1);border:1px solid var(--border)}
+.feed-hd{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.feed-entry{padding:8px 14px;border-bottom:1px solid rgba(15,30,48,0.6);display:flex;gap:10px;font-size:10px;animation:slideIn 0.3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.fe-ts{color:var(--muted);min-width:60px;flex-shrink:0}
+.fe-agent{min-width:60px;flex-shrink:0;font-weight:600}
+.fe-msg{flex:1;color:var(--white)}
+.fe-layer{min-width:28px;text-align:center;font-size:9px;padding:1px 4px;border:1px solid;border-radius:2px}
+
+/* RIGHT PANEL — Cross-Agent Pool */
+.right{background:var(--s1);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.pool-entry{padding:12px 14px;border-bottom:1px solid var(--border)}
+.pe-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.pe-agent{font-size:10px;font-weight:600}
+.pe-score{font-size:10px;margin-left:auto}
+.pe-headline{font-size:11px;line-height:1.4;color:var(--white)}
+.pe-why{font-size:9px;color:var(--muted);margin-top:4px}
+.pe-cat{font-size:9px;padding:1px 6px;border:1px solid var(--border);color:var(--cyan)}
+
+/* FINETUNE SECTION */
+.ft-card{background:var(--dim);border:1px solid var(--border);padding:14px;margin:12px}
+.ft-title{font-family:'Syne',sans-serif;font-weight:800;font-size:12px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ft-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:10px}
+.ft-label{color:var(--muted)}
+.ft-val{font-weight:600}
+.ft-btn{margin-top:10px;width:100%;padding:8px;background:transparent;border:1px solid var(--green);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all 0.2s}
+.ft-btn:hover{background:rgba(0,255,136,0.1)}
+</style>
+</head>
+<body>
+<div class="grid">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand"><div class="live-dot"></div>NEXUS NOW · TRAINING INTELLIGENCE</div>
+  <div class="topbar-metrics">
+    <div class="tm"><span style="color:var(--muted)">TOTAL SAMPLES</span><span class="tm-val g" id="totalSamples">0</span></div>
+    <div class="tm"><span style="color:var(--muted)">AVG QUALITY</span><span class="tm-val b" id="avgQuality">0.0</span></div>
+    <div class="tm"><span style="color:var(--muted)">ELITE OUTPUTS</span><span class="tm-val y" id="eliteCount">0</span></div>
+    <div class="tm"><span style="color:var(--muted)">WISDOM RULES</span><span class="tm-val p" id="wisdomRules">0</span></div>
+    <div class="tm"><span style="color:var(--muted)">CROSS-POOL</span><span class="tm-val" style="color:var(--cyan)" id="crossPool">0</span></div>
+  </div>
+  <div class="topbar-right">
+    <span id="clock">--:--:-- UTC</span>
+    <span class="sys-ok">ALL LAYERS ACTIVE</span>
+  </div>
+</div>
+
+<div class="body">
+
+<!-- LEFT: AGENT LIST -->
+<div class="left">
+  <div class="panel-title">11 ACTIVE AGENTS</div>
+  <div class="agent-list" id="agentList"></div>
+</div>
+
+<!-- CENTER: MAIN DASHBOARD -->
+<div class="center">
+
+  <!-- TRAINING LAYERS -->
+  <div class="section-hd">
+    <div class="section-hd-title">5 Training Layers</div>
+    <span class="section-hd-badge" style="color:var(--green);border-color:var(--green)">ALL ACTIVE</span>
+    <span style="font-size:10px;color:var(--muted);margin-left:auto">Every agent · Every run · Forever</span>
+  </div>
+
+  <div class="layers-grid">
+    <div class="layer-card lc1">
+      <div class="layer-num">01</div>
+      <div class="layer-icon">💾</div>
+      <div class="layer-title">Experience Memory</div>
+      <div class="layer-desc">Every output recorded to JSONL training store. Score, strengths, weaknesses, prompt used — all logged forever. Feeds all other layers.</div>
+      <div class="layer-stats">
+        <div class="ls-item"><div class="ls-val" style="color:var(--blue)" id="l1samples">0</div><div class="ls-label">TOTAL RECORDS</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--green)" id="l1elite">0</div><div class="ls-label">ELITE (9+)</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--yellow)" id="l1high">0</div><div class="ls-label">HIGH (8+)</div></div>
+      </div>
+      <div class="layer-progress"><div class="layer-prog-fill" id="l1prog" style="background:var(--blue)"></div></div>
+    </div>
+
+    <div class="layer-card lc2">
+      <div class="layer-num">02</div>
+      <div class="layer-icon">🎯</div>
+      <div class="layer-title">Prompt Fine-Tuning + Few-Shot</div>
+      <div class="layer-desc">Injects best past outputs as few-shot examples into every new prompt. Agent literally learns from its own elite work. Prompt evolves every 5 runs.</div>
+      <div class="layer-stats">
+        <div class="ls-item"><div class="ls-val" style="color:var(--green)" id="l2gen">0</div><div class="ls-label">PROMPT GEN</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--blue)" id="l2shots">0</div><div class="ls-label">FEW-SHOTS</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--yellow)" id="l2nextEvo">5</div><div class="ls-label">RUNS TO EVO</div></div>
+      </div>
+      <div class="layer-progress"><div class="layer-prog-fill" id="l2prog" style="background:var(--green)"></div></div>
+    </div>
+
+    <div class="layer-card lc3">
+      <div class="layer-num">03</div>
+      <div class="layer-icon">🌳</div>
+      <div class="layer-title">Pattern Extraction Engine</div>
+      <div class="layer-desc">Every 3 runs: AI compares best vs worst outputs and distils hard rules. Builds a growing wisdom tree of domain-specific constraints. Rules baked into all future prompts.</div>
+      <div class="layer-stats">
+        <div class="ls-item"><div class="ls-val" style="color:var(--yellow)" id="l3rules">0</div><div class="ls-label">DO RULES</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--red)" id="l3anti">0</div><div class="ls-label">ANTI-RULES</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--cyan)" id="l3style">0</div><div class="ls-label">STYLE NOTES</div></div>
+      </div>
+      <div class="layer-progress"><div class="layer-prog-fill" id="l3prog" style="background:var(--yellow)"></div></div>
+    </div>
+
+    <div class="layer-card lc4">
+      <div class="layer-num">04</div>
+      <div class="layer-icon">🔗</div>
+      <div class="layer-title">Cross-Agent Learning</div>
+      <div class="layer-desc">Agents learn from each other. Elite outputs (9+) deposited to shared pool. TITAN studies VOLT's best tech headline structure. All agents get smarter together.</div>
+      <div class="layer-stats">
+        <div class="ls-item"><div class="ls-val" style="color:var(--purple)" id="l4pool">0</div><div class="ls-label">SHARED POOL</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--blue)" id="l4universal">0</div><div class="ls-label">UNIVERSAL RULES</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--green)" id="l4donors">0</div><div class="ls-label">CONTRIBUTING</div></div>
+      </div>
+      <div class="layer-progress"><div class="layer-prog-fill" id="l4prog" style="background:var(--purple)"></div></div>
+    </div>
+
+    <div class="layer-card lc5" style="grid-column:span 2">
+      <div class="layer-num">05</div>
+      <div class="layer-icon">⚔️</div>
+      <div class="layer-title">Adversarial Self-Challenge — Rewrite Loop</div>
+      <div class="layer-desc">Any output scoring below 7.0 faces a harsh adversarial critique. A "rival editor" AI tears it apart with specific fixes. Forced rewrite applied. Final score always higher. This is what separates mediocre from great.</div>
+      <div class="layer-stats">
+        <div class="ls-item"><div class="ls-val" style="color:var(--red)" id="l5challenged">0</div><div class="ls-label">CHALLENGED</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--green)" id="l5improved">0</div><div class="ls-label">IMPROVED</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--yellow)" id="l5avgGain">+0.0</div><div class="ls-label">AVG SCORE GAIN</div></div>
+        <div class="ls-item"><div class="ls-val" style="color:var(--orange)" id="l5threshold">7.0</div><div class="ls-label">THRESHOLD</div></div>
+      </div>
+      <div class="layer-progress"><div class="layer-prog-fill" id="l5prog" style="background:var(--red);width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- QUALITY TREND CHART -->
+  <div class="chart-area">
+    <div class="chart-title">QUALITY SCORE TREND — All Agents Over Time</div>
+    <svg class="chart-svg" id="qualityChart" viewBox="0 0 800 120" preserveAspectRatio="none">
+      <!-- Rendered by JS -->
+    </svg>
+  </div>
+
+  <!-- WISDOM TREE -->
+  <div class="wisdom-card">
+    <div class="section-hd" style="border:none;padding-bottom:12px">
+      <div class="section-hd-title">Active Wisdom Tree</div>
+      <span class="section-hd-badge" style="color:var(--yellow);border-color:var(--yellow)" id="activeAgent">SCOUT</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="wisdom-section">
+        <div class="wisdom-label">ALWAYS DO (Learned Rules)</div>
+        <div id="doRules"></div>
+      </div>
+      <div class="wisdom-section">
+        <div class="wisdom-label" style="color:var(--red)">NEVER DO (Anti-Rules)</div>
+        <div id="antiRules"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAINING FEED -->
+  <div class="train-feed">
+    <div class="feed-hd">
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:12px"><div class="live-dot" style="display:inline-block;margin-right:6px"></div>Live Training Feed</span>
+      <span style="font-size:9px;color:var(--muted)">All 5 layers · Real-time</span>
+    </div>
+    <div id="trainFeed"></div>
+  </div>
+
+</div>
+
+<!-- RIGHT: CROSS-AGENT POOL + FINETUNE -->
+<div class="right">
+  <div class="panel-title">CROSS-AGENT ELITE POOL</div>
+  <div style="flex:1;overflow-y:auto" id="crossPool_list"></div>
+
+  <!-- Fine-tuning status -->
+  <div style="border-top:1px solid var(--border)">
+    <div class="panel-title">FINE-TUNING STATUS</div>
+    <div class="ft-card">
+      <div class="ft-title">🧬 Gemini Fine-Tuning</div>
+      <div class="ft-row"><span class="ft-label">Status</span><span class="ft-val" style="color:var(--yellow)">Waiting (need 10+ samples)</span></div>
+      <div class="ft-row"><span class="ft-label">Samples ready</span><span class="ft-val" id="ftSamples">0</span></div>
+      <div class="ft-row"><span class="ft-label">Tuned models</span><span class="ft-val">0 / 2 (free)</span></div>
+      <button class="ft-btn" onclick="alert('Run: python -c \'from agents.training_engine import GeminiFineTuner; ...\' ')">TRIGGER FINE-TUNE JOB</button>
+    </div>
+    <div class="ft-card">
+      <div class="ft-title">⚡ Colab LoRA Fine-Tuning</div>
+      <div class="ft-row"><span class="ft-label">Script</span><span class="ft-val" style="color:var(--green)">Generated</span></div>
+      <div class="ft-row"><span class="ft-label">GPU</span><span class="ft-val" style="color:var(--green)">Free T4 (Colab)</span></div>
+      <div class="ft-row"><span class="ft-label">Method</span><span class="ft-val">Unsloth + LoRA 4-bit</span></div>
+      <button class="ft-btn" style="border-color:var(--purple);color:var(--purple)" onclick="alert('Download: agent_memory/datasets/{agent_id}_colab_finetune.py')">DOWNLOAD COLAB SCRIPT</button>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+// ── AGENT DATA ─────────────────────────────────────────────────────────────
+const AGENTS = [
+  {id:"scout",   name:"SCOUT",  role:"Trend Monitor",    icon:"👁️",  col:"#38bdf8", cat:"All"},
+  {id:"titan",   name:"TITAN",  role:"Business",         icon:"💼",  col:"#fbbf24", cat:"Business"},
+  {id:"pulse",   name:"PULSE",  role:"Science",          icon:"🔬",  col:"#00ff88", cat:"Science"},
+  {id:"volt",    name:"VOLT",   role:"Technology",       icon:"⚡",  col:"#22d3ee", cat:"Technology"},
+  {id:"arena",   name:"ARENA",  role:"Sports",           icon:"🏆",  col:"#fb923c", cat:"Sports"},
+  {id:"nexus",   name:"NEXUS",  role:"World Politics",   icon:"🌍",  col:"#c084fc", cat:"Politics"},
+  {id:"prism",   name:"PRISM",  role:"Entertainment",    icon:"🎬",  col:"#f472b6", cat:"Entertain."},
+  {id:"terra",   name:"TERRA",  role:"Environment",      icon:"🌿",  col:"#4ade80", cat:"Environ."},
+  {id:"cipher",  name:"CIPHER", role:"Crime & Justice",  icon:"⚖️",  col:"#ef4444", cat:"Crime"},
+  {id:"aegis",   name:"AEGIS",  role:"Verification",     icon:"🛡️",  col:"#ff6b35", cat:"Verify"},
+  {id:"herald",  name:"HERALD", role:"Publisher",        icon:"📡",  col:"#e2e8f0", cat:"Publish"},
+];
+
+// Simulate progressive improvement data
+function makeTrainingData(agent, seed) {
+  const base = 4.5 + (seed * 0.3);
+  const runs = Math.floor(seed * 8) + 3;
+  const gen  = Math.floor(runs / 5);
+  return {
+    agent_id:    agent.id,
+    total_runs:  runs,
+    samples:     runs,
+    avg_quality: Math.min(base + gen * 0.4 + Math.random()*0.5, 9.5),
+    best_score:  Math.min(base + gen * 0.6 + 1.0 + Math.random(), 9.8),
+    elite_count: Math.max(0, Math.floor((runs - 5) * 0.15)),
+    high_count:  Math.floor(runs * 0.3),
+    prompt_gen:  gen,
+    rules:       Array.from({length: Math.floor(gen*2.5)+2}, (_,i) =>
+      ["Always lead with a specific data point",
+       "Name the company or person in the headline",
+       "Include a 'what this means for you' section",
+       "Open video script with a question",
+       "Use strong active verbs in headlines",
+       "Include historical comparison",
+       "Add expert attribution even if paraphrased",
+       "End with forward-looking statement"][i % 8]
+    ),
+    anti_rules: Array.from({length: Math.min(gen+1, 5)}, (_,i) =>
+      ["Never use passive voice in headlines",
+       "Never write vague summaries without a 'so what'",
+       "Never omit specific figures in business stories",
+       "Never start video script with 'In today's news'",
+       "Never exceed 12 words in headline"][i]
+    ),
+    style_notes: Array.from({length: Math.min(gen, 4)}, (_,i) =>
+      ["Headlines with numbers score avg +1.2 pts",
+       "Stories with expert quotes score 0.8 pts higher",
+       "Adding 'BREAKING' boosts Twitter engagement 34%",
+       "First-person hooks in IG captions get 2x saves"][i]
+    ),
+    score_history: Array.from({length: Math.min(runs, 15)}, (_,j) =>
+      Math.min(base + j*0.08 + Math.random()*0.8, 9.5)
+    ),
+    adversarial_rewrites: Math.floor(runs * 0.2),
+    score_gain_from_adversarial: 1.3 + Math.random() * 0.7,
+  };
+}
+
+const allData = {};
+AGENTS.forEach((a,i) => { allData[a.id] = makeTrainingData(a, i+1); });
+
+let selectedAgent = AGENTS[0].id;
+
+// ── RENDER AGENT LIST ──────────────────────────────────────────────────────
+function renderAgentList() {
+  const list = document.getElementById('agentList');
+  list.innerHTML = AGENTS.map(a => {
+    const d = allData[a.id];
+    const q = d.avg_quality;
+    const pct = (q / 10) * 100;
+    return `
+    <div class="agent-row${selectedAgent===a.id?' active':''}" onclick="selectAgent('${a.id}')">
+      <div class="ar-top">
+        <span class="ar-icon">${a.icon}</span>
+        <span class="ar-name" style="color:${a.col}">${a.name}</span>
+        <span class="ar-gen" style="color:${a.col};border-color:${a.col}">G${d.prompt_gen}</span>
+        <span class="ar-score" style="color:${q>=8?'var(--green)':q>=6?'var(--yellow)':'var(--red)'}">${q.toFixed(1)}</span>
+      </div>
+      <div class="ar-bar"><div class="ar-fill" style="width:${pct}%;background:${a.col}"></div></div>
+      <div class="ar-meta">
+        <span><span class="status-dot"></span>${a.role}</span>
+        <span>${d.samples} samples · ${d.rules.length} rules</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── SELECT AGENT ───────────────────────────────────────────────────────────
+function selectAgent(id) {
+  selectedAgent = id;
+  renderAgentList();
+  renderWisdomTree();
+  renderQualityChart();
+  document.getElementById('activeAgent').textContent = id.toUpperCase();
+}
+
+// ── RENDER WISDOM TREE ─────────────────────────────────────────────────────
+function renderWisdomTree() {
+  const d = allData[selectedAgent];
+  document.getElementById('doRules').innerHTML =
+    d.rules.slice(0,6).map(r=>`<div class="wisdom-rule">✓ ${r}</div>`).join('') ||
+    '<div style="color:var(--muted);font-size:10px;padding:8px">Learning... (needs 3+ runs)</div>';
+  document.getElementById('antiRules').innerHTML =
+    d.anti_rules.map(r=>`<div class="wisdom-rule anti">✗ ${r}</div>`).join('') ||
+    '<div style="color:var(--muted);font-size:10px;padding:8px">No anti-rules yet</div>';
+}
+
+// ── RENDER QUALITY CHART ───────────────────────────────────────────────────
+function renderQualityChart() {
+  const d = allData[selectedAgent];
+  const agent = AGENTS.find(a => a.id === selectedAgent);
+  const scores = d.score_history;
+  if (!scores.length) return;
+  const W=800, H=120, pad=10;
+  const minS=Math.max(0,Math.min(...scores)-0.5);
+  const maxS=Math.min(10,Math.max(...scores)+0.5);
+  const pts = scores.map((s,i)=>{
+    const x = pad + (i/(scores.length-1||1))*(W-2*pad);
+    const y = H-pad - ((s-minS)/(maxS-minS||1))*(H-2*pad);
+    return `${x},${y}`;
+  });
+  const svg = document.getElementById('qualityChart');
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:${agent.col};stop-opacity:0.3"/>
+        <stop offset="100%" style="stop-color:${agent.col};stop-opacity:0"/>
+      </linearGradient>
+    </defs>
+    <line x1="10" y1="${H/2}" x2="${W-10}" y2="${H/2}" stroke="#0f1e30" stroke-width="1" stroke-dasharray="4,4"/>
+    <polyline points="${pts.join(' ')}" fill="none" stroke="${agent.col}" stroke-width="2" stroke-linejoin="round"/>
+    ${scores.map((s,i)=>{
+      const x=pad+(i/(scores.length-1||1))*(W-2*pad);
+      const y=H-pad-((s-minS)/(maxS-minS||1))*(H-2*pad);
+      return `<circle cx="${x}" cy="${y}" r="3" fill="${agent.col}"/>
+              <text x="${x}" y="${y-6}" text-anchor="middle" fill="${agent.col}" font-size="8">${s.toFixed(1)}</text>`;
+    }).join('')}`;
+}
+
+// ── RENDER LAYER STATS ─────────────────────────────────────────────────────
+function renderLayerStats() {
+  const all = Object.values(allData);
+  const totalSamples = all.reduce((s,d)=>s+d.samples,0);
+  const avgQ = all.reduce((s,d)=>s+d.avg_quality,0)/all.length;
+  const elite = all.reduce((s,d)=>s+d.elite_count,0);
+  const totalRules = all.reduce((s,d)=>s+d.rules.length,0);
+  const crossPool = all.filter(d=>d.best_score>=8.5).length * 2;
+  const rewrites = all.reduce((s,d)=>s+d.adversarial_rewrites,0);
+
+  // Top metrics
+  document.getElementById('totalSamples').textContent = totalSamples;
+  document.getElementById('avgQuality').textContent   = avgQ.toFixed(1);
+  document.getElementById('eliteCount').textContent   = elite;
+  document.getElementById('wisdomRules').textContent  = totalRules;
+  document.getElementById('crossPool').textContent    = crossPool;
+
+  // Layer 1
+  document.getElementById('l1samples').textContent = totalSamples;
+  document.getElementById('l1elite').textContent   = elite;
+  document.getElementById('l1high').textContent    = all.reduce((s,d)=>s+d.high_count,0);
+  document.getElementById('l1prog').style.width    = Math.min((totalSamples/500)*100,100)+'%';
+
+  // Layer 2
+  const totalGen = all.reduce((s,d)=>s+d.prompt_gen,0);
+  document.getElementById('l2gen').textContent  = totalGen;
+  document.getElementById('l2shots').textContent= all.filter(d=>d.samples>=3).length * 3;
+  document.getElementById('l2prog').style.width = Math.min((totalGen/50)*100,100)+'%';
+
+  // Layer 3
+  document.getElementById('l3rules').textContent = totalRules;
+  document.getElementById('l3anti').textContent  = all.reduce((s,d)=>s+d.anti_rules.length,0);
+  document.getElementById('l3style').textContent = all.reduce((s,d)=>s+d.style_notes.length,0);
+  document.getElementById('l3prog').style.width  = Math.min((totalRules/100)*100,100)+'%';
+
+  // Layer 4
+  document.getElementById('l4pool').textContent    = crossPool;
+  document.getElementById('l4universal').textContent= Math.floor(crossPool/3);
+  document.getElementById('l4donors').textContent  = all.filter(d=>d.elite_count>0).length;
+  document.getElementById('l4prog').style.width    = Math.min((crossPool/40)*100,100)+'%';
+
+  // Layer 5
+  const improved = Math.floor(rewrites*0.92);
+  document.getElementById('l5challenged').textContent= rewrites;
+  document.getElementById('l5improved').textContent  = improved;
+  document.getElementById('l5avgGain').textContent   = '+1.4';
+  document.getElementById('l5prog').style.width      = Math.min((improved/50)*100,100)+'%';
+
+  // Fine-tune
+  document.getElementById('ftSamples').textContent = all.filter(d=>d.avg_quality>=7.5).reduce((s,d)=>s+d.high_count,0);
+}
+
+// ── CROSS-AGENT POOL ───────────────────────────────────────────────────────
+function renderCrossPool() {
+  const top = AGENTS
+    .filter(a => allData[a.id].best_score >= 8.5)
+    .map(a => ({agent:a, score:allData[a.id].best_score, d:allData[a.id]}))
+    .sort((x,y) => y.score - x.score).slice(0,8);
+
+  const samples = [
+    "AI regulation bill passes Senate — tech stocks surge 4%",
+    "Champions League comeback wins in 94th minute stuns crowd",
+    "New gene therapy reverses Type 2 diabetes in 83% of patients",
+    "Central bank holds rates; signals three cuts by year end",
+    "Climate summit: 140 nations commit to net zero by 2040",
+    "Court verdict: CEO guilty of $2.3B fraud — maximum sentence",
+    "Blockbuster sequel breaks opening weekend record by $200M",
+    "New exoplanet discovered in habitable zone 12 light years away",
+  ];
+
+  document.getElementById('crossPool_list').innerHTML = top.map((t,i) => `
+    <div class="pool-entry">
+      <div class="pe-top">
+        <span class="ar-icon">${t.agent.icon}</span>
+        <span class="pe-agent" style="color:${t.agent.col}">${t.agent.name}</span>
+        <span class="pe-cat">${t.agent.cat}</span>
+        <span class="pe-score" style="color:var(--green)">★ ${t.score.toFixed(1)}</span>
+      </div>
+      <div class="pe-headline">${samples[i]||'Breaking story'}</div>
+      <div class="pe-why">Shared: ${t.d.rules[0]||'Strong headline pattern'}</div>
+    </div>`).join('');
+}
+
+// ── LIVE TRAINING FEED ─────────────────────────────────────────────────────
+const feedEntries = [
+  {ts:"08:00:01", agent:"SCOUT",  msg:"Trend scan complete — 2 topics selected", layer:"L1"},
+  {ts:"08:00:18", agent:"VOLT",   msg:"Training context loaded: 12 samples + 8 rules", layer:"L2"},
+  {ts:"08:01:05", agent:"VOLT",   msg:"Content generated Q=7.2 — below threshold", layer:"L5"},
+  {ts:"08:01:06", agent:"VOLT",   msg:"Adversarial challenge: 'Headline lacks specificity'", layer:"L5"},
+  {ts:"08:01:24", agent:"VOLT",   msg:"Rewrite complete → Q=8.6 (+1.4) ✓", layer:"L5"},
+  {ts:"08:01:25", agent:"VOLT",   msg:"Sample recorded to training store (sample #47)", layer:"L1"},
+  {ts:"08:01:26", agent:"VOLT",   msg:"Elite output → deposited to cross-agent pool", layer:"L4"},
+  {ts:"08:01:30", agent:"ARENA",  msg:"Training context loaded: 9 samples + 5 rules", layer:"L2"},
+  {ts:"08:02:15", agent:"ARENA",  msg:"Content Q=8.4 ✓ — pattern extraction triggered (run #3)", layer:"L3"},
+  {ts:"08:02:18", agent:"ARENA",  msg:"New rule learned: 'Always include score + player name'", layer:"L3"},
+  {ts:"08:02:20", agent:"HERALD", msg:"Published to 4 platforms successfully", layer:"L1"},
+  {ts:"08:02:25", agent:"SYSTEM", msg:"Cross-agent global patterns extracted (9 agents, 18 elite outputs)", layer:"L4"},
+  {ts:"08:02:30", agent:"VOLT",   msg:"Prompt evolution triggered (every 5 runs) → Gen 4", layer:"L2"},
+];
+const LAYER_COLORS = {L1:"#38bdf8",L2:"#00ff88",L3:"#fbbf24",L4:"#c084fc",L5:"#E81A1A"};
+const AGENT_COLORS = {SCOUT:"#38bdf8",TITAN:"#fbbf24",PULSE:"#00ff88",VOLT:"#22d3ee",ARENA:"#fb923c",
+  NEXUS:"#c084fc",PRISM:"#f472b6",TERRA:"#4ade80",CIPHER:"#ef4444",AEGIS:"#ff6b35",HERALD:"#e2e8f0",SYSTEM:"#555"};
+
+function renderFeed() {
+  document.getElementById('trainFeed').innerHTML = feedEntries.slice(0,12).map(e=>`
+    <div class="feed-entry">
+      <span class="fe-ts">${e.ts}</span>
+      <span class="fe-agent" style="color:${AGENT_COLORS[e.agent]||'#fff'}">[${e.agent}]</span>
+      <span class="fe-msg">${e.msg}</span>
+      <span class="fe-layer" style="color:${LAYER_COLORS[e.layer]||'#fff'};border-color:${LAYER_COLORS[e.layer]||'#333'}">${e.layer}</span>
+    </div>`).join('');
+}
+
+// ── CLOCK ──────────────────────────────────────────────────────────────────
+function tick() {
+  document.getElementById('clock').textContent =
+    new Date().toUTCString().split(' ')[4] + ' UTC';
+}
+setInterval(tick, 1000);
+
+// ── AUTO-UPDATE FEED ───────────────────────────────────────────────────────
+const newEntries = [
+  {agent:"TITAN",  msg:"Pattern extraction: 'Always cite market cap in M&A stories'", layer:"L3"},
+  {agent:"PULSE",  msg:"Cross-agent learning: adopted VOLT's headline number pattern", layer:"L4"},
+  {agent:"CIPHER", msg:"Adversarial rewrite: 'Missing jurisdiction' → Q=7.8 → 9.1", layer:"L5"},
+  {agent:"NEXUS",  msg:"Few-shot block updated with 3 new elite examples", layer:"L2"},
+  {agent:"PRISM",  msg:"Training sample #31 recorded — avg quality now 7.9", layer:"L1"},
+  {agent:"TERRA",  msg:"Prompt evolved to Gen 3 — baking in climate data citation rule", layer:"L2"},
+  {agent:"SCOUT",  msg:"Cross-agent global extraction: 7 universal patterns identified", layer:"L4"},
+];
+let nIdx = 0;
+setInterval(() => {
+  const now = new Date();
+  const ts  = now.toTimeString().slice(0,8);
+  feedEntries.unshift({ts, ...newEntries[nIdx++ % newEntries.length]});
+  feedEntries.splice(20);
+  renderFeed();
+}, 8000);
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+renderAgentList();
+renderWisdomTree();
+renderQualityChart();
+renderLayerStats();
+renderCrossPool();
+renderFeed();
+tick();
+</script>
+</body>
+</html>
