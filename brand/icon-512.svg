@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f0f"/>
+      <stop offset="100%" style="stop-color:#080808"/>
+    </linearGradient>
+    <linearGradient id="redG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF2020"/>
+      <stop offset="100%" style="stop-color:#CC0000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background square with slight rounding -->
+  <rect width="512" height="512" fill="url(#bgGrad)" rx="48"/>
+
+  <!-- Subtle inner border -->
+  <rect x="2" y="2" width="508" height="508" fill="none" stroke="#1a1a1a" stroke-width="2" rx="46"/>
+
+  <!-- Signal / Broadcast arcs — centered -->
+  <!-- Outermost arc pair -->
+  <path d="M 130 256 A 126 126 0 0 1 256 130" stroke="#FF2020" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <path d="M 130 256 A 126 126 0 0 0 256 382" stroke="#FF2020" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <path d="M 382 256 A 126 126 0 0 0 256 130" stroke="#FF2020" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <path d="M 382 256 A 126 126 0 0 1 256 382" stroke="#FF2020" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Middle arc pair -->
+  <path d="M 162 256 A 94 94 0 0 1 256 162" stroke="#FF2020" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55" filter="url(#softGlow)"/>
+  <path d="M 162 256 A 94 94 0 0 0 256 350" stroke="#FF2020" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55" filter="url(#softGlow)"/>
+  <path d="M 350 256 A 94 94 0 0 0 256 162" stroke="#FF2020" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55" filter="url(#softGlow)"/>
+  <path d="M 350 256 A 94 94 0 0 1 256 350" stroke="#FF2020" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.55" filter="url(#softGlow)"/>
+
+  <!-- Inner arc pair -->
+  <path d="M 196 256 A 60 60 0 0 1 256 196" stroke="#FF2020" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#softGlow)"/>
+  <path d="M 196 256 A 60 60 0 0 0 256 316" stroke="#FF2020" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#softGlow)"/>
+  <path d="M 316 256 A 60 60 0 0 0 256 196" stroke="#FF2020" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#softGlow)"/>
+  <path d="M 316 256 A 60 60 0 0 1 256 316" stroke="#FF2020" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#softGlow)"/>
+
+  <!-- Center glowing dot -->
+  <circle cx="256" cy="256" r="28" fill="#CC0000" opacity="0.3" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="18" fill="url(#redG)" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="10" fill="#FF6666"/>
+  <circle cx="252" cy="252" r="4" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- NN lettermark subtle background -->
+  <!-- N left vertical -->
+  <rect x="148" y="380" width="216" height="3" fill="#FF2020" opacity="0.4" rx="1"/>
+
+  <!-- Bottom red bar -->
+  <rect x="0" y="496" width="512" height="16" fill="url(#redG)" rx="0"/>
+  <rect x="0" y="496" width="512" height="16" fill="url(#redG)" rx="0"/>
+
+  <!-- Small NN text at bottom -->
+  <text x="256" y="490" font-family="'Arial Black','Impact',sans-serif" font-size="11" font-weight="900" letter-spacing="6" fill="#333333" text-anchor="middle">NEXUS NOW</text>
+</svg>
