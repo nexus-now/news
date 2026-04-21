@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-04-21T11:44:31.780895",
+    "duration_secs": 40,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence breakthroughs 2026",
+        "category": "technology",
+        "agent": "VOLT",
+        "quality": 4.0,
+        "copyright_id": "NN-2026-0421-114441-TEC-6675F4",
+        "verified": "VERIFIED"
+      },
+      {
+        "headline": "Breaking: climate change extreme weather events",
+        "category": "",
+        "agent": "",
+        "quality": 4.0,
+        "copyright_id": "NN-2026-0421-114504-GEN-72FE58",
+        "verified": "VERIFIED"
+      }
+    ]
+  },
+  {
     "timestamp": "2026-04-20T20:10:57.299821",
     "duration_secs": 45,
     "posts_published": 2,
