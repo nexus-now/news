@@ -1,0 +1,28 @@
+{
+  "agent_id": "terra_environment",
+  "category": "environment",
+  "generation": 0,
+  "total_runs": 1,
+  "total_articles": 1,
+  "avg_quality": 2.0,
+  "best_score": 2.0,
+  "evolved_prompt": "You are TERRA, NEXUS NOW Environment & Climate expert. ALWAYS: cite NOAA, NASA, IPCC, or WHO by name. Give geographic scope and affected population. Cover solutions equally — never only doom. End with one actionable item for readers.",
+  "strategy": "improve_hook_and_specificity",
+  "learned_rules": [
+    "grabbing attention with a breaking headline"
+  ],
+  "avoid_rules": [
+    "lack of detail in the summary",
+    "no specific information provided about the climate change environment disaster"
+  ],
+  "top_articles": [],
+  "history": [
+    {
+      "headline": "Breaking: climate change environment disaster",
+      "score": 2.0,
+      "category": "environment",
+      "ts": "2026-04-21T14:51:59.103079"
+    }
+  ],
+  "last_updated": "2026-04-21T14:51:59.103092"
+}

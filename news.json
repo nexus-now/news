@@ -1,5 +1,53 @@
 [
   {
+    "title": "Breaking: climate change environment disaster",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "environment",
+    "agent": "terra_environment",
+    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
+    "key_facts": [
+      "Topic: climate change environment disaster",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring climate change environment disaster for updates.",
+    "tags": [
+      "environment",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0421-145159-ENV-DD0B54",
+    "verification": "⚠️ UNVERIFIED",
+    "slug": "breaking--climate-change-environment-dis",
+    "time": "Apr 21, 2026 · 14:53 UTC",
+    "timestamp": "2026-04-21T14:53:09.063278",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: artificial intelligence new developments",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "technology",
+    "agent": "volt_technology",
+    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
+    "key_facts": [
+      "Topic: artificial intelligence new developments",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
+    "tags": [
+      "technology",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0421-145137-TEC-60192A",
+    "verification": "❓ UNVERIFIED",
+    "slug": "breaking--artificial-intelligence-new-de",
+    "time": "Apr 21, 2026 · 14:51 UTC",
+    "timestamp": "2026-04-21T14:51:39.345587",
+    "ai_generated": true
+  },
+  {
     "title": "NEXUS NOW Goes Live: World's First Fully Autonomous AI News Channel Launches",
     "subheadline": "11 AI agents now covering 8 categories around the clock",
     "category": "Technology",
@@ -12,7 +60,12 @@
       "Self-improving agents get smarter after every single run",
       "Zero human intervention from trend detection to publication"
     ],
-    "tags": ["technology", "ai", "nexusnow", "launch"],
+    "tags": [
+      "technology",
+      "ai",
+      "nexusnow",
+      "launch"
+    ],
     "quality_score": 9.2,
     "copyright_id": "NN-2026-0406-080000-TEC-AA01",
     "verification": "✅ VERIFIED",
@@ -35,7 +88,12 @@
       "AI market projected to reach $2 trillion by 2030",
       "10 new AI unicorns created every week globally"
     ],
-    "tags": ["business", "ai", "investment", "technology"],
+    "tags": [
+      "business",
+      "ai",
+      "investment",
+      "technology"
+    ],
     "quality_score": 8.7,
     "copyright_id": "NN-2026-0406-080100-BIZ-BB02",
     "verification": "✅ VERIFIED",
@@ -58,7 +116,12 @@
       "Published in Nature Medicine peer-reviewed journal",
       "Human trials expected to begin Q3 2027"
     ],
-    "tags": ["science", "health", "longevity", "research"],
+    "tags": [
+      "science",
+      "health",
+      "longevity",
+      "research"
+    ],
     "quality_score": 9.0,
     "copyright_id": "NN-2026-0406-080200-SCI-CC03",
     "verification": "✅ VERIFIED",
@@ -81,7 +144,12 @@
       "Madrid's 23rd Champions League comeback from 2+ goals down",
       "Second leg at Bernabeu on April 15"
     ],
-    "tags": ["sports", "football", "championsleague", "realmadrid"],
+    "tags": [
+      "sports",
+      "football",
+      "championsleague",
+      "realmadrid"
+    ],
     "quality_score": 8.9,
     "copyright_id": "NN-2026-0406-080300-SPT-DD04",
     "verification": "✅ VERIFIED",
@@ -104,7 +172,12 @@
       "US 7th Fleet placed on elevated readiness",
       "Diplomatic talks proposed for Geneva next week"
     ],
-    "tags": ["politics", "world", "southchinasea", "un"],
+    "tags": [
+      "politics",
+      "world",
+      "southchinasea",
+      "un"
+    ],
     "quality_score": 8.5,
     "copyright_id": "NN-2026-0406-080400-POL-EE05",
     "verification": "⚡ DEVELOPING",
@@ -127,7 +200,12 @@
       "COP32 delegates urged to accelerate emissions targets",
       "Methane release from permafrost now exceeding models"
     ],
-    "tags": ["environment", "climate", "arctic", "noaa"],
+    "tags": [
+      "environment",
+      "climate",
+      "arctic",
+      "noaa"
+    ],
     "quality_score": 9.1,
     "copyright_id": "NN-2026-0406-080500-ENV-FF06",
     "verification": "✅ VERIFIED",

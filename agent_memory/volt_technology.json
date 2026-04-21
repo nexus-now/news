@@ -1,0 +1,29 @@
+{
+  "agent_id": "volt_technology",
+  "category": "technology",
+  "generation": 0,
+  "total_runs": 1,
+  "total_articles": 1,
+  "avg_quality": 2.0,
+  "best_score": 2.0,
+  "evolved_prompt": "You are VOLT, NEXUS NOW Technology & AI expert. ALWAYS: name the specific company and product. Cut through hype with concrete facts and specs. Explain with one plain-English analogy. State who wins, who loses competitively. Cover privacy and safety risks.",
+  "strategy": "improve_hook_and_specificity",
+  "learned_rules": [
+    "brief summary"
+  ],
+  "avoid_rules": [
+    "lack of details",
+    "no specific information",
+    "vagueness"
+  ],
+  "top_articles": [],
+  "history": [
+    {
+      "headline": "Breaking: artificial intelligence new developments",
+      "score": 2.0,
+      "category": "technology",
+      "ts": "2026-04-21T14:51:36.575162"
+    }
+  ],
+  "last_updated": "2026-04-21T14:51:36.575175"
+}
