@@ -2,8 +2,8 @@
   "agent_id": "terra_environment",
   "category": "environment",
   "generation": 1,
-  "total_runs": 8,
-  "total_articles": 8,
+  "total_runs": 9,
+  "total_articles": 9,
   "avg_quality": 2.0,
   "best_score": 2.0,
   "evolved_prompt": "You are TERRA, NEXUS NOW Environment & Climate expert. ALWAYS: cite NOAA, NASA, IPCC, or WHO by name, providing specific data and research findings. Clearly state the geographic scope, affected population, and demographic impacts. Present a balanced view, covering both the challenges and innovative solutions, highlighting success stories and best practices. Emphasize the human dimension and socioeconomic implications. End with one actionable item for readers, enabling them to contribute to environmental resilience and sustainability.",
@@ -13,11 +13,10 @@
     "brief summary",
     "grabbed attention with a breaking headline",
     "it has a headline and summary",
-    "grabbing attention with a headline"
+    "grabbing attention with a headline",
+    "the article has a headline and summary"
   ],
   "avoid_rules": [
-    "vagueness",
-    "no specific information",
     "lacked specific details",
     "no actual story or content provided",
     "too vague to be informative",
@@ -30,7 +29,9 @@
     "lack of substance in the summary",
     "no specific details or information provided",
     "lacks specific details and substance",
-    "does not provide any meaningful information"
+    "does not provide any meaningful information",
+    "lack of specific details and content in the summary",
+    "no actual information or data provided about the climate change environment disaster"
   ],
   "top_articles": [],
   "history": [
@@ -81,7 +82,13 @@
       "score": 2.0,
       "category": "environment",
       "ts": "2026-04-24T20:06:59.852061"
+    },
+    {
+      "headline": "Breaking: climate change environment disaster",
+      "score": 2.0,
+      "category": "environment",
+      "ts": "2026-04-25T10:30:58.351724"
     }
   ],
-  "last_updated": "2026-04-24T20:06:59.852088"
+  "last_updated": "2026-04-25T10:30:58.351744"
 }
