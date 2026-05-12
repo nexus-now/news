@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-05-12T19:29:27.538826",
+    "duration_secs": 37,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0512-192934-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: climate change environment disaster",
+        "category": "environment",
+        "agent": "terra_environment",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0512-192957-ENV-DD0B54",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-05-12T10:26:01.182077",
     "duration_secs": 32,
     "posts_published": 2,
