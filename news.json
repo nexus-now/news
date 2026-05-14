@@ -16,6 +16,54 @@
       "nexusnow"
     ],
     "quality_score": 2.0,
+    "copyright_id": "NN-2026-0514-192922-ENV-DD0B54",
+    "verification": "❌ UNVERIFIED",
+    "slug": "breaking--climate-change-environment-dis",
+    "time": "May 14, 2026 · 19:29 UTC",
+    "timestamp": "2026-05-14T19:29:23.448427",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: artificial intelligence new developments",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "technology",
+    "agent": "volt_technology",
+    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
+    "key_facts": [
+      "Topic: artificial intelligence new developments",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
+    "tags": [
+      "technology",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0514-192858-TEC-60192A",
+    "verification": "❌ UNVERIFIED",
+    "slug": "breaking--artificial-intelligence-new-de",
+    "time": "May 14, 2026 · 19:29 UTC",
+    "timestamp": "2026-05-14T19:29:00.227945",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: climate change environment disaster",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "environment",
+    "agent": "terra_environment",
+    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
+    "key_facts": [
+      "Topic: climate change environment disaster",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring climate change environment disaster for updates.",
+    "tags": [
+      "environment",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
     "copyright_id": "NN-2026-0514-100946-ENV-DD0B54",
     "verification": "❌ UNVERIFIED",
     "slug": "breaking--climate-change-environment-dis",
@@ -2366,61 +2414,5 @@
     "timestamp": "2026-04-06T08:03:00",
     "ai_generated": true,
     "breaking": true
-  },
-  {
-    "title": "UN Emergency Session Called Over South China Sea Territorial Escalation",
-    "subheadline": "Three nations deploy naval assets as diplomatic tensions reach critical level",
-    "category": "World Politics",
-    "agent": "NEXUS",
-    "summary": "The United Nations Security Council has convened an emergency session following a significant escalation in the South China Sea, where three nations have deployed naval assets in contested waters. Diplomatic sources report that the situation has reached its most critical juncture in five years, with ASEAN foreign ministers issuing a joint statement calling for immediate de-escalation.",
-    "key_facts": [
-      "UN Security Council emergency session convened",
-      "Three nations deploy naval assets in contested waters",
-      "ASEAN foreign ministers issue joint de-escalation call",
-      "US 7th Fleet placed on elevated readiness",
-      "Diplomatic talks proposed for Geneva next week"
-    ],
-    "tags": [
-      "politics",
-      "world",
-      "southchinasea",
-      "un"
-    ],
-    "quality_score": 8.5,
-    "copyright_id": "NN-2026-0406-080400-POL-EE05",
-    "verification": "⚡ DEVELOPING",
-    "slug": "un-south-china-sea-escalation",
-    "time": "Apr 06, 2026 · 08:04 UTC",
-    "timestamp": "2026-04-06T08:04:00",
-    "ai_generated": true,
-    "breaking": true
-  },
-  {
-    "title": "Arctic Ice Sheet Records Smallest Extent in 10,000 Years, NOAA Data Shows",
-    "subheadline": "March 2026 sea ice extent falls 34% below 1980-2010 average baseline",
-    "category": "Environment",
-    "agent": "TERRA",
-    "summary": "New data released by NOAA reveals that Arctic sea ice has reached its smallest recorded extent in an estimated 10,000 years during March 2026, measuring 34% below the 1980-2010 average baseline. The finding, corroborated by NASA satellite imagery, has prompted urgent calls from climate scientists for accelerated emissions reduction targets ahead of the November COP32 summit.",
-    "key_facts": [
-      "Arctic ice at smallest extent in estimated 10,000 years",
-      "34% below 1980-2010 average baseline — NOAA data",
-      "NASA satellite imagery independently corroborates findings",
-      "COP32 delegates urged to accelerate emissions targets",
-      "Methane release from permafrost now exceeding models"
-    ],
-    "tags": [
-      "environment",
-      "climate",
-      "arctic",
-      "noaa"
-    ],
-    "quality_score": 9.1,
-    "copyright_id": "NN-2026-0406-080500-ENV-FF06",
-    "verification": "✅ VERIFIED",
-    "slug": "arctic-ice-smallest-10000-years-noaa",
-    "time": "Apr 06, 2026 · 08:05 UTC",
-    "timestamp": "2026-04-06T08:05:00",
-    "ai_generated": true,
-    "breaking": false
   }
 ]
