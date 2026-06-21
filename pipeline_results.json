@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-06-21T19:17:27.081175",
+    "duration_secs": 34,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0621-191732-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: climate change environment disaster",
+        "category": "environment",
+        "agent": "terra_environment",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0621-191754-ENV-DD0B54",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-06-21T11:11:21.277293",
     "duration_secs": 34,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0528-113206-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-05-27T20:02:30.662599",
-    "duration_secs": 36,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Breaking: artificial intelligence new developments",
-        "category": "technology",
-        "agent": "volt_technology",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0527-200237-TEC-60192A",
-        "strategy": ""
-      },
-      {
-        "headline": "Breaking: climate change environment disaster",
-        "category": "environment",
-        "agent": "terra_environment",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0527-200259-ENV-DD0B54",
         "strategy": ""
       }
     ]
