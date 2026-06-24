@@ -1,5 +1,56 @@
 [
   {
+    "title": "2026: 1.2°C Rise",
+    "subheadline": "Climate Change Accelerates",
+    "category": "Environment",
+    "agent": "TERRA",
+    "summary": "The planet has warmed by 1.2°C since the Industrial Revolution, causing devastating natural disasters. Climate change affects millions worldwide, from intense hurricanes to droughts. The IPCC warns of catastrophic consequences if global warming exceeds 1.5°C. The world must act now to reduce carbon emissions and transition to renewable energy sources. Climate change mitigation requires a collective effort, and individuals can make a difference by reducing their carbon footprint and supporting sustainable practices. The future of our planet depends on our ability to work together to address this pressing issue.",
+    "key_facts": [
+      "1.2°C global temperature rise",
+      "IPCC warns of 1.5°C threshold",
+      "2026: highest CO2 levels recorded",
+      "Climate change displaces 22 million people",
+      "Renewable energy sources grow 15%"
+    ],
+    "deep_analysis": "The path forward requires a collective effort, with governments, corporations, and individuals working together to address the climate crisis. We must prioritize climate change education and awareness, support climate-resilient infrastructure, and promote sustainable land use practices. The future of our planet depends on our ability to work together to reduce greenhouse gas emissions and transition to renewable energy sources. By taking immediate action, we can mitigate the worst impacts of climate change and create a more sustainable future for all.",
+    "tags": [
+      "environment",
+      "nexusnow",
+      "news"
+    ],
+    "quality_score": 7.5,
+    "copyright_id": "NN-2026-0624-192729-ENV-F27395",
+    "verification": "✅ VERIFIED",
+    "slug": "2026--1-2-c-rise",
+    "time": "Jun 24, 2026 · 19:27 UTC",
+    "timestamp": "2026-06-24T19:27:33.134096",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: artificial intelligence new developments",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "technology",
+    "agent": "volt_technology",
+    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
+    "key_facts": [
+      "Topic: artificial intelligence new developments",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
+    "tags": [
+      "technology",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0624-192706-TEC-60192A",
+    "verification": "❌ UNVERIFIED",
+    "slug": "breaking--artificial-intelligence-new-de",
+    "time": "Jun 24, 2026 · 19:27 UTC",
+    "timestamp": "2026-06-24T19:27:08.260772",
+    "ai_generated": true
+  },
+  {
     "title": "Breaking: climate change environment disaster",
     "subheadline": "Developing — NEXUS NOW",
     "category": "environment",
@@ -2358,54 +2409,6 @@
     "slug": "breaking--artificial-intelligence-new-de",
     "time": "May 31, 2026 · 10:08 UTC",
     "timestamp": "2026-05-31T10:08:53.964358",
-    "ai_generated": true
-  },
-  {
-    "title": "Breaking: climate change environment disaster",
-    "subheadline": "Developing — NEXUS NOW",
-    "category": "environment",
-    "agent": "terra_environment",
-    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
-    "key_facts": [
-      "Topic: climate change environment disaster",
-      "Story developing"
-    ],
-    "deep_analysis": "Monitoring climate change environment disaster for updates.",
-    "tags": [
-      "environment",
-      "news",
-      "nexusnow"
-    ],
-    "quality_score": 2.0,
-    "copyright_id": "NN-2026-0530-190119-ENV-DD0B54",
-    "verification": "❌ UNVERIFIED",
-    "slug": "breaking--climate-change-environment-dis",
-    "time": "May 30, 2026 · 19:01 UTC",
-    "timestamp": "2026-05-30T19:01:20.434423",
-    "ai_generated": true
-  },
-  {
-    "title": "Breaking: artificial intelligence new developments",
-    "subheadline": "Developing — NEXUS NOW",
-    "category": "technology",
-    "agent": "volt_technology",
-    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
-    "key_facts": [
-      "Topic: artificial intelligence new developments",
-      "Story developing"
-    ],
-    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
-    "tags": [
-      "technology",
-      "news",
-      "nexusnow"
-    ],
-    "quality_score": 2.0,
-    "copyright_id": "NN-2026-0530-190056-TEC-60192A",
-    "verification": "❓ UNVERIFIED",
-    "slug": "breaking--artificial-intelligence-new-de",
-    "time": "May 30, 2026 · 19:00 UTC",
-    "timestamp": "2026-05-30T19:00:57.930242",
     "ai_generated": true
   }
 ]
