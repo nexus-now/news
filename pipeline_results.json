@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-07-12T18:52:56.974340",
+    "duration_secs": 39,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0712-185305-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: climate change environment disaster",
+        "category": "environment",
+        "agent": "terra_environment",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0712-185329-ENV-DD0B54",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-07-12T09:45:02.723299",
     "duration_secs": 36,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0618-114648-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-06-17T20:01:42.773146",
-    "duration_secs": 63,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Amazon AI 4.0 Launched June 2026",
-        "category": "Technology",
-        "agent": "VOLT",
-        "quality": 7.5,
-        "copyright_id": "NN-2026-0617-200157-TEC-23C579",
-        "strategy": ""
-      },
-      {
-        "headline": "Breaking: climate change environment disaster",
-        "category": "environment",
-        "agent": "terra_environment",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0617-200238-ENV-DD0B54",
         "strategy": ""
       }
     ]
