@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-07-17T09:50:16.590749",
+    "duration_secs": 36,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0717-095023-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: climate change environment disaster",
+        "category": "environment",
+        "agent": "terra_environment",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0717-095046-ENV-DD0B54",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-07-16T18:57:36.207673",
     "duration_secs": 36,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0622-203600-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-06-22T13:28:30.783336",
-    "duration_secs": 38,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Google AI 4.0 Released June 2026",
-        "category": "Technology",
-        "agent": "VOLT",
-        "quality": 7.5,
-        "copyright_id": "NN-2026-0622-132837-TEC-81D85B",
-        "strategy": ""
-      },
-      {
-        "headline": "Breaking: climate change environment disaster",
-        "category": "environment",
-        "agent": "terra_environment",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0622-132901-ENV-DD0B54",
         "strategy": ""
       }
     ]
