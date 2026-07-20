@@ -1,5 +1,53 @@
 [
   {
+    "title": "Breaking: climate change environment disaster",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "environment",
+    "agent": "terra_environment",
+    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
+    "key_facts": [
+      "Topic: climate change environment disaster",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring climate change environment disaster for updates.",
+    "tags": [
+      "environment",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0720-192720-ENV-DD0B54",
+    "verification": "❌ UNVERIFIED",
+    "slug": "breaking--climate-change-environment-dis",
+    "time": "Jul 20, 2026 · 19:27 UTC",
+    "timestamp": "2026-07-20T19:27:20.962785",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: artificial intelligence new developments",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "technology",
+    "agent": "volt_technology",
+    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
+    "key_facts": [
+      "Topic: artificial intelligence new developments",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
+    "tags": [
+      "technology",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0720-192658-TEC-60192A",
+    "verification": "❌ UNVERIFIED",
+    "slug": "breaking--artificial-intelligence-new-de",
+    "time": "Jul 20, 2026 · 19:26 UTC",
+    "timestamp": "2026-07-20T19:26:59.348255",
+    "ai_generated": true
+  },
+  {
     "title": "2026: Miami Sea Levels Rise 10 Inches",
     "subheadline": "1 Million Residents at Risk",
     "category": "Environment",
@@ -2364,54 +2412,6 @@
     "slug": "breaking--artificial-intelligence-new-de",
     "time": "Jun 26, 2026 · 10:45 UTC",
     "timestamp": "2026-06-26T10:45:34.563799",
-    "ai_generated": true
-  },
-  {
-    "title": "Breaking: climate change environment disaster",
-    "subheadline": "Developing — NEXUS NOW",
-    "category": "environment",
-    "agent": "terra_environment",
-    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
-    "key_facts": [
-      "Topic: climate change environment disaster",
-      "Story developing"
-    ],
-    "deep_analysis": "Monitoring climate change environment disaster for updates.",
-    "tags": [
-      "environment",
-      "news",
-      "nexusnow"
-    ],
-    "quality_score": 2.0,
-    "copyright_id": "NN-2026-0625-194708-ENV-DD0B54",
-    "verification": "⚠️ UNVERIFIED",
-    "slug": "breaking--climate-change-environment-dis",
-    "time": "Jun 25, 2026 · 19:47 UTC",
-    "timestamp": "2026-06-25T19:47:09.775111",
-    "ai_generated": true
-  },
-  {
-    "title": "Breaking: artificial intelligence new developments",
-    "subheadline": "Developing — NEXUS NOW",
-    "category": "technology",
-    "agent": "volt_technology",
-    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
-    "key_facts": [
-      "Topic: artificial intelligence new developments",
-      "Story developing"
-    ],
-    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
-    "tags": [
-      "technology",
-      "news",
-      "nexusnow"
-    ],
-    "quality_score": 2.0,
-    "copyright_id": "NN-2026-0625-194646-TEC-60192A",
-    "verification": "❓ UNVERIFIED",
-    "slug": "breaking--artificial-intelligence-new-de",
-    "time": "Jun 25, 2026 · 19:46 UTC",
-    "timestamp": "2026-06-25T19:46:47.724435",
     "ai_generated": true
   }
 ]
