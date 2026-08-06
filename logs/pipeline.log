@@ -5562,3 +5562,29 @@ PIPELINE COMPLETE: 2 stories in 36s
 PIPELINE COMPLETE: 2 stories in 36s
 [2026-08-06 10:32:09 UTC] Average quality: 2.0/10
 [2026-08-06 10:32:09 UTC] ============================================================
+[2026-08-06 23:50:40 UTC] ============================================================
+[2026-08-06 23:50:40 UTC] NEXUS NOW PIPELINE STARTING
+[2026-08-06 23:50:40 UTC] Gemini: YES
+[2026-08-06 23:50:40 UTC] Groq:   YES
+[2026-08-06 23:50:40 UTC] Twitter:YES
+[2026-08-06 23:50:40 UTC] ============================================================
+[2026-08-06 23:50:40 UTC] 
+[STEP 1] SCOUT — Trend Detection
+[2026-08-06 23:50:42 UTC] Scout: 2 topics selected
+[2026-08-06 23:50:42 UTC] 
+[STORY 1/2] TECHNOLOGY: artificial intelligence new developments
+[2026-08-06 23:50:42 UTC]   Agent=volt_technology Gen=42 AvgQ=2.4/10 Strategy=improve_hook_and_specificity
+[2026-08-06 23:50:48 UTC]   Written: 'Breaking: artificial intelligence new developments' Q=2.0
+[2026-08-06 23:50:48 UTC]   AEGIS: ❌ UNVERIFIED ID=NN-2026-0806-235048-TEC-60192A
+[2026-08-06 23:50:55 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-08-06 23:50:55 UTC]   Pausing 10s...
+[2026-08-06 23:51:05 UTC] 
+[STORY 2/2] ENVIRONMENT: climate change environment disaster
+[2026-08-06 23:51:05 UTC]   Agent=terra_environment Gen=42 AvgQ=2.2/10 Strategy=improve_hook_and_specificity
+[2026-08-06 23:51:11 UTC]   Written: 'Breaking: climate change environment disaster' Q=2.0
+[2026-08-06 23:51:11 UTC]   AEGIS: ⚠️ UNVERIFIED ID=NN-2026-0806-235111-ENV-DD0B54
+[2026-08-06 23:51:19 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-08-06 23:51:19 UTC] 
+PIPELINE COMPLETE: 2 stories in 38s
+[2026-08-06 23:51:19 UTC] Average quality: 2.0/10
+[2026-08-06 23:51:19 UTC] ============================================================
