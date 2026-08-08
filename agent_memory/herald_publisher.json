@@ -2,7 +2,7 @@
   "agent_id": "herald_publisher",
   "category": "publishing",
   "generation": 0,
-  "total_runs": 434,
+  "total_runs": 436,
   "total_articles": 0,
   "avg_quality": 0.0,
   "best_score": 0.0,
@@ -12,5 +12,5 @@
   "avoid_rules": [],
   "top_articles": [],
   "history": [],
-  "last_updated": "2026-08-07T18:41:45.585055"
+  "last_updated": "2026-08-08T08:31:46.578936"
 }
