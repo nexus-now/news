@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-08-14T09:00:45.242376",
+    "duration_secs": 40,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0814-090055-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: climate change environment disaster",
+        "category": "environment",
+        "agent": "terra_environment",
+        "quality": 2.0,
+        "copyright_id": "NN-2026-0814-090118-ENV-DD0B54",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-08-13T18:51:12.430515",
     "duration_secs": 36,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0720-192720-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-07-20T10:43:50.043887",
-    "duration_secs": 39,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Breaking: artificial intelligence new developments",
-        "category": "technology",
-        "agent": "volt_technology",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0720-104357-TEC-60192A",
-        "strategy": ""
-      },
-      {
-        "headline": "2026: Miami Sea Levels Rise 10 Inches",
-        "category": "Environment",
-        "agent": "TERRA",
-        "quality": 7.5,
-        "copyright_id": "NN-2026-0720-104420-ENV-998C82",
         "strategy": ""
       }
     ]

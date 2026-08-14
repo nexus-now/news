@@ -16,6 +16,54 @@
       "nexusnow"
     ],
     "quality_score": 2.0,
+    "copyright_id": "NN-2026-0814-090118-ENV-DD0B54",
+    "verification": "❓ UNVERIFIED",
+    "slug": "breaking--climate-change-environment-dis",
+    "time": "Aug 14, 2026 · 09:01 UTC",
+    "timestamp": "2026-08-14T09:01:19.722991",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: artificial intelligence new developments",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "technology",
+    "agent": "volt_technology",
+    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
+    "key_facts": [
+      "Topic: artificial intelligence new developments",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
+    "tags": [
+      "technology",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
+    "copyright_id": "NN-2026-0814-090055-TEC-60192A",
+    "verification": "❓ UNVERIFIED",
+    "slug": "breaking--artificial-intelligence-new-de",
+    "time": "Aug 14, 2026 · 09:00 UTC",
+    "timestamp": "2026-08-14T09:00:56.107366",
+    "ai_generated": true
+  },
+  {
+    "title": "Breaking: climate change environment disaster",
+    "subheadline": "Developing — NEXUS NOW",
+    "category": "environment",
+    "agent": "terra_environment",
+    "summary": "NEXUS NOW is tracking climate change environment disaster. Full story developing.",
+    "key_facts": [
+      "Topic: climate change environment disaster",
+      "Story developing"
+    ],
+    "deep_analysis": "Monitoring climate change environment disaster for updates.",
+    "tags": [
+      "environment",
+      "news",
+      "nexusnow"
+    ],
+    "quality_score": 2.0,
     "copyright_id": "NN-2026-0813-185141-ENV-DD0B54",
     "verification": "❌ UNVERIFIED",
     "slug": "breaking--climate-change-environment-dis",
@@ -2367,57 +2415,6 @@
     "slug": "breaking--artificial-intelligence-new-de",
     "time": "Jul 20, 2026 · 19:26 UTC",
     "timestamp": "2026-07-20T19:26:59.348255",
-    "ai_generated": true
-  },
-  {
-    "title": "2026: Miami Sea Levels Rise 10 Inches",
-    "subheadline": "1 Million Residents at Risk",
-    "category": "Environment",
-    "agent": "TERRA",
-    "summary": "Miami's sea levels are projected to rise by 10 inches by 2050, threatening the livelihoods of over 1 million residents. This catastrophic event is a result of climate change, which is melting ice caps and causing sea levels to rise globally. The city is taking measures to mitigate the effects, including building sea walls and implementing flood-control systems.",
-    "key_facts": [
-      "10-inch sea level rise by 2050",
-      "1 million residents at risk",
-      "Miami's economy threatened",
-      "Climate change causes sea level rise",
-      "City implementing flood-control systems"
-    ],
-    "deep_analysis": "The solutions to address the root causes of climate change and to protect Miami's residents and economy are complex and multifaceted. They involve reducing greenhouse gas emissions, investing in renewable energy, and implementing policies to mitigate the effects of climate change. Individuals can also make a difference by reducing their carbon footprint, using public transport, and supporting organizations that work to protect the environment.",
-    "tags": [
-      "environment",
-      "nexusnow",
-      "news"
-    ],
-    "quality_score": 7.5,
-    "copyright_id": "NN-2026-0720-104420-ENV-998C82",
-    "verification": "✅ VERIFIED",
-    "slug": "2026--miami-sea-levels-rise-10-inches",
-    "time": "Jul 20, 2026 · 10:44 UTC",
-    "timestamp": "2026-07-20T10:44:23.093174",
-    "ai_generated": true
-  },
-  {
-    "title": "Breaking: artificial intelligence new developments",
-    "subheadline": "Developing — NEXUS NOW",
-    "category": "technology",
-    "agent": "volt_technology",
-    "summary": "NEXUS NOW is tracking artificial intelligence new developments. Full story developing.",
-    "key_facts": [
-      "Topic: artificial intelligence new developments",
-      "Story developing"
-    ],
-    "deep_analysis": "Monitoring artificial intelligence new developments for updates.",
-    "tags": [
-      "technology",
-      "news",
-      "nexusnow"
-    ],
-    "quality_score": 2.0,
-    "copyright_id": "NN-2026-0720-104357-TEC-60192A",
-    "verification": "⚠️ UNVERIFIED",
-    "slug": "breaking--artificial-intelligence-new-de",
-    "time": "Jul 20, 2026 · 10:43 UTC",
-    "timestamp": "2026-07-20T10:43:58.385777",
     "ai_generated": true
   }
 ]
