@@ -2,7 +2,7 @@
   "agent_id": "aegis_verification",
   "category": "verification",
   "generation": 0,
-  "total_runs": 494,
+  "total_runs": 496,
   "total_articles": 0,
   "avg_quality": 0.0,
   "best_score": 0.0,
@@ -12,5 +12,5 @@
   "avoid_rules": [],
   "top_articles": [],
   "history": [],
-  "last_updated": "2026-08-22T18:16:57.071383"
+  "last_updated": "2026-08-23T08:20:40.119615"
 }
