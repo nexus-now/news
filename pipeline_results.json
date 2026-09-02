@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-09-02T20:19:17.120057",
+    "duration_secs": 29,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0902-201920-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: global stock markets economy update",
+        "category": "business",
+        "agent": "titan_business",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0902-201939-BIZ-DB9CAA",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-09-02T12:25:52.818001",
     "duration_secs": 27,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0809-083338-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-08-08T18:23:55.367502",
-    "duration_secs": 40,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Google AI 4.0 Released August 2026",
-        "category": "Technology",
-        "agent": "VOLT",
-        "quality": 7.5,
-        "copyright_id": "NN-2026-0808-182402-TEC-262CC2",
-        "strategy": ""
-      },
-      {
-        "headline": "Breaking: climate change environment disaster",
-        "category": "environment",
-        "agent": "terra_environment",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0808-182428-ENV-DD0B54",
         "strategy": ""
       }
     ]
