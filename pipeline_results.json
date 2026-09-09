@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-09-09T12:36:14.495411",
+    "duration_secs": 28,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0909-123617-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: global stock markets economy update",
+        "category": "business",
+        "agent": "titan_business",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0909-123635-BIZ-DB9CAA",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-09-08T20:31:40.508523",
     "duration_secs": 27,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "terra_environment",
         "quality": 2.0,
         "copyright_id": "NN-2026-0815-181550-ENV-DD0B54",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-08-15T08:18:11.886250",
-    "duration_secs": 37,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Breaking: artificial intelligence new developments",
-        "category": "technology",
-        "agent": "volt_technology",
-        "quality": 2.0,
-        "copyright_id": "NN-2026-0815-081818-TEC-60192A",
-        "strategy": ""
-      },
-      {
-        "headline": "2026: Miami Sea Levels Rise 10 Inches",
-        "category": "Environment",
-        "agent": "TERRA",
-        "quality": 7.5,
-        "copyright_id": "NN-2026-0815-081840-ENV-998C82",
         "strategy": ""
       }
     ]
