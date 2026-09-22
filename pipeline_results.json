@@ -1,5 +1,28 @@
 [
   {
+    "timestamp": "2026-09-22T20:40:56.431935",
+    "duration_secs": 27,
+    "posts_published": 2,
+    "stories": [
+      {
+        "headline": "Breaking: artificial intelligence new developments",
+        "category": "technology",
+        "agent": "volt_technology",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0922-204058-TEC-60192A",
+        "strategy": ""
+      },
+      {
+        "headline": "Breaking: global stock markets economy update",
+        "category": "business",
+        "agent": "titan_business",
+        "quality": 5.0,
+        "copyright_id": "NN-2026-0922-204117-BIZ-DB9CAA",
+        "strategy": ""
+      }
+    ]
+  },
+  {
     "timestamp": "2026-09-22T12:59:02.025299",
     "duration_secs": 27,
     "posts_published": 2,
@@ -1122,29 +1145,6 @@
         "agent": "titan_business",
         "quality": 5.0,
         "copyright_id": "NN-2026-0829-133059-BIZ-DB9CAA",
-        "strategy": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2026-08-29T01:20:39.473632",
-    "duration_secs": 29,
-    "posts_published": 2,
-    "stories": [
-      {
-        "headline": "Breaking: artificial intelligence new developments",
-        "category": "technology",
-        "agent": "volt_technology",
-        "quality": 5.0,
-        "copyright_id": "NN-2026-0829-012041-TEC-60192A",
-        "strategy": ""
-      },
-      {
-        "headline": "Breaking: global stock markets economy update",
-        "category": "business",
-        "agent": "titan_business",
-        "quality": 5.0,
-        "copyright_id": "NN-2026-0829-012100-BIZ-DB9CAA",
         "strategy": ""
       }
     ]
