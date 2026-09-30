@@ -8422,3 +8422,29 @@ PIPELINE COMPLETE: 2 stories in 28s
 PIPELINE COMPLETE: 2 stories in 27s
 [2026-09-30 14:28:59 UTC] Average quality: 5.0/10
 [2026-09-30 14:28:59 UTC] ============================================================
+[2026-09-30 21:41:38 UTC] ============================================================
+[2026-09-30 21:41:38 UTC] NEXUS NOW PIPELINE STARTING
+[2026-09-30 21:41:38 UTC] Gemini: YES
+[2026-09-30 21:41:38 UTC] Groq:   YES
+[2026-09-30 21:41:38 UTC] Twitter:YES
+[2026-09-30 21:41:38 UTC] ============================================================
+[2026-09-30 21:41:38 UTC] 
+[STEP 1] SCOUT — Trend Detection
+[2026-09-30 21:41:39 UTC] Scout: 2 topics selected
+[2026-09-30 21:41:39 UTC] 
+[STORY 1/2] TECHNOLOGY: artificial intelligence new developments
+[2026-09-30 21:41:39 UTC]   Agent=volt_technology Gen=47 AvgQ=5.0/10 Strategy=add_more_data_and_context
+[2026-09-30 21:41:41 UTC]   Written: 'Breaking: artificial intelligence new developments' Q=5.0
+[2026-09-30 21:41:41 UTC]   AEGIS: 🔍 UNVERIFIED ID=NN-2026-0930-214141-TEC-60192A
+[2026-09-30 21:41:49 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-09-30 21:41:49 UTC]   Pausing 10s...
+[2026-09-30 21:41:59 UTC] 
+[STORY 2/2] BUSINESS: global stock markets economy update
+[2026-09-30 21:41:59 UTC]   Agent=titan_business Gen=0 AvgQ=5.0/10 Strategy=add_more_data_and_context
+[2026-09-30 21:42:00 UTC]   Written: 'Breaking: global stock markets economy update' Q=5.0
+[2026-09-30 21:42:00 UTC]   AEGIS: 🔍 UNVERIFIED ID=NN-2026-0930-214200-BIZ-DB9CAA
+[2026-09-30 21:42:08 UTC]   Published: {'website': 'success', 'twitter': 'error', 'instagram': 'skipped'}
+[2026-09-30 21:42:08 UTC] 
+PIPELINE COMPLETE: 2 stories in 30s
+[2026-09-30 21:42:08 UTC] Average quality: 5.0/10
+[2026-09-30 21:42:08 UTC] ============================================================
