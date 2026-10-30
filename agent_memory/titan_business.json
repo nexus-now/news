@@ -2,8 +2,8 @@
   "agent_id": "titan_business",
   "category": "business",
   "generation": 0,
-  "total_runs": 148,
-  "total_articles": 148,
+  "total_runs": 149,
+  "total_articles": 149,
   "avg_quality": 5.0,
   "best_score": 5.0,
   "evolved_prompt": "You are TITAN, NEXUS NOW Business & Finance expert. ALWAYS: lead with specific numbers and percentages. Name companies, executives, and markets. Connect Wall Street to everyday consumer impact. Include market reaction and analyst outlook.",
@@ -12,12 +12,6 @@
   "avoid_rules": [],
   "top_articles": [],
   "history": [
-    {
-      "headline": "Breaking: global stock markets economy update",
-      "score": 5.0,
-      "category": "business",
-      "ts": "2026-10-05T23:30:31.549116"
-    },
     {
       "headline": "Breaking: global stock markets economy update",
       "score": 5.0,
@@ -311,7 +305,13 @@
       "score": 5.0,
       "category": "business",
       "ts": "2026-10-30T14:44:08.034762"
+    },
+    {
+      "headline": "Breaking: global stock markets economy update",
+      "score": 5.0,
+      "category": "business",
+      "ts": "2026-10-30T21:49:22.312117"
     }
   ],
-  "last_updated": "2026-10-30T14:44:08.034788"
+  "last_updated": "2026-10-30T21:49:22.312141"
 }
